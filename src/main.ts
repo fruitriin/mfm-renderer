@@ -15,13 +15,9 @@ import Url from "./components/MfmComponents/Url.vue";
 import Fn from "./components/MfmComponents/Fn.vue";
 import Mfm from "./components/Mfm.vue";
 import Hashtag from "./components/MfmComponents/Hashtag.vue";
-import Bg from "./components/MfmComponents/Bg.vue";
-import Fg from "./components/MfmComponents/Fg.vue";
 
 createApp(App)
   .component("MfmComponent", Mfm)
-  .component("Bg", Bg)
-  .component("Fg", Fg)
   .component("Bold", Bold)
   .component("Emoji", Emoji)
   .component("Text", Text)
