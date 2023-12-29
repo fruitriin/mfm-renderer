@@ -1,5 +1,5 @@
 <template>
-  <a :href="'/tags/' + token.hashtag">#{{ token.hashtag }}</a>
+  <a class="hashtag" :href="'/tags/' + token.hashtag">#{{ token.hashtag }}</a>
 </template>
 
 <script lang="ts">

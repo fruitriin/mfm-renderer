@@ -1,5 +1,5 @@
 <template>
-  <a :href="token.url" v-text="token.url" />
+  <a class="url" :href="token.url" v-text="token.url" />
 </template>
 
 <script lang="ts">

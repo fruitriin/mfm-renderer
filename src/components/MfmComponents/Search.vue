@@ -1,5 +1,5 @@
 <template>
-  <div>{{ token.query }} <button>検索</button></div>
+  <div class="search">{{ token.query }} <button>検索</button></div>
 </template>
 
 <script lang="ts">

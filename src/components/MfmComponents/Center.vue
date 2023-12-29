@@ -1,8 +1,5 @@
 <template>
-  {{ token }}
-  <pre class="inline-code">
-    <code>{{ token.code }}</code>
-  </pre>
+  <center>{{ token }}</center>
 </template>
 
 <script lang="ts">

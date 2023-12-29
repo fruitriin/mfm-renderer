@@ -1,6 +1,6 @@
 <template>
   silent - {{ token.silent }}
-  <a :href="token.url" :style="style">
+  <a class="link" :href="token.url" :style="style">
     <MfmComponent :tokens="children" />
   </a>
 </template>

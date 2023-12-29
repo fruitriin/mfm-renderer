@@ -1,5 +1,5 @@
 <template>
-  <i><MfmComponent :tokens="children" /></i>
+  <i class="italic"><MfmComponent :tokens="children" /></i>
 </template>
 
 <script lang="ts">

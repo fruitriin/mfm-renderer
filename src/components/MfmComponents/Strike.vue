@@ -1,5 +1,5 @@
 <template>
-  <del><MfmComponent :tokens="children" /></del>
+  <del class="strike"><MfmComponent :tokens="children" /></del>
 </template>
 
 <script lang="ts">

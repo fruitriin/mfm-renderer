@@ -1,5 +1,5 @@
 <template>
-  <span>Plain</span>
+  <span class="plain">{{ token }}</span>
 </template>
 
 <script lang="ts">

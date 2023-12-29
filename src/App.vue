@@ -72,46 +72,46 @@ $[bg.color=ff0 黄背景]
   もりもり$[blur あ]んこ`,
   `
     フォント
-$[font.serif MisskeyでFediverseの世界が広がります]
-$[font.monospace MisskeyでFediverseの世界が広がります]
-$[font.cursive MisskeyでFediverseの世界が広がります]
-$[font.fantasy MisskeyでFediverseの世界が広がります]
-    `,
-  `反転
-    $[flip MisskeyでFediverseの世界が広がります]
-$[flip.v MisskeyでFediverseの世界が広がります]
-$[flip.h,v MisskeyでFediverseの世界が広がります]`,
-  `角度変更
-  $[rotate.deg=30 misskey]
-    `,
+// $[font.serif MisskeyでFediverseの世界が広がります]
+// $[font.monospace MisskeyでFediverseの世界が広がります]
+// $[font.cursive MisskeyでFediverseの世界が広がります]
+// $[font.fantasy MisskeyでFediverseの世界が広がります]
+//     `,
+  //   `反転
+  //     $[flip MisskeyでFediverseの世界が広がります]
+  // $[flip.v MisskeyでFediverseの世界が広がります]
+  // $[flip.h,v MisskeyでFediverseの世界が広がります]`,
+  //   `角度変更
+  //   $[rotate.deg=30 misskey]
+  //     `,
   `日時
     $[unixtime 1700000000]`,
   `ルビ
     うま$[ruby 味 あじ]`,
-  `位置変更
-    😏$[position.x=0.8,y=0.5 🍮]😀`,
-  `拡大
-    $[scale.x=4,y=2 🍮]
-`,
-  `シンプル拡大
-$[x2 x2]
-$[x3 x3]
-$[x4 x4]`,
-  `$[jelly 🍮] $[jelly.speed=5s 🍮]`,
-  `$[tada 🍮] $[tada.speed=5s 🍮]`,
-  `$[jump 🍮] $[jump.speed=5s 🍮]`,
-  `$[bounce 🍮] $[bounce.speed=5s 🍮]`,
-  `$[spin 🍮] $[spin.left 🍮] $[spin.alternate 🍮]
-$[spin.x 🍮] $[spin.x,left 🍮] $[spin.x,alternate 🍮]
-$[spin.y 🍮] $[spin.y,left 🍮] $[spin.y,alternate 🍮]
-
-$[spin.speed=5s 🍮]`,
-  `$[shake 🍮] $[shake.speed=5s 🍮]`,
-  `$[twitch 🍮] $[twitch.speed=5s 🍮]`,
-  `$[rainbow 🍮] $[rainbow.speed=5s 🍮]
-$[rainbow 色なし文字]
-$[rainbow $[fg.color=f0f 色付き文字]]`,
-  `$[sparkle 🍮]`,
+  //   `位置変更
+  //     😏$[position.x=0.8,y=0.5 🍮]😀`,
+  //   `拡大
+  //     $[scale.x=4,y=2 🍮]
+  // `,
+  //   `シンプル拡大
+  // $[x2 x2]
+  // $[x3 x3]
+  // $[x4 x4]`,
+  //   `$[jelly 🍮] $[jelly.speed=5s 🍮]`,
+  //   `$[tada 🍮] $[tada.speed=5s 🍮]`,
+  //   `$[jump 🍮] $[jump.speed=5s 🍮]`,
+  //   `$[bounce 🍮] $[bounce.speed=5s 🍮]`,
+  //   `$[spin 🍮] $[spin.left 🍮] $[spin.alternate 🍮]
+  // $[spin.x 🍮] $[spin.x,left 🍮] $[spin.x,alternate 🍮]
+  // $[spin.y 🍮] $[spin.y,left 🍮] $[spin.y,alternate 🍮]
+  //
+  // $[spin.speed=5s 🍮]`,
+  //   `$[shake 🍮] $[shake.speed=5s 🍮]`,
+  //   `$[twitch 🍮] $[twitch.speed=5s 🍮]`,
+  //   `$[rainbow 🍮] $[rainbow.speed=5s 🍮]
+  // $[rainbow 色なし文字]
+  // $[rainbow $[fg.color=f0f 色付き文字]]`,
+  //   `$[sparkle 🍮]`,
   `<plain>**bold** @mention #hashtag \`code\` $[x2 🍮]</plain>`,
 ]);
 // 未実装： Mention, Emoji

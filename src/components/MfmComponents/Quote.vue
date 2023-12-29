@@ -1,5 +1,6 @@
 <template>
   <div
+    class="quote"
     style="
       display: block;
       margin: 8px;
