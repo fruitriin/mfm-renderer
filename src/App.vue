@@ -80,13 +80,13 @@ $[bg.color=ff0 黄背景]
 // $[font.cursive MisskeyでFediverseの世界が広がります]
 // $[font.fantasy MisskeyでFediverseの世界が広がります]
 //     `,
-  //   `反転
-  //     $[flip MisskeyでFediverseの世界が広がります]
-  // $[flip.v MisskeyでFediverseの世界が広がります]
-  // $[flip.h,v MisskeyでFediverseの世界が広がります]`,
-  //   `角度変更
-  //   $[rotate.deg=30 misskey]
-  //     `,
+  `反転
+      $[flip MisskeyでFediverseの世界が広がります]
+  $[flip.v MisskeyでFediverseの世界が広がります]
+  $[flip.h,v MisskeyでFediverseの世界が広がります]`,
+  `角度変更
+    $[rotate.deg=30 misskey]
+      `,
   `日時
     $[unixtime 1700000000]`,
   `ルビ
