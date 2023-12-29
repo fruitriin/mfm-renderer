@@ -8,7 +8,7 @@
     :token="token.props"
     :children="token.children"
   />
-  <div style="border: solid 1px red" v-if="false">
+  <div style="border: solid 1px red" v-if="true">
     <pre v-for="token in tokens">
 component: {{ getComponent(token.type) }}
 token: {{ token }}
@@ -21,7 +21,7 @@ import { getComponent } from "../utils/mfmUtil.ts";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "MfmComponent",
+  name: "MfmWrap",
   props: {
     tokens: {
       required: true,

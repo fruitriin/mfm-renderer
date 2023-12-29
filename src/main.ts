@@ -10,7 +10,7 @@ import Mention from "./components/MfmComponents/Mention.vue";
 import Plain from "./components/MfmComponents/Plain.vue";
 import Search from "./components/MfmComponents/Search.vue";
 import Strike from "./components/MfmComponents/Strike.vue";
-import UnicordEmoji from "./components/MfmComponents/UnicordEmoji.vue";
+import UnicodeEmoji from "./components/MfmComponents/UnicodeEmoji.vue";
 import Url from "./components/MfmComponents/Url.vue";
 import Fn from "./components/MfmComponents/Fn.vue";
 import Mfm from "./components/Mfm.vue";
@@ -37,7 +37,7 @@ createApp(App)
   .component("InlineCode", Inlinecode)
   .component("Search", Search)
   .component("Strike", Strike)
-  .component("UnicordEmoji", UnicordEmoji)
+  .component("UnicodeEmoji", UnicodeEmoji)
   .component("Url", Url)
   .component("Link", Link)
   .component("Fn", Fn)
