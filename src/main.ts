@@ -15,10 +15,15 @@ import Url from "./components/MfmComponents/Url.vue";
 import Fn from "./components/MfmComponents/Fn.vue";
 import Mfm from "./components/Mfm.vue";
 import Hashtag from "./components/MfmComponents/Hashtag.vue";
+import Italic from "./components/MfmComponents/Italic.vue";
+import Quote from "./components/MfmComponents/Quote.vue";
+import Link from "./components/MfmComponents/Link.vue";
 
 createApp(App)
   .component("MfmComponent", Mfm)
   .component("Bold", Bold)
+  .component("Italic", Italic)
+  .component("Quote", Quote)
   .component("Emoji", Emoji)
   .component("Text", Text)
   .component("EmojiCode", EmojiCode)
@@ -28,6 +33,7 @@ createApp(App)
   .component("Strike", Strike)
   .component("UnicordEmoji", UnicordEmoji)
   .component("Url", Url)
+  .component("Link", Link)
   .component("Fn", Fn)
   .component("Hashtag", Hashtag)
   .mount("#app");

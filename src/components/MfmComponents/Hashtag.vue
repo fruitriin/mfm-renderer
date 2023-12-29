@@ -1,4 +1,6 @@
-<template>#{{ token.hashtag }}</template>
+<template>
+  <a :href="'/tags/' + token.hashtag">#{{ token.hashtag }}</a>
+</template>
 
 <script lang="ts">
 export default {
