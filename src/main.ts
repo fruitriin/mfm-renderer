@@ -17,19 +17,19 @@ import Hashtag from "./components/MfmComponents/Hashtag.vue";
 import Italic from "./components/MfmComponents/Italic.vue";
 import Quote from "./components/MfmComponents/Quote.vue";
 import Link from "./components/MfmComponents/Link.vue";
-import Center from "./components/MfmComponents/Center.vue";
 import Small from "./components/MfmComponents/Small.vue";
 import Inlinecode from "./components/MfmComponents/Inlinecode.vue";
 import BlockCode from "./components/MfmComponents/BlockCode.vue";
+import Center from "./components/MfmComponents/Center.vue";
 
 createApp(App)
   .component("MfmComponent", Mfm)
   .component("Bold", Bold)
   .component("Italic", Italic)
   .component("Quote", Quote)
-  .component("Center", Center)
   .component("Small", Small)
   .component("Text", Text)
+  .component("Center", Center)
   .component("EmojiCode", EmojiCode)
   .component("Mention", Mention)
   .component("Plain", Plain)

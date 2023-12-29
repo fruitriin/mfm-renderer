@@ -1,9 +1,10 @@
 <template>
   <MfmComponent :tokens="parsedMfm" />
+  AST: {{ parsedMfm }}
 </template>
 
 <script lang="ts">
-import { getComponent, mfm } from "../utils/mfmUtil.ts";
+import { mfm } from "../utils/mfmUtil.ts";
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -12,9 +13,6 @@ export default defineComponent({
       required: true,
       type: String,
     },
-  },
-  methods: {
-    getComponent,
   },
   computed: {
     parsedMfm() {

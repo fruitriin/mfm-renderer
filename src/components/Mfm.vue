@@ -1,17 +1,16 @@
 <template>
   <component
     :style="style"
-    :class="class"
     :className="className"
     v-for="token in tokens"
     :is="`${getComponent(token.type)}`"
     :token="token.props"
     :children="token.children"
   />
-  <div style="border: solid 1px red" v-if="false">
+  <div style="border: solid 1px red" v-if="true">
     <pre v-for="token in tokens">
 component: {{ getComponent(token.type) }}
-token: {{ token }}
+<!--token: {{ token }}-->
     </pre>
   </div>
 </template>
