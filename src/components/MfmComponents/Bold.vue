@@ -1,5 +1,5 @@
 <template>
-  <b><MfmComponent v-bind="$attrs" /></b>
+  <b><MfmComponent :tokens="$attrs.children" /></b>
 </template>
 
 <script>

@@ -13,6 +13,7 @@ export default {
   inheritAttrs: true,
   name: "MfmText",
   props: {
+    children: Object,
     token: Object,
     plain: {
       type: Boolean,
