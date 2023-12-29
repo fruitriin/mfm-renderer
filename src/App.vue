@@ -8,7 +8,10 @@
     <hr />
     <h2>進捗？</h2>
     まだできてない<br />
-    customEmoji, unicordEmoji
+    customEmoji, unicordEmoji<br />
+    <br />
+    壊れてる<br />
+    center
 
     <hr />
     <h2>テストコード</h2>

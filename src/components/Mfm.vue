@@ -1,6 +1,5 @@
 <template>
   <component
-    v-bind="$attrs"
     :style="style"
     :className="className"
     v-for="token in tokens"

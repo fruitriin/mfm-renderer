@@ -1,5 +1,6 @@
 <template>
-  <div style="text-align: center"><MfmComponent :tokens="children" /></div>
+  aaaaaaaaa
+  <div style="text-align: center">u?<MfmComponent :tokens="children" /></div>
 </template>
 
 <script lang="ts">

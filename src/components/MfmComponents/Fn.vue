@@ -1,17 +1,15 @@
 <template>
   <MfmComponent
-    v-bind="$attrs"
     class="Fn"
-    :className="token.name"
+    :className="`${token.name} ${className ?? ''}`"
     :tokens="children"
-    :style="functionedStyle"
+    :style="[functionedStyle, style]"
   />
 </template>
 
 <script lang="ts">
 export default {
-  name: "Fn",
-  props: ["token", "children", "style", "className"],
+  props: ["token", "children", "style", "className", "class"],
   computed: {
     functionedStyle() {
       switch (this.token.name) {
