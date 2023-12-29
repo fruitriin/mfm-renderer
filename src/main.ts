@@ -20,6 +20,7 @@ import Quote from "./components/MfmComponents/Quote.vue";
 import Link from "./components/MfmComponents/Link.vue";
 import Center from "./components/MfmComponents/Center.vue";
 import Small from "./components/MfmComponents/Small.vue";
+import Inlinecode from "./components/MfmComponents/Inlinecode.vue";
 
 createApp(App)
   .component("MfmComponent", Mfm)
@@ -33,6 +34,7 @@ createApp(App)
   .component("EmojiCode", EmojiCode)
   .component("Mention", Mention)
   .component("Plain", Plain)
+  .component("InlineCode", Inlinecode)
   .component("Search", Search)
   .component("Strike", Strike)
   .component("UnicordEmoji", UnicordEmoji)
