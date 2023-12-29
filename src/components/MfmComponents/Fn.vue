@@ -13,6 +13,8 @@ export default {
   computed: {
     functionedStyle() {
       switch (this.token.name) {
+        case "font":
+          return { fontFamily: Object.keys(this.token.args).join(" ") };
         case "bg":
           return { background: `#${this.token.args.color}` };
         case "fg":
