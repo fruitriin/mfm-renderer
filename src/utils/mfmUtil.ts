@@ -8,6 +8,11 @@ export function mfm(text: string, plain: boolean): MfmNode[] {
   return ast;
 }
 
+/**
+ * MfmVueがAST Nodeからコンポーネントを決定するためのもの
+ * <component :is=getComponent(token.type)>
+ * @param string
+ */
 export function getComponent(string: string) {
   return string.replace(
     /(^.)(.*)/,

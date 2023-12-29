@@ -17,6 +17,7 @@ token: {{ token }}
 </template>
 
 <script lang="ts">
+// classとclassNameが混在してるのやばそう
 import { getComponent } from "../utils/mfmUtil.ts";
 import { defineComponent } from "vue";
 
