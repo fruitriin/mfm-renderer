@@ -8,7 +8,7 @@
     :token="token.props"
     :children="token.children"
   />
-  <div style="border: solid 1px red" v-if="true">
+  <div style="border: solid 1px red" v-if="false">
     <pre v-for="token in tokens">
 component: {{ getComponent(token.type) }}
 token: {{ token }}

@@ -100,21 +100,21 @@ $[bg.color=ff0 黄背景]
   $[x2 x2]
   $[x3 x3]
   $[x4 x4]`,
-  //   `$[jelly 🍮] $[jelly.speed=5s 🍮]`,
-  //   `$[tada 🍮] $[tada.speed=5s 🍮]`,
-  //   `$[jump 🍮] $[jump.speed=5s 🍮]`,
-  //   `$[bounce 🍮] $[bounce.speed=5s 🍮]`,
-  //   `$[spin 🍮] $[spin.left 🍮] $[spin.alternate 🍮]
-  // $[spin.x 🍮] $[spin.x,left 🍮] $[spin.x,alternate 🍮]
-  // $[spin.y 🍮] $[spin.y,left 🍮] $[spin.y,alternate 🍮]
-  //
-  // $[spin.speed=5s 🍮]`,
-  //   `$[shake 🍮] $[shake.speed=5s 🍮]`,
-  //   `$[twitch 🍮] $[twitch.speed=5s 🍮]`,
-  //   `$[rainbow 🍮] $[rainbow.speed=5s 🍮]
-  // $[rainbow 色なし文字]
-  // $[rainbow $[fg.color=f0f 色付き文字]]`,
-  //   `$[sparkle 🍮]`,
+  `$[jelly 🍮] $[jelly.speed=5s 🍮]`,
+  `$[tada 🍮] $[tada.speed=5s 🍮]`,
+  `$[jump 🍮] $[jump.speed=5s 🍮]`,
+  `$[bounce 🍮] $[bounce.speed=5s 🍮]`,
+  `$[spin 🍮] $[spin.left 🍮] $[spin.alternate 🍮]
+  $[spin.x 🍮] $[spin.x,left 🍮] $[spin.x,alternate 🍮]
+  $[spin.y 🍮] $[spin.y,left 🍮] $[spin.y,alternate 🍮]
+
+  $[spin.speed=5s 🍮]`,
+  `$[shake 🍮] $[shake.speed=5s 🍮]`,
+  `$[twitch 🍮] $[twitch.speed=5s 🍮]`,
+  `$[rainbow 🍮] $[rainbow.speed=5s 🍮]
+  $[rainbow 色なし文字]
+  $[rainbow $[fg.color=f0f 色付き文字]]`,
+  `$[sparkle 🍮]`,
   `<plain>**bold** @mention #hashtag \`code\` $[x2 🍮]</plain>`,
 ]);
 // 未実装： Mention, Emoji
