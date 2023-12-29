@@ -8,13 +8,20 @@
     <hr />
     <h2>進捗？</h2>
     まだできてない<br />
-    mention, customEmoji, link, center, unicordEmoji
+    customEmoji, unicordEmoji
 
     <hr />
     <h2>テストコード</h2>
     <div v-for="sample in samples">
-      <pre v-text="sample" />
-      <MfmText :text="sample" />
+      <div>
+        <h4>元テキスト</h4>
+        <textarea v-text="sample" style="height: 4rem; width: 100%" /><br />
+      </div>
+
+      <h4>Parsed MFM</h4>
+      <div>
+        <MfmText :text="sample" />
+      </div>
     </div>
   </div>
 </template>
@@ -29,7 +36,7 @@ const text = ref(
 
 const samples = ref([
   `基本構文
-#mfmart
+#mfmart @mention
 **太字** <i>斜め</i> ~~打ち消し~~
 \`inline code (JavaScript highlight)\`
 > 引用
