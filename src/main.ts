@@ -3,7 +3,6 @@ import "./style.css";
 import App from "./App.vue";
 
 import Bold from "./components/MfmComponents/Bold.vue";
-import Emoji from "./components/MfmComponents/Emoji.vue";
 import EmojiCode from "./components/MfmComponents/EmojiCode.vue";
 import Text from "./components/MfmComponents/Text.vue";
 import Mention from "./components/MfmComponents/Mention.vue";
@@ -28,7 +27,6 @@ createApp(App)
   .component("Bold", Bold)
   .component("Italic", Italic)
   .component("Quote", Quote)
-  .component("Emoji", Emoji)
   .component("Center", Center)
   .component("Small", Small)
   .component("Text", Text)

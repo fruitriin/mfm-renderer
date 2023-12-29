@@ -34,7 +34,7 @@ import MfmText from "./components/MfmText.vue";
 import { ref } from "vue";
 
 const text = ref(
-  "$[bg.color=b51 $[fg.color=fff  2桁　Normal ]] 挑戦した数字「**05**」\n$[sparkle 10手で当てることができました！]\nhttps://misskey.systems/play/9nr3u7p244 #Hit&Blowチャレンジ\n総当たりしちゃった",
+  ":blob_dj: $[bg.color=b51 $[fg.color=fff  2桁　Normal ]] 挑戦した数字「**05**」\n$[sparkle 10手で当てることができました！]\nhttps://misskey.systems/play/9nr3u7p244 #Hit&Blowチャレンジ\n総当たりしちゃった",
 );
 
 const samples = ref([

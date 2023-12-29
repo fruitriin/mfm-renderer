@@ -7,7 +7,7 @@ TSXではなく純粋なオブジェクトとしてMFMを記述することを�
 |------------------|---------|--------------------------|
 | Blockcode.vue    | 複数行のコード | 全くうごいてない                 |
 | Bold.vue         | 太字      | よさそう                     |
-| EmojiCode.vue    | カスタム絵文字 | 微妙                       |
+| EmojiCode.vue    | カスタム絵文字 | コードがそのままでる               |
 | Inlinecode.vue   | 一行のコード  | よさそう                     |
 | Mention.vue      | メンション   | よさそう                     |
 | Search.vue       | 検索      | よさそう                     |
@@ -18,10 +18,10 @@ TSXではなく純粋なオブジェクトとしてMFMを記述することを�
 | Plain.vue        |         | よさそう                     |
 | Small.vue        |         | よさそう                     |
 | UnicodeEmoji.vue |         | 暫定                       |
-| Emoji.vue        | ???     | ???                      |
 | Hashtag.vue      | ハッシュタグ  | よさそう                     |
 | Link.vue         | リンク構文   | よさそう                     |
 | Quote.vue        | 引用      | よさそう                     |
 | Strike.vue       | 打ち消し線   | よさそう                     |
 | Url.vue          | URL     | よさそう                     |
+| Ruby             | ルビ      | ルビとしてパースされてない            |
 

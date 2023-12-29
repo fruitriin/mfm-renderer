@@ -1,25 +1,13 @@
-<template><img class="emoji" :src="emoji()" /></template>
+<template>
+  :{{ token.name }}:
+  <!--  <img class="emoji" :src="emoji()" />-->
+</template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  props: {
-    token: {
-      required: true,
-    },
-    note: {
-      type: Object,
-      required: true,
-    },
-  },
-  methods: {
-    emoji(): string {
-      return this.note.emojis.find((e: { name: string }) => {
-        return e.name == (this.token as any).name;
-      }).url;
-    },
-  },
+  props: ["token", "children", "className", "class", "style"],
 });
 </script>
 
