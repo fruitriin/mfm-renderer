@@ -1,10 +1,10 @@
 <template>
-  <span class="plain">{{ token }}</span>
+  <MfmComponent :tokens="children" />
 </template>
 
 <script lang="ts">
 export default {
-  props: ["children", "token", "style"],
+  props: ["children", "token", "style", "className"],
 };
 </script>
 
