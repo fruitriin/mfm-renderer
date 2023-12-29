@@ -1,6 +1,7 @@
 <template>
   <component
     :style="style"
+    :class="class"
     :className="className"
     v-for="token in tokens"
     :is="`${getComponent(token.type)}`"
@@ -28,6 +29,7 @@ export default defineComponent({
     },
     style: Object,
     className: String,
+    class: String,
   },
   methods: {
     getComponent,

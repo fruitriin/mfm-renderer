@@ -22,6 +22,9 @@ export default {
     style: {
       type: Object,
     },
+    class: {
+      type: String,
+    },
   },
 };
 </script>
