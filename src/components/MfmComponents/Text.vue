@@ -1,6 +1,8 @@
 <template>
   <template v-for="(t, i) in parsedText">
-    <span class="text" :style="style"> {{ t }}</span>
+    <span class="text" :class="[className, $attrs.class]" :style="style">
+      {{ t }}</span
+    >
     <br v-if="showBr(t, i)" />
   </template>
 </template>
@@ -9,7 +11,6 @@
 import { PropType } from "vue";
 
 export default {
-  inheritAttrs: true,
   props: {
     children: Object,
     token: Object as PropType<any>,
@@ -17,6 +18,7 @@ export default {
       type: Boolean,
       default: false,
     },
+    className: String,
     nowrap: {
       type: Boolean,
       default: false,
