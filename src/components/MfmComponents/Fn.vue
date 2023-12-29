@@ -44,6 +44,13 @@ export default {
           };
         case "sparkle":
           return { color: "yellow" };
+        case "x2":
+          return { fontSize: "200%" };
+        case "x3":
+          return { fontSize: "300%" };
+
+        case "x4":
+          return { fontSize: "400%" };
         default:
           return { background: "red" };
       }
