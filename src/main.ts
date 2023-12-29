@@ -18,6 +18,8 @@ import Hashtag from "./components/MfmComponents/Hashtag.vue";
 import Italic from "./components/MfmComponents/Italic.vue";
 import Quote from "./components/MfmComponents/Quote.vue";
 import Link from "./components/MfmComponents/Link.vue";
+import Center from "./components/MfmComponents/Center.vue";
+import Small from "./components/MfmComponents/Small.vue";
 
 createApp(App)
   .component("MfmComponent", Mfm)
@@ -25,6 +27,8 @@ createApp(App)
   .component("Italic", Italic)
   .component("Quote", Quote)
   .component("Emoji", Emoji)
+  .component("Center", Center)
+  .component("Small", Small)
   .component("Text", Text)
   .component("EmojiCode", EmojiCode)
   .component("Mention", Mention)

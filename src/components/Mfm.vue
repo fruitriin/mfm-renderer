@@ -6,12 +6,11 @@
     :token="token.props"
     :children="token.children"
   />
-  <div style="border: solid 1px red" v-if="false">
+  <div style="border: solid 1px red" v-if="true">
     <pre v-for="token in tokens">
 component: {{ getComponent(token.type) }}
 token: {{ token }}
-  </pre
-    >
+    </pre>
   </div>
 </template>
 

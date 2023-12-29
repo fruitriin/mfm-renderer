@@ -1,8 +1,6 @@
 <template>
-  {{ token }}
-  <pre class="inline-code">
-    <code>{{ token.code }}</code>
-  </pre>
+  {{ token }} {{ children }}
+  <pre class="inline-code"></pre>
 </template>
 
 <script lang="ts">
