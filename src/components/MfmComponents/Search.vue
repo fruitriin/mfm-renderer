@@ -1,24 +1,20 @@
 <template>
-  <div>Search: {{ $attrs.token }}</div>
+  <div>{{ token.query }} <button>検索</button></div>
 </template>
 
-<script>
+<script lang="ts">
+import { PropType } from "vue";
+
 export default {
   props: {
     token: {
-      type: Object,
+      type: Object as PropType<{ query: string }>,
       required: true,
     },
-    note: {
+    children: {
       type: Object,
-      required: true,
-    },
-    plain: {
-      type: Boolean,
-      default: false,
     },
   },
-  name: "Search.vue",
 };
 </script>
 

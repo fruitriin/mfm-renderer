@@ -1,11 +1,9 @@
 <template>InlineCode {{ token.code }}</template>
 
-<script>
+<script lang="ts">
 export default {
   name: "InlineCode.vue",
-  props: {
-    token: Object,
-  },
+  props: ["token", "children"],
   data() {
     return {
       inline: true,

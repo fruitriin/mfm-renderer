@@ -1,13 +1,19 @@
 <template>
-  <a href="token.url" v-text="token.url" />
+  <a :href="token.url" v-text="token.url" />
 </template>
 
-<script>
+<script lang="ts">
+import { PropType } from "vue";
+
 export default {
   name: "Url.vue",
   props: {
-    token: Object,
-    children: Object,
+    token: {
+      type: Object as PropType<any>,
+    },
+    children: {
+      type: Object,
+    },
   },
 };
 </script>

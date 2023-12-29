@@ -2,15 +2,19 @@
   {{ token.emoji }}
 </template>
 
-<script>
+<script lang="ts">
+import { PropType } from "vue";
+
 export default {
-  name: "MfmComponentUnicodeEmoji",
   props: {
-    token: Object,
-    customEmojis: Array,
-    normal: Boolean,
-    plain: true,
-    note: Object,
+    token: {
+      type: Object as PropType<{ emoji: string }>,
+      required: true,
+    },
+    children: {
+      type: Array,
+      default: () => [],
+    },
   },
 };
 </script>

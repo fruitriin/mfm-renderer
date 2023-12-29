@@ -3,9 +3,8 @@
   <!--  <span v-html="token"></span>-->
 </template>
 
-<script>
+<script lang="ts">
 export default {
-  name: "Emoji.vue",
   props: {
     token: String,
   },

@@ -1,8 +1,10 @@
-<template>Plain</template>
+<template>
+  <span>Plain</span>
+</template>
 
-<script>
+<script lang="ts">
 export default {
-  name: "Plain",
+  props: ["children", "token", "style"],
 };
 </script>
 

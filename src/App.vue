@@ -2,28 +2,28 @@
 import MfmText from "./components/MfmText.vue";
 import { ref } from "vue";
 
-const note = {
-  id: "9ntvuujd2f",
-  createdAt: "2023-12-29T07:34:57.049Z",
-  userId: "9bs3a5r48b",
-  text: "$[bg.color=b51 $[fg.color=fff  2桁　Normal ]] 挑戦した数字「**05**」\n$[sparkle 10手で当てることができました！]\nhttps://misskey.systems/play/9nr3u7p244 #Hit&Blowチャレンジ\n総当たりしちゃった",
-  cw: null,
-  visibility: "public",
-  localOnly: false,
-  reactionAcceptance: "nonSensitiveOnly",
-  renoteCount: 0,
-  repliesCount: 0,
-  reactions: {
-    ":neko_medetai_nya@.:": 1,
-  },
-  reactionEmojis: {},
-  tags: ["hit&blowチャレンジ"],
-  fileIds: [],
-  files: [],
-  replyId: null,
-  renoteId: null,
-  clippedCount: 0,
-};
+// const _note = {
+//   id: "9ntvuujd2f",
+//   createdAt: "2023-12-29T07:34:57.049Z",
+//   userId: "9bs3a5r48b",
+//   text: "$[bg.color=b51 $[fg.color=fff  2桁　Normal ]] 挑戦した数字「**05**」\n$[sparkle 10手で当てることができました！]\nhttps://misskey.systems/play/9nr3u7p244 #Hit&Blowチャレンジ\n総当たりしちゃった",
+//   cw: null,
+//   visibility: "public",
+//   localOnly: false,
+//   reactionAcceptance: "nonSensitiveOnly",
+//   renoteCount: 0,
+//   repliesCount: 0,
+//   reactions: {
+//     ":neko_medetai_nya@.:": 1,
+//   },
+//   reactionEmojis: {},
+//   tags: ["hit&blowチャレンジ"],
+//   fileIds: [],
+//   files: [],
+//   replyId: null,
+//   renoteId: null,
+//   clippedCount: 0,
+// };
 
 const text = ref(
   "$[bg.color=b51 $[fg.color=fff  2桁　Normal ]] 挑戦した数字「**05**」\n$[sparkle 10手で当てることができました！]\nhttps://misskey.systems/play/9nr3u7p244 #Hit&Blowチャレンジ\n総当たりしちゃった",
@@ -125,6 +125,11 @@ $[rainbow $[fg.color=f0f 色付き文字]]`,
     <textarea v-model="text" style="height: 6rem; width: 40rem" />
     <hr />
     <MfmText :text="text" />
+
+    <hr />
+    <h2>進捗？</h2>
+    まだできてない<br />
+    italic, quote, mention, customEmoji, link, center, unicordEmoji
 
     <hr />
     <h2>テストコード</h2>

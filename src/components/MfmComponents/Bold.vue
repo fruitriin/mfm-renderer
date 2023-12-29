@@ -2,7 +2,7 @@
   <b><MfmComponent :tokens="children" /></b>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   props: ["children"],
 };

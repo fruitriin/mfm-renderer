@@ -3,7 +3,7 @@
   <MfmComponent :tokens="children" :style="functionedStyle" />
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "Fn",
   props: ["token", "children"],

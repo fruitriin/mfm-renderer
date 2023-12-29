@@ -5,16 +5,14 @@
   </template>
 </template>
 
-<script>
-/**
- * 完成
- */
+<script lang="ts">
+import { PropType } from "vue";
+
 export default {
   inheritAttrs: true,
-  name: "MfmText",
   props: {
     children: Object,
-    token: Object,
+    token: Object as PropType<any>,
     plain: {
       type: Boolean,
       default: false,
@@ -27,7 +25,7 @@ export default {
     style: Object,
   },
   methods: {
-    showBr(text, index) {
+    showBr(_text: string, index: number) {
       // 行末では改行しない
       if (index + 1 === this.parsedText.length) {
         return false;

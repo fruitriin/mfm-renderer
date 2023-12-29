@@ -1,11 +1,9 @@
 <template><img class="emoji" :src="emoji()" /></template>
 
 <script lang="ts">
-import { entities } from "misskey-js";
-import { defineComponent, PropType } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "EmojiCode.vue",
   props: {
     token: {
       required: true,
@@ -17,8 +15,8 @@ export default defineComponent({
   },
   methods: {
     emoji(): string {
-      return this.note.emojis.find((e) => {
-        return e.name == this.token.name;
+      return this.note.emojis.find((e: { name: string }) => {
+        return e.name == (this.token as any).name;
       }).url;
     },
   },

@@ -1,7 +1,7 @@
 <template>#{{ token.hashtag }}</template>
 
-<script>
+<script lang="ts">
 export default {
-  props: ["token", "note", "plain", "children", "style"],
+  props: ["token", "children", "style"],
 };
 </script>

@@ -1,9 +1,9 @@
 <template>
-  <del><MfmComponent v-bind="$attrs" /></del>
+  <del><MfmComponent :tokens="children" /></del>
 </template>
 
-<script>
+<script lang="ts">
 export default {
-  name: "Strike.vue",
+  props: ["token", "children"],
 };
 </script>
