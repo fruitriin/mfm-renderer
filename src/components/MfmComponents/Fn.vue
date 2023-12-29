@@ -22,13 +22,8 @@ export default {
         case "blur":
           return {};
         case "flip":
-          // オプションなし = x -1, Y = 1
-          // v のみ = X 1, Y -1
-          // h.v = x -1, Y -1
-
           // v がある → Y -1
           // h がある -> X -1
-          //
           return {
             transform: `scale(${this.token.args.h ? 1 : -1}, ${
               this.token.args.v ? -1 : 1
@@ -38,6 +33,14 @@ export default {
           const deg = this.token.args.deg ?? 90;
           return {
             transform: `rotate(${deg}deg)`,
+          };
+        case "position":
+          return {
+            transform: `translateX(${this.token.args.x}em) translateY(${this.token.args.y}em)`,
+          };
+        case "scale":
+          return {
+            transform: `scale(${this.token.args.x}, ${this.token.args.y})`,
           };
         case "sparkle":
           return { color: "yellow" };
@@ -50,6 +53,12 @@ export default {
 </script>
 
 <style>
+.scale {
+  display: inline-block;
+}
+.position {
+  position: absolute;
+}
 .flip {
   display: inline-block;
 }

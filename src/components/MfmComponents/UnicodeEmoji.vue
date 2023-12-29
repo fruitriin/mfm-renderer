@@ -1,4 +1,6 @@
-<template>{{ token.emoji }}</template>
+<template>
+  <span :style="style">{{ token.emoji }}</span>
+</template>
 
 <script lang="ts">
 // 本当は twimojiやfluent emojiに置き換える
