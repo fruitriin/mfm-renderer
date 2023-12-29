@@ -1,9 +1,9 @@
 <template>
-  <b><MfmComponent :tokens="$attrs.children" /></b>
+  <b><MfmComponent :tokens="children" /></b>
 </template>
 
 <script>
 export default {
-  name: "Bold",
+  props: ["children"],
 };
 </script>

@@ -1,8 +1,6 @@
 <template>
   <!--  Fn: {{ token }}-->
-  <span :style="functionedStyle">
-    <MfmComponent :tokens="children" />
-  </span>
+  <MfmComponent :tokens="children" :style="functionedStyle" />
 </template>
 
 <script>

@@ -2,6 +2,6 @@
 
 <script>
 export default {
-  props: ["token", "note", "plain"],
+  props: ["token", "note", "plain", "children", "style"],
 };
 </script>

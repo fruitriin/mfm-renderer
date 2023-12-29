@@ -1,6 +1,6 @@
 <template>
   <template v-for="(t, i) in parsedText">
-    <span>{{ t }}</span>
+    <span :style="style"> {{ t }}</span>
     <br v-if="showBr(t, i)" />
   </template>
 </template>
@@ -24,6 +24,7 @@ export default {
       default: false,
     },
     note: Object,
+    style: Object,
   },
   methods: {
     showBr(text, index) {
