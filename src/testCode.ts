@@ -18,7 +18,7 @@ export const samples = ref([
     "``` \n" +
     "console.log('hello misskey') \n" +
     "``` ",
-  "中央揃え(ブロック要素) \n <center>中央揃え > 引用は無効です```コードブロックは無効です```</center>",
+  "中央揃え(ブロック要素) \n<center>中央揃え > 引用は無効です```コードブロックは無効です```</center>",
   `
 検索
 misskey 検索

@@ -7,11 +7,8 @@
     :token="token.props"
     :children="token.children"
   />
-  <div style="border: solid 1px red" v-if="true">
-    <pre v-for="token in tokens">
-component: {{ getComponent(token.type) }}
-<!--token: {{ token }}-->
-    </pre>
+  <div style="border: solid 1px red" v-if="false">
+    <pre>{{ tokens[0] }}</pre>
   </div>
 </template>
 

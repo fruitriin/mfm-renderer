@@ -1,6 +1,6 @@
 <template>
+  <!--  AST: {{ parsedMfm }}-->
   <MfmComponent :tokens="parsedMfm" />
-  AST: {{ parsedMfm }}
 </template>
 
 <script lang="ts">

@@ -15,10 +15,14 @@
 
     <hr />
     <h2>テストコード</h2>
-    <div v-for="sample in samples">
+    <div v-for="(sample, key) in samples">
       <div>
         <h4>元テキスト</h4>
-        <textarea v-text="sample" style="height: 4rem; width: 100%" /><br />
+        <textarea
+          v-text="sample"
+          @input="samples[key] = $event.target.value"
+          style="height: 4rem; width: 100%"
+        /><br />
       </div>
 
       <h4>Parsed MFM</h4>
