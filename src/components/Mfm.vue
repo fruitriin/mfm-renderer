@@ -9,7 +9,10 @@
   />
 
   <div style="border: solid 1px red" v-if="debugMode">
-    <pre>{{ tokens }}</pre>
+    <div v-for="token in tokens">
+      <p>Selected: {{ getComponent(token.type) }}</p>
+      <pre>{{ token }}</pre>
+    </div>
   </div>
 </template>
 

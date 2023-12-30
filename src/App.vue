@@ -1,8 +1,17 @@
 <template>
   <div>
     <h1>MFM Renderer</h1>
-    <div>モード</div>
-    <label><input type="checkbox" v-model="debugMode" /> デバッグモード</label>
+    <div style="position: fixed; right: 0; top: 0; background: wheat">
+      モード
+      <div>
+        <label
+          ><input type="checkbox" v-model="debugMode" /> デバッグモード</label
+        >
+      </div>
+      <div>
+        <label><input type="checkbox" v-model="ast" /> AST</label>
+      </div>
+    </div>
     <hr />
     <div style="display: flex">
       <div style="width: 50%; padding: 8px">
@@ -17,16 +26,18 @@
     <h2>テストコード</h2>
     <div style="display: flex" v-for="(sample, key) in samples">
       <div style="width: 50%; padding: 8px">
-        <h4>Parsed MFM</h4>
+        <h4>Parsed MFM: ({{ sample.title }})</h4>
         <hr />
-        <MfmText :text="sample" />
+        <MfmText :text="sample.body" />
+        <MfmAst v-if="ast" :text="sample.body" />
+
         <hr />
       </div>
       <div style="width: 50%; padding: 8px">
         <h4>元テキスト</h4>
         <textarea
-          @input="samples[key] = $event?.target?.value"
-          :value="sample"
+          @input="samples[key].body = $event?.target?.value"
+          :value="sample.body"
           style="height: 6rem; width: 100%"
         />
       </div>
@@ -38,19 +49,23 @@
 import MfmText from "./components/MfmText.vue";
 import { samples } from "./testCode.ts";
 import { computed } from "vue";
+import MfmAst from "./components/MfmAst.vue";
 
 export default {
   components: {
+    MfmAst,
     MfmText,
   },
   provide() {
     return {
+      ast: computed(() => this.ast),
       debugMode: computed(() => this.debugMode),
     };
   },
   data() {
     return {
-      debugMode: true,
+      ast: false,
+      debugMode: false,
       text: "うま$[ruby 味 あじ] @mention :blob_dj: `inlineCode` ```blockCode```",
       samples,
     };
