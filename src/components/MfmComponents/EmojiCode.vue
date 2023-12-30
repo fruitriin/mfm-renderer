@@ -1,5 +1,6 @@
 <template>
-  :{{ token.name }}:
+  <img v-if="emojis[token.name]" :src="emojis[token.name].url" class="emoji" />
+  <span v-else>:{{ token.name }}:</span>
   <!--  <img class="emoji" :src="emoji()" />-->
 </template>
 
@@ -7,13 +8,15 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
+  inject: ["emojis"],
   props: ["token", "children", "className", "class", "style"],
 });
 </script>
 
 <style scoped>
 .emoji {
-  height: 1.25em;
-  vertical-align: -0.25em;
+  height: 2em;
+  vertical-align: middle;
+  transition: transform 0.2s ease;
 }
 </style>

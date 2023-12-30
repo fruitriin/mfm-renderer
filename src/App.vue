@@ -16,6 +16,7 @@
       </div>
 
       <div
+        v-if="false"
         style="
           overflow-x: hidden;
           overflow-y: auto;
@@ -32,7 +33,7 @@
         <MfmText :text="text" />
       </div>
       <div style="width: 50%; padding: 8px">
-        <textarea v-model.lazy="text" style="height: 6rem; width: 100%" />
+        <textarea v-model="text" style="height: 6rem; width: 100%" />
       </div>
     </div>
 
@@ -50,7 +51,7 @@
       <div style="width: 50%; padding: 8px">
         <h4>元テキスト</h4>
         <textarea
-          @input.lazy="samples[key].body = $event?.target?.value"
+          @input="samples[key].body = $event?.target?.value"
           :value="sample.body"
           style="height: 6rem; width: 100%"
         />
@@ -83,7 +84,7 @@ export default {
       ast: false,
       debugMode: false,
       domain: "misskey.systems",
-      text: "うま$[ruby 味 あじ] @nekokan blob_dj:",
+      text: "うま$[ruby 味 あじ] @nekokan :110:",
       samples,
       emojis: {},
     };
@@ -105,10 +106,11 @@ export default {
         localStorage.setItem("emojis", JSON.stringify(await res.json()));
       }
 
-      const json = JSON.parse(localStorage.getItem("emojis")) as any[];
+      const json = JSON.parse(localStorage.getItem("emojis")) as {
+        emojis: any[];
+      };
 
       for (let emoji of json.emojis) {
-        console.log(emoji);
         this.emojis[emoji.name] = emoji;
       }
     },
