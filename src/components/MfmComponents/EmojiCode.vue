@@ -9,6 +9,11 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   inject: ["emojis"],
+  data() {
+    return {
+      emojis: this.emojis as Record<string, any>,
+    };
+  },
   props: ["token", "children", "className", "class", "style"],
 });
 </script>

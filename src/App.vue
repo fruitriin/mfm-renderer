@@ -51,7 +51,7 @@
       <div style="width: 50%; padding: 8px">
         <h4>元テキスト</h4>
         <textarea
-          @input="samples[key].body = $event?.target?.value"
+          @input="samples[key].body = handler($event)"
           :value="sample.body"
           style="height: 6rem; width: 100%"
         />
@@ -63,10 +63,10 @@
 <script lang="ts">
 import MfmText from "./components/MfmText.vue";
 import { samples } from "./testCode.ts";
-import { computed } from "vue";
+import { computed, defineComponent } from "vue";
 import MfmAst from "./components/MfmAst.vue";
 
-export default {
+export default defineComponent({
   components: {
     MfmAst,
     MfmText,
@@ -84,17 +84,32 @@ export default {
       ast: false,
       debugMode: false,
       domain: "misskey.systems",
-      text: "うま$[ruby 味 あじ] @nekokan :110:",
+      text: `#mfmart @mention :110:
+      **太字** <i>斜め</i> ~~打ち消し~~
+\`inline code (JavaScript highlight)\`
+> 引用
+>> 引用の引用`,
       samples,
-      emojis: {},
+      emojis: {} as Record<string, any>,
     };
   },
   mounted() {
     this.getEmojis();
   },
   methods: {
+    handler(event: Event) {
+      return (event.target as HTMLTextAreaElement).value;
+    },
     async getEmojis() {
-      if (localStorage.getItem("emojis")) {
+      const emojis = localStorage.getItem("emojis");
+      if (emojis) {
+        const json = JSON.parse(emojis) as {
+          emojis: any[];
+        };
+
+        for (let emoji of json.emojis) {
+          this.emojis[emoji.name] = emoji;
+        }
       } else {
         const res = await fetch(`https://${this.domain}/api/emojis`, {
           method: "POST",
@@ -104,18 +119,12 @@ export default {
           body: JSON.stringify({}),
         });
         localStorage.setItem("emojis", JSON.stringify(await res.json()));
-      }
 
-      const json = JSON.parse(localStorage.getItem("emojis")) as {
-        emojis: any[];
-      };
-
-      for (let emoji of json.emojis) {
-        this.emojis[emoji.name] = emoji;
+        await this.getEmojis();
       }
     },
   },
-};
+});
 </script>
 
 <style></style>

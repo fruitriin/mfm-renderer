@@ -12,7 +12,7 @@ export const samples = ref<Sample[]>([
   },
   {
     title: "Misskey",
-    body: "#mfmart @mention :blob_dj:",
+    body: "#mfmart @mention :110:",
   },
   {
     title: "URL",

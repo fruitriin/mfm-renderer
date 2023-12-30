@@ -6,10 +6,15 @@
 </template>
 
 <script lang="ts">
-import { PropType } from "vue";
+import { defineComponent, PropType } from "vue";
 
-export default {
+export default defineComponent({
   inject: ["debugMode"],
+  data() {
+    return {
+      debugMode: this.debugMode,
+    };
+  },
   props: {
     token: {
       type: Object as PropType<any>,
@@ -27,7 +32,7 @@ export default {
       type: String,
     },
   },
-};
+});
 </script>
 
 <style scoped></style>

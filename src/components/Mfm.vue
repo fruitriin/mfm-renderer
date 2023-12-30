@@ -24,6 +24,11 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "MfmWrap",
   inject: ["debugMode"],
+  data() {
+    return {
+      debugMode: this.debugMode,
+    };
+  },
   props: {
     tokens: {
       required: true,

@@ -7,12 +7,15 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
   props: ["token", "children", "style", "className"],
   inject: ["domain"],
   data() {
     return {
-      user: undefined,
+      domain: this.domain,
+      user: undefined as unknown as any,
     };
   },
   watch: {
@@ -41,7 +44,7 @@ export default {
       },
     },
   },
-};
+});
 </script>
 
 <style>
