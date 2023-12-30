@@ -1,5 +1,7 @@
 <template>
-  <a class="mention" :href="host + '/' + token.acct"
+  <a
+    class="mention"
+    :href="token.host ?? 'https://' + domain + '/' + token.acct"
     ><img v-if="user" class="avatar" :src="user.avatarUrl" />{{ token.acct }}</a
   >
 </template>
@@ -7,37 +9,36 @@
 <script lang="ts">
 export default {
   props: ["token", "children", "style", "className"],
+  inject: ["domain"],
   data() {
     return {
       user: undefined,
     };
   },
-  mounted() {
-    this.getUser();
-  },
-  methods: {
-    async getUser() {
-      const res = await fetch(
-        "https://misskey.systems/api/users/search-by-username-and-host",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json; charset=utf-8",
-          },
-          body: JSON.stringify({
-            detail: false,
-            limit: 1,
+  watch: {
+    token: {
+      immediate: true,
+      async handler() {
+        // FIXME: なんかバウンスとかスロットルとか必要
+        const res = await fetch(
+          `https:/${
+            this.token.host ?? this.domain
+          }/api/users/search-by-username-and-host`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify({
+              detail: false,
+              limit: 1,
 
-            username: "ikasoba",
-          }),
-        },
-      );
-      this.user = (await res.json())[0];
-    },
-  },
-  computed: {
-    host() {
-      return this.token.host === null ? "" : this.token.host;
+              username: this.token.username,
+            }),
+          },
+        );
+        this.user = (await res.json())[0];
+      },
     },
   },
 };

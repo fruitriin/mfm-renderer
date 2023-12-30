@@ -63,6 +63,7 @@ export default {
     return {
       ast: computed(() => this.ast),
       debugMode: computed(() => this.debugMode),
+      domain: computed(() => this.domain),
     };
   },
   data() {
@@ -70,7 +71,7 @@ export default {
       ast: false,
       debugMode: false,
       domain: "misskey.systems",
-      text: "うま$[ruby 味 あじ] @mention :blob_dj:",
+      text: "うま$[ruby 味 あじ] @nekokan blob_dj:",
       samples,
     };
   },
