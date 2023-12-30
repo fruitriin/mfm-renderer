@@ -10,9 +10,6 @@
     まだできてない<br />
     customEmoji<br />
     <br />
-    壊れてる<br />
-    center
-
     <hr />
     <h2>テストコード</h2>
     <div v-for="(sample, key) in samples">
@@ -38,9 +35,7 @@ import MfmText from "./components/MfmText.vue";
 import { ref } from "vue";
 import { samples } from "./testCode.ts";
 
-const text = ref(
-  ":blob_dj: $[bg.color=b51 $[fg.color=fff  2桁　Normal ]] 挑戦した数字「**05**」\n$[sparkle 10手で当てることができました！]\nhttps://misskey.systems/play/9nr3u7p244 #Hit&Blowチャレンジ\n総当たりしちゃった",
-);
+const text = ref("ルビ" + "うま$[ruby 味 あじ]");
 </script>
 
 <style>

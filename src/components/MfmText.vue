@@ -1,5 +1,4 @@
 <template>
-  <!--  AST: {{ parsedMfm }}-->
   <MfmComponent :tokens="parsedMfm" />
 </template>
 

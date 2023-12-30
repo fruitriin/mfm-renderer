@@ -15,9 +15,9 @@ export const samples = ref([
 日本語を含むリンクの場合<>で囲みます。
 [Wikipedia](<https://ja.wikipedia.org/wiki/分散型ソーシャル・ネットワーク>)`,
   "コード(ブロック要素) \n" +
-    "``` \n" +
+    "```\n" +
     "console.log('hello misskey') \n" +
-    "``` ",
+    "```",
   "中央揃え(ブロック要素) \n<center>中央揃え > 引用は無効です```コードブロックは無効です```</center>",
   `
 検索

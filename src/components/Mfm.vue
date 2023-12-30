@@ -7,8 +7,8 @@
     :token="token.props"
     :children="token.children"
   />
-  <div style="border: solid 1px red" v-if="false">
-    <pre>{{ tokens[0] }}</pre>
+  <div style="border: solid 1px red" v-if="true">
+    <pre>{{ tokens }}</pre>
   </div>
 </template>
 

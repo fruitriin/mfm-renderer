@@ -21,6 +21,7 @@ import Small from "./components/MfmComponents/Small.vue";
 import Inlinecode from "./components/MfmComponents/Inlinecode.vue";
 import BlockCode from "./components/MfmComponents/BlockCode.vue";
 import Center from "./components/MfmComponents/Center.vue";
+import Ruby from "./components/MfmComponents/Ruby.vue";
 
 createApp(App)
   .component("MfmComponent", Mfm)
@@ -42,4 +43,5 @@ createApp(App)
   .component("Link", Link)
   .component("Fn", Fn)
   .component("Hashtag", Hashtag)
+  .component("Ruby", Ruby)
   .mount("#app");
