@@ -16,6 +16,7 @@
   "scripts": {
     "dev": "vite",
     "build": " vue-tsc --emitDeclarationOnly && vite build",
+    "pages": " vue-tsc  --emitDeclarationOnly && vite build -c vite.config.docs.ts",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -3,11 +3,11 @@ import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/mfm-renderer",
   plugins: [vue()],
 
   build: {
     outDir: "dist",
+
     lib: {
       // src/indext.ts is where we have exported the component(s)
       entry: "src/library.ts",
