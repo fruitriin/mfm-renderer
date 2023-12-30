@@ -1,15 +1,14 @@
 <template>
   <MfmComponent
-    class="Fn"
-    :className="`${token.name} ${className ?? ''}`"
+    :className="`Fn ${token.name} ${className ?? ''}`"
     :tokens="children"
-    :style="[functionedStyle, style, { display: 'inline-block' }]"
+    :style="[functionedStyle, style]"
   />
 </template>
 
 <script lang="ts">
 export default {
-  props: ["token", "children", "style", "className", "class"],
+  props: ["token", "children", "style", "className"],
   computed: {
     functionedStyle() {
       switch (this.token.name) {
@@ -101,16 +100,7 @@ export default {
 </script>
 
 <style>
-.scale {
-  display: inline-block;
-}
-.position {
-  position: absolute;
-}
-.flip {
-  display: inline-block;
-}
-.rotate {
+.Fn {
   display: inline-block;
 }
 .blur {

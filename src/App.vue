@@ -16,7 +16,7 @@
       <div>
         <h4>元テキスト</h4>
         <textarea
-          v-text="sample"
+          :value="sample"
           @input="samples[key] = $event.target.value"
           style="height: 4rem; width: 100%"
         /><br />
@@ -36,6 +36,10 @@ import { ref } from "vue";
 import { samples } from "./testCode.ts";
 
 const text = ref("ルビ" + "うま$[ruby 味 あじ]");
+
+function handler(event: HTMLInputElement) {
+  return;
+}
 </script>
 
 <style>
