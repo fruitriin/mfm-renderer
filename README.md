@@ -1,6 +1,9 @@
-# MFM Renderer Component
+# Meintenable MFM Renderer Component
 
-TSXではなく純粋なオブジェクトとしてMFMを記述することを目指す
+MFMをレンダリングするコンポーネント
+各文法ごとにコンポーネント化されているのでメンテナンスしやすい気がする。
+
+<MfmText text="Hello **mfm**" />
 
 
 | ファイル名            | 説明      | 進捗                                                     |
