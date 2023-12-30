@@ -1,39 +1,61 @@
 <template>
   <div>
     <h1>MFM Renderer</h1>
-    <textarea v-model="text" style="height: 6rem; width: 40rem" />
+    <div>モード</div>
+    <label><input type="checkbox" v-model="debugMode" /> デバッグモード</label>
     <hr />
-    <MfmText :text="text" />
+    <div style="display: flex">
+      <div style="width: 50%; padding: 8px">
+        <MfmText :text="text" />
+      </div>
+      <div style="width: 50%; padding: 8px">
+        <textarea v-model="text" style="height: 6rem; width: 100%" />
+      </div>
+    </div>
 
     <hr />
     <h2>テストコード</h2>
-    <div v-for="(sample, key) in samples">
-      <div>
+    <div style="display: flex" v-for="(sample, key) in samples">
+      <div style="width: 50%; padding: 8px">
+        <h4>Parsed MFM</h4>
+        <hr />
+        <MfmText :text="sample" />
+        <hr />
+      </div>
+      <div style="width: 50%; padding: 8px">
         <h4>元テキスト</h4>
         <textarea
+          @input="samples[key] = $event?.target?.value"
           :value="sample"
-          @input="samples[key] = $event.target.value"
-          style="height: 4rem; width: 100%"
-        /><br />
-      </div>
-
-      <h4>Parsed MFM</h4>
-      <div>
-        <MfmText :text="sample" />
+          style="height: 6rem; width: 100%"
+        />
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import MfmText from "./components/MfmText.vue";
-import { ref } from "vue";
 import { samples } from "./testCode.ts";
+import { computed } from "vue";
 
-const text = ref(
-  "ルビ" +
-    "うま$[ruby 味 あじ] @mention :blob_dj: `inlineCode` ```blockCode```",
-);
+export default {
+  components: {
+    MfmText,
+  },
+  provide() {
+    return {
+      debugMode: computed(() => this.debugMode),
+    };
+  },
+  data() {
+    return {
+      debugMode: true,
+      text: "うま$[ruby 味 あじ] @mention :blob_dj: `inlineCode` ```blockCode```",
+      samples,
+    };
+  },
+};
 </script>
 
 <style></style>

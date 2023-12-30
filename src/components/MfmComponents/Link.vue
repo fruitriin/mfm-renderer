@@ -1,5 +1,5 @@
 <template>
-  silent - {{ token.silent }}
+  <span v-if="debugMode">silent - {{ token.silent }}</span>
   <a class="link" :class="className" :href="token.url" :style="style">
     <MfmComponent :tokens="children" />
   </a>
@@ -9,6 +9,7 @@
 import { PropType } from "vue";
 
 export default {
+  inject: ["debugMode"],
   props: {
     token: {
       type: Object as PropType<any>,

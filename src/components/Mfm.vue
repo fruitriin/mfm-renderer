@@ -7,7 +7,8 @@
     :token="token.props"
     :children="token.children"
   />
-  <div style="border: solid 1px red" v-if="true">
+
+  <div style="border: solid 1px red" v-if="debugMode">
     <pre>{{ tokens }}</pre>
   </div>
 </template>
@@ -19,6 +20,7 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "MfmWrap",
+  inject: ["debugMode"],
   props: {
     tokens: {
       required: true,
