@@ -5,8 +5,12 @@
 <script lang="ts">
 import { mfm } from "../utils/mfmUtil.ts";
 import { defineComponent } from "vue";
+import MfmComponent from "./Mfm.vue";
 
 export default defineComponent({
+  components: {
+    MfmComponent,
+  },
   props: {
     text: {
       required: true,

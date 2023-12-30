@@ -30,7 +30,7 @@
     <hr />
     <div style="display: flex">
       <div style="width: 50%; padding: 8px">
-        <MfmText :text="text" />
+        <MfmRenderer :text="text" />
       </div>
       <div style="width: 50%; padding: 8px">
         <textarea v-model="text" style="height: 6rem; width: 100%" />
@@ -43,7 +43,7 @@
       <div style="width: 50%; padding: 8px">
         <h4>Parsed MFM: ({{ sample.title }})</h4>
         <hr />
-        <MfmText :text="sample.body" />
+        <MfmRenderer :text="sample.body" />
         <MfmAst v-if="ast" :text="sample.body" />
 
         <hr />
@@ -61,15 +61,15 @@
 </template>
 
 <script lang="ts">
-import MfmText from "./components/MfmText.vue";
-import { samples } from "./testCode.ts";
+import MfmRenderer from "./components/MfmRenderer.vue";
+import { samples } from "./testCode";
 import { computed, defineComponent } from "vue";
 import MfmAst from "./components/MfmAst.vue";
 
 export default defineComponent({
   components: {
     MfmAst,
-    MfmText,
+    MfmRenderer,
   },
   provide() {
     return {
