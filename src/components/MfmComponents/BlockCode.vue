@@ -1,10 +1,12 @@
 <template>
   {{ token.lang }}
-  <pre class="block-code">{{ token.code }}</pre>
+  <pre class="block-code">
+    <code>{{ token.code }}</code>
+  </pre>
 </template>
 
 <script lang="ts">
-// langが与えられたらハイライトとか
+// lang が与えられたらハイライトとか
 export default {
   props: ["token", "children", "style", "className"],
 };

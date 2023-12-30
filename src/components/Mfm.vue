@@ -17,13 +17,11 @@
 </template>
 
 <script lang="ts">
-// classとclassNameが混在してるのやばそう
+// class と className が混在してるのやばそう
 import { getComponent } from "../utils/mfmUtil.ts";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "MfmWrap",
-  inject: ["debugMode"],
   data() {
     return {
       debugMode: this.debugMode,
