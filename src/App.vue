@@ -12,7 +12,18 @@
         <label><input type="checkbox" v-model="ast" /> AST</label>
       </div>
       <div>
-        <input v-model="domain" />
+        <input v-model.lazy="domain" />
+      </div>
+
+      <div
+        style="
+          overflow-x: hidden;
+          overflow-y: auto;
+          width: 300px;
+          height: 10rem;
+        "
+      >
+        <pre>{{ Object.keys(emojis) }}</pre>
       </div>
     </div>
     <hr />
@@ -21,7 +32,7 @@
         <MfmText :text="text" />
       </div>
       <div style="width: 50%; padding: 8px">
-        <textarea v-model="text" style="height: 6rem; width: 100%" />
+        <textarea v-model.lazy="text" style="height: 6rem; width: 100%" />
       </div>
     </div>
 
@@ -39,7 +50,7 @@
       <div style="width: 50%; padding: 8px">
         <h4>元テキスト</h4>
         <textarea
-          @input="samples[key].body = $event?.target?.value"
+          @input.lazy="samples[key].body = $event?.target?.value"
           :value="sample.body"
           style="height: 6rem; width: 100%"
         />
@@ -64,6 +75,7 @@ export default {
       ast: computed(() => this.ast),
       debugMode: computed(() => this.debugMode),
       domain: computed(() => this.domain),
+      emojis: computed(() => this.emojis),
     };
   },
   data() {
@@ -73,7 +85,33 @@ export default {
       domain: "misskey.systems",
       text: "うま$[ruby 味 あじ] @nekokan blob_dj:",
       samples,
+      emojis: {},
     };
+  },
+  mounted() {
+    this.getEmojis();
+  },
+  methods: {
+    async getEmojis() {
+      if (localStorage.getItem("emojis")) {
+      } else {
+        const res = await fetch(`https://${this.domain}/api/emojis`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+          body: JSON.stringify({}),
+        });
+        localStorage.setItem("emojis", JSON.stringify(await res.json()));
+      }
+
+      const json = JSON.parse(localStorage.getItem("emojis")) as any[];
+
+      for (let emoji of json.emojis) {
+        console.log(emoji);
+        this.emojis[emoji.name] = emoji;
+      }
+    },
   },
 };
 </script>
