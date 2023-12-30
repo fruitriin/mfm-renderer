@@ -11,6 +11,9 @@
       <div>
         <label><input type="checkbox" v-model="ast" /> AST</label>
       </div>
+      <div>
+        <input v-model="domain" />
+      </div>
     </div>
     <hr />
     <div style="display: flex">
@@ -66,7 +69,8 @@ export default {
     return {
       ast: false,
       debugMode: false,
-      text: "うま$[ruby 味 あじ] @mention :blob_dj: `inlineCode` ```blockCode```",
+      domain: "misskey.systems",
+      text: "うま$[ruby 味 あじ] @mention :blob_dj:",
       samples,
     };
   },
