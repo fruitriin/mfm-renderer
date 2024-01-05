@@ -16,6 +16,6 @@
 
 <script lang="ts">
 export default {
-  props: ["children"],
-};
+  props: ['children']
+}
 </script>

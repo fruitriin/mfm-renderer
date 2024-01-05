@@ -4,9 +4,7 @@
     <div style="position: fixed; right: 0; top: 0; background: wheat">
       モード
       <div>
-        <label
-          ><input type="checkbox" v-model="debugMode" /> デバッグモード</label
-        >
+        <label><input type="checkbox" v-model="debugMode" /> デバッグモード</label>
       </div>
       <div>
         <label><input type="checkbox" v-model="ast" /> AST</label>
@@ -15,15 +13,7 @@
         <input v-model.lazy="domain" />
       </div>
 
-      <div
-        v-if="false"
-        style="
-          overflow-x: hidden;
-          overflow-y: auto;
-          width: 300px;
-          height: 10rem;
-        "
-      >
+      <div v-if="false" style="overflow-x: hidden; overflow-y: auto; width: 300px; height: 10rem">
         <pre>{{ Object.keys(emojis) }}</pre>
       </div>
     </div>
@@ -61,70 +51,70 @@
 </template>
 
 <script lang="ts">
-import MfmRenderer from "./components/MfmRenderer.vue";
-import { samples } from "./testCode";
-import { computed, defineComponent } from "vue";
-import MfmAst from "./components/MfmAst.vue";
+import MfmRenderer from './components/MfmRenderer.vue'
+import { samples } from './testCode'
+import { computed, defineComponent } from 'vue'
+import MfmAst from './components/MfmAst.vue'
 
 export default defineComponent({
   components: {
     MfmAst,
-    MfmRenderer,
+    MfmRenderer
   },
   provide() {
     return {
       ast: computed(() => this.ast),
       debugMode: computed(() => this.debugMode),
       domain: computed(() => this.domain),
-      emojis: computed(() => this.emojis),
-    };
+      emojis: computed(() => this.emojis)
+    }
   },
   data() {
     return {
       ast: false,
       debugMode: false,
-      domain: "misskey.systems",
+      domain: 'misskey.systems',
       text: `#mfmart @mention :110:
       **太字** <i>斜め</i> ~~打ち消し~~
 \`inline code (JavaScript highlight)\`
 > 引用
 >> 引用の引用`,
       samples,
-      emojis: {} as Record<string, any>,
-    };
+      emojis: {} as Record<string, any>
+    }
   },
   mounted() {
-    this.getEmojis();
+    this.getEmojis()
   },
   methods: {
     handler(event: Event) {
-      return (event.target as HTMLTextAreaElement).value;
+      return (event.target as HTMLTextAreaElement).value
     },
     async getEmojis() {
-      const emojis = localStorage.getItem("emojis");
+      const emojis = localStorage.getItem('emojis')
       if (emojis) {
         const json = JSON.parse(emojis) as {
-          emojis: any[];
-        };
+          emojis: any[]
+        }
 
         for (let emoji of json.emojis) {
-          this.emojis[emoji.name] = emoji;
+          this.emojis[emoji.name] = emoji
         }
       } else {
         const res = await fetch(`https://${this.domain}/api/emojis`, {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json; charset=utf-8",
+            'Content-Type': 'application/json; charset=utf-8'
           },
-          body: JSON.stringify({}),
-        });
-        localStorage.setItem("emojis", JSON.stringify(await res.json()));
+          body: JSON.stringify({})
+        })
+        localStorage.setItem('emojis', JSON.stringify(await res.json()))
 
-        await this.getEmojis();
+        await this.getEmojis()
       }
-    },
-  },
-});
+    }
+  }
+})
 </script>
 
 <style></style>

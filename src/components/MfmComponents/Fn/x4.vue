@@ -8,9 +8,8 @@
 
 <script lang="ts">
 export default {
-  props: ["token", "children", "style", "className"],
-};
+  props: ['token', 'children', 'style', 'className']
+}
 </script>
 
-<style>
-</style>
+<style></style>

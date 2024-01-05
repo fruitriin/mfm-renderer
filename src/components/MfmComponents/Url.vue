@@ -3,19 +3,19 @@
 </template>
 
 <script lang="ts">
-import { PropType } from "vue";
+import { PropType } from 'vue'
 
 export default {
-  name: "Url.vue",
+  name: 'Url.vue',
   props: {
     token: {
-      type: Object as PropType<any>,
+      type: Object as PropType<any>
     },
     children: {
-      type: Object,
-    },
-  },
-};
+      type: Object
+    }
+  }
+}
 </script>
 
 <style scoped></style>

@@ -18,28 +18,28 @@
 
 <script lang="ts">
 // class と className が混在してるのやばそう
-import { getComponent } from "../utils/mfmUtil.ts";
-import { defineComponent } from "vue";
+import { getComponent } from '../utils/mfmUtil.ts'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   data() {
     return {
-      debugMode: this.debugMode,
-    };
+      debugMode: this.debugMode
+    }
   },
   props: {
     tokens: {
       required: true,
-      type: Object,
+      type: Object
     },
     style: Object,
     className: String,
-    class: String,
+    class: String
   },
   methods: {
-    getComponent,
-  },
-});
+    getComponent
+  }
+})
 </script>
 
 <style scoped></style>

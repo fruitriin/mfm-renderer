@@ -1,22 +1,20 @@
 <template>
-  <a
-    class="mention"
-    :href="token.host ?? 'https://' + domain + '/' + token.acct"
+  <a class="mention" :href="token.host ?? 'https://' + domain + '/' + token.acct"
     ><img v-if="user" class="avatar" :src="user.avatarUrl" />{{ token.acct }}</a
   >
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue'
 
 export default defineComponent({
-  props: ["token", "children", "style", "className"],
-  inject: ["domain"],
+  props: ['token', 'children', 'style', 'className'],
+  inject: ['domain'],
   data() {
     return {
       domain: this.domain,
-      user: undefined as unknown as any,
-    };
+      user: undefined as unknown as any
+    }
   },
   watch: {
     token: {
@@ -24,27 +22,25 @@ export default defineComponent({
       async handler() {
         // FIXME: なんかバウンスとかスロットルとか必要
         const res = await fetch(
-          `https:/${
-            this.token.host ?? this.domain
-          }/api/users/search-by-username-and-host`,
+          `https:/${this.token.host ?? this.domain}/api/users/search-by-username-and-host`,
           {
-            method: "POST",
+            method: 'POST',
             headers: {
-              "Content-Type": "application/json; charset=utf-8",
+              'Content-Type': 'application/json; charset=utf-8'
             },
             body: JSON.stringify({
               detail: false,
               limit: 1,
 
-              username: this.token.username,
-            }),
-          },
-        );
-        this.user = (await res.json())[0];
-      },
-    },
-  },
-});
+              username: this.token.username
+            })
+          }
+        )
+        this.user = (await res.json())[0]
+      }
+    }
+  }
+})
 </script>
 
 <style>

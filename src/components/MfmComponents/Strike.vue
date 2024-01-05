@@ -4,6 +4,6 @@
 
 <script lang="ts">
 export default {
-  props: ["token", "children"],
-};
+  props: ['token', 'children']
+}
 </script>

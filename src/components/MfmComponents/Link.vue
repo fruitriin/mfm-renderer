@@ -6,33 +6,33 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({
-  inject: ["debugMode"],
+  inject: ['debugMode'],
   data() {
     return {
-      debugMode: this.debugMode,
-    };
+      debugMode: this.debugMode
+    }
   },
   props: {
     token: {
-      type: Object as PropType<any>,
+      type: Object as PropType<any>
     },
     children: {
-      type: Object,
+      type: Object
     },
     className: {
-      type: String,
+      type: String
     },
     style: {
-      type: Object,
+      type: Object
     },
     class: {
-      type: String,
-    },
-  },
-});
+      type: String
+    }
+  }
+})
 </script>
 
 <style scoped></style>

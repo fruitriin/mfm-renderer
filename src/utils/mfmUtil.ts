@@ -1,11 +1,11 @@
-import { MfmNode, parse, parseSimple } from "mfm-js";
+import { MfmNode, parse, parseSimple } from 'mfm-js'
 
 export function mfm(text: string, plain: boolean): MfmNode[] {
-  if (text == null || text === "") {
-    return [];
+  if (text == null || text === '') {
+    return []
   }
-  const ast = plain ? parseSimple(text) : parse(text);
-  return ast;
+  const ast = plain ? parseSimple(text) : parse(text)
+  return ast
 }
 
 /**
@@ -14,8 +14,5 @@ export function mfm(text: string, plain: boolean): MfmNode[] {
  * @param string
  */
 export function getComponent(string: string) {
-  return string.replace(
-    /(^.)(.*)/,
-    (_$1, $2, $3) => `${$2.toUpperCase() + $3}`,
-  );
+  return string.replace(/(^.)(.*)/, (_$1, $2, $3) => `${$2.toUpperCase() + $3}`)
 }

@@ -8,6 +8,6 @@
 <script lang="ts">
 // lang が与えられたらハイライトとか
 export default {
-  props: ["token", "children", "style", "className"],
-};
+  props: ['token', 'children', 'style', 'className']
+}
 </script>

@@ -6,8 +6,8 @@
 
 <script lang="ts">
 export default {
-  props: ["children", "class", "className"],
-};
+  props: ['children', 'class', 'className']
+}
 </script>
 <style>
 .center {
