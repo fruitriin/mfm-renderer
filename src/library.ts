@@ -40,54 +40,59 @@ import { App } from "vue";
 import { ObjectPlugin } from "@vue/runtime-core";
 import MfmRenderer from "./components/MfmRenderer.vue";
 
+const components = {
+  Bold,
+  Italic,
+  Quote,
+  Small,
+  Text,
+  Center,
+  EmojiCode,
+  Mention,
+  Plain,
+  BlockCode,
+  Inlinecode,
+  Search,
+  Strike,
+  UnicodeEmoji,
+  Url,
+  Link,
+  Hashtag,
+  Fn,
+} as Record<string, any>;
+const functions = {
+  Fg,
+  Bg,
+  Font,
+  Blur,
+  Flip,
+  Scale,
+  Position,
+  x2,
+  x3,
+  x4,
+  Jump,
+  Tada,
+  Jelly,
+  Spin,
+  Twitch,
+  Shake,
+  Bounce,
+  Rainbow,
+  Ruby,
+} as Record<string, any>;
+
 export default {
   install: (app: App) => {
-    app
-      .component("MfmRenderer", MfmRenderer)
-      .component("MfmComponent", Mfm)
-      .component("Bold", Bold)
-      .component("Italic", Italic)
-      .component("Quote", Quote)
-      .component("Small", Small)
-      .component("Text", Text)
-      .component("Center", Center)
-      .component("EmojiCode", EmojiCode)
-      .component("Mention", Mention)
-      .component("Plain", Plain)
-      .component("BlockCode", BlockCode)
-      .component("InlineCode", Inlinecode)
-      .component("Search", Search)
-      .component("Strike", Strike)
-      .component("UnicodeEmoji", UnicodeEmoji)
-      .component("Url", Url)
-      .component("Link", Link)
+    app.component("MfmRenderer", MfmRenderer).component("MfmComponent", Mfm);
 
-      .component("Hashtag", Hashtag)
+    Object.keys(components).forEach((componentName) => {
+      app.component("MFM" + componentName, components[componentName]);
+    });
 
-      .component("Fn", Fn)
-      .component("Fg", Fg)
-      .component("Bg", Bg)
-      .component("Font", Font)
-      .component("Blur", Blur)
-
-      .component("Flip", Flip)
-      .component("Scale", Scale)
-      .component("Position", Position)
-
-      .component("X2", x2)
-      .component("X3", x3)
-      .component("X4", x4)
-
-      .component("Jump", Jump)
-      .component("Tada", Tada)
-      .component("Jelly", Jelly)
-      .component("Spin", Spin)
-      .component("Twitch", Twitch)
-      .component("Shake", Shake)
-      .component("Bounce", Bounce)
-      .component("Rainbow", Rainbow)
-
-      .component("Ruby", Ruby);
+    Object.keys(functions).forEach((componentName) => {
+      app.component("MFM" + componentName, components[componentName]);
+    });
 
     return app;
   },
