@@ -5,19 +5,23 @@
   </ruby>
 </template>
 
-<script lang="ts">
-export default {
-  props: ['children', 'token', 'style', 'className'],
-  computed: {
-    ruby() {
-      const ruby = this.children[0].props.text.split(' ')
-      return {
-        body: ruby[0],
-        yomi: ruby[1]
-      }
-    }
+<script setup lang="ts">
+import { computed } from 'vue'
+
+const props = defineProps<{
+  children?: any
+  token?: any
+  style?: object
+  className?: string
+}>()
+
+const ruby = computed(() => {
+  const rubyText = props.children[0].props.text.split(' ')
+  return {
+    body: rubyText[0],
+    yomi: rubyText[1]
   }
-}
+})
 </script>
 
 <style scoped></style>

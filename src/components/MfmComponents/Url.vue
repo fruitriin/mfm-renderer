@@ -2,20 +2,11 @@
   <a class="url" :href="token.url" v-text="token.url" />
 </template>
 
-<script lang="ts">
-import { PropType } from 'vue'
-
-export default {
-  name: 'Url.vue',
-  props: {
-    token: {
-      type: Object as PropType<any>
-    },
-    children: {
-      type: Object
-    }
-  }
-}
+<script setup lang="ts">
+defineProps<{
+  token?: any
+  children?: object
+}>()
 </script>
 
 <style scoped></style>

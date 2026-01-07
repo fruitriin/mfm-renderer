@@ -4,32 +4,23 @@
   </div>
 </template>
 
-<script lang="ts">
-import { PropType } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default {
-  data() {
-    return {
-      currentQuery: this.token.query
-    }
-  },
-  props: {
-    token: {
-      type: Object as PropType<{ query: string }>,
-      required: true
-    },
-    children: {
-      type: Object
-    }
-  },
-  methods: {
-    search() {
-      window.open(
-        'https://www.google.com/search?q=' + encodeURIComponent(this.currentQuery),
-        '_blank'
-      )
-    }
-  }
+interface Props {
+  token: { query: string }
+  children?: object
+}
+
+const props = defineProps<Props>()
+
+const currentQuery = ref(props.token.query)
+
+const search = () => {
+  window.open(
+    'https://www.google.com/search?q=' + encodeURIComponent(currentQuery.value),
+    '_blank'
+  )
 }
 </script>
 

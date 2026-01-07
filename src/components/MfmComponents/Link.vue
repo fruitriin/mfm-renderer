@@ -5,34 +5,18 @@
   </a>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
+<script setup lang="ts">
+import { inject } from 'vue'
 
-export default defineComponent({
-  inject: ['debugMode'],
-  data() {
-    return {
-      debugMode: this.debugMode
-    }
-  },
-  props: {
-    token: {
-      type: Object as PropType<any>
-    },
-    children: {
-      type: Object
-    },
-    className: {
-      type: String
-    },
-    style: {
-      type: Object
-    },
-    class: {
-      type: String
-    }
-  }
-})
+defineProps<{
+  token?: any
+  children?: object
+  className?: string
+  style?: object
+  class?: string
+}>()
+
+const debugMode = inject('debugMode', false)
 </script>
 
 <style scoped></style>

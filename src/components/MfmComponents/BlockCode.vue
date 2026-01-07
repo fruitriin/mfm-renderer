@@ -5,9 +5,12 @@
   </pre>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 // lang が与えられたらハイライトとか
-export default {
-  props: ['token', 'children', 'style', 'className']
-}
+defineProps<{
+  token?: any
+  children?: any
+  style?: object
+  className?: string
+}>()
 </script>

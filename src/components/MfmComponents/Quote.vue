@@ -14,8 +14,8 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  props: ['children']
-}
+<script setup lang="ts">
+defineProps<{
+  children?: any
+}>()
 </script>

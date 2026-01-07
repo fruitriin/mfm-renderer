@@ -2,8 +2,9 @@
   <del class="strike"><MfmComponent :tokens="children" /></del>
 </template>
 
-<script lang="ts">
-export default {
-  props: ['token', 'children']
-}
+<script setup lang="ts">
+defineProps<{
+  token?: any
+  children?: any
+}>()
 </script>

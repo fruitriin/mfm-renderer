@@ -5,40 +5,35 @@
   </template>
 </template>
 
-<script lang="ts">
-import { PropType } from 'vue'
+<script setup lang="ts">
+import { computed } from 'vue'
 
-export default {
-  props: {
-    children: Object,
-    token: Object as PropType<any>,
-    plain: {
-      type: Boolean,
-      default: false
-    },
-    className: String,
-    nowrap: {
-      type: Boolean,
-      default: false
-    },
-    note: Object,
-    style: Object
-  },
-  methods: {
-    showBr(_text: string, index: number) {
-      // 行末では改行しない
-      if (index + 1 === this.parsedText.length) {
-        return false
-      }
+interface Props {
+  children?: object
+  token?: any
+  plain?: boolean
+  className?: string
+  nowrap?: boolean
+  note?: object
+  style?: object
+}
 
-      return true
-    }
-  },
-  computed: {
-    parsedText() {
-      if (!this.plain) return this.token.text.split(/\r\n|\n|\r/)
-      return [this.token.text.replace(/\n/g, ' ')]
-    }
+const props = withDefaults(defineProps<Props>(), {
+  plain: false,
+  nowrap: false
+})
+
+const parsedText = computed(() => {
+  if (!props.plain) return props.token.text.split(/\r\n|\n|\r/)
+  return [props.token.text.replace(/\n/g, ' ')]
+})
+
+const showBr = (_text: string, index: number) => {
+  // 行末では改行しない
+  if (index + 1 === parsedText.value.length) {
+    return false
   }
+
+  return true
 }
 </script>

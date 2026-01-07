@@ -20,10 +20,13 @@
   />
 </template>
 
-<script lang="ts">
-export default {
-  props: ['token', 'children', 'style', 'className']
-}
+<script setup lang="ts">
+defineProps<{
+  token?: any
+  children?: any
+  style?: object
+  className?: string
+}>()
 </script>
 
 <style></style>
