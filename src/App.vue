@@ -50,70 +50,57 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import MfmRenderer from './components/MfmRenderer.vue'
 import { samples } from './testCode'
-import { computed, defineComponent } from 'vue'
+import { computed, onMounted, provide, reactive, ref } from 'vue'
 import MfmAst from './components/MfmAst.vue'
 
-export default defineComponent({
-  components: {
-    MfmAst,
-    MfmRenderer
-  },
-  provide() {
-    return {
-      ast: computed(() => this.ast),
-      debugMode: computed(() => this.debugMode),
-      domain: computed(() => this.domain),
-      emojis: computed(() => this.emojis)
-    }
-  },
-  data() {
-    return {
-      ast: false,
-      debugMode: false,
-      domain: 'misskey.systems',
-      text: `#mfmart @mention :110:
+const ast = ref(false)
+const debugMode = ref(false)
+const domain = ref('misskey.systems')
+const text = ref(`#mfmart @mention :110:
       **太字** <i>斜め</i> ~~打ち消し~~
 \`inline code (JavaScript highlight)\`
 > 引用
->> 引用の引用`,
-      samples,
-      emojis: {} as Record<string, any>
-    }
-  },
-  mounted() {
-    this.getEmojis()
-  },
-  methods: {
-    handler(event: Event) {
-      return (event.target as HTMLTextAreaElement).value
-    },
-    async getEmojis() {
-      const emojis = localStorage.getItem('emojis')
-      if (emojis) {
-        const json = JSON.parse(emojis) as {
-          emojis: any[]
-        }
+>> 引用の引用`)
+const emojis = reactive<Record<string, any>>({})
 
-        for (let emoji of json.emojis) {
-          this.emojis[emoji.name] = emoji
-        }
-      } else {
-        const res = await fetch(`https://${this.domain}/api/emojis`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json; charset=utf-8'
-          },
-          body: JSON.stringify({})
-        })
-        localStorage.setItem('emojis', JSON.stringify(await res.json()))
+provide('ast', computed(() => ast.value))
+provide('debugMode', computed(() => debugMode.value))
+provide('domain', computed(() => domain.value))
+provide('emojis', computed(() => emojis))
 
-        await this.getEmojis()
-      }
+const handler = (event: Event) => {
+  return (event.target as HTMLTextAreaElement).value
+}
+
+const getEmojis = async () => {
+  const emojisData = localStorage.getItem('emojis')
+  if (emojisData) {
+    const json = JSON.parse(emojisData) as {
+      emojis: any[]
     }
+
+    for (let emoji of json.emojis) {
+      emojis[emoji.name] = emoji
+    }
+  } else {
+    const res = await fetch(`https://${domain.value}/api/emojis`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      },
+      body: JSON.stringify({})
+    })
+    localStorage.setItem('emojis', JSON.stringify(await res.json()))
+
+    await getEmojis()
   }
+}
+
+onMounted(() => {
+  getEmojis()
 })
 </script>
 

@@ -16,30 +16,16 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 // class と className が混在してるのやばそう
 import { getComponent } from '../utils/mfmUtil.ts'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  data() {
-    return {
-      debugMode: this.debugMode
-    }
-  },
-  props: {
-    tokens: {
-      required: true,
-      type: Object
-    },
-    style: Object,
-    className: String,
-    class: String
-  },
-  methods: {
-    getComponent
-  }
-})
+defineProps<{
+  tokens: any
+  style?: object
+  className?: string
+  class?: string
+}>()
 </script>
 
 <style scoped></style>

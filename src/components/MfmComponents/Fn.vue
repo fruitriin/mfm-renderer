@@ -8,13 +8,16 @@
   />
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { getComponent } from '../../utils/mfmUtil.ts'
 
-export default {
-  methods: { getComponent },
-  props: ['token', 'tokens', 'children', 'style', 'className']
-}
+defineProps<{
+  token?: any
+  tokens?: any
+  children?: any
+  style?: object
+  className?: string
+}>()
 </script>
 
 <style>

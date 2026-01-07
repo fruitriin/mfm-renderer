@@ -4,43 +4,41 @@
   >
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { inject, ref, watch } from 'vue'
 
-export default defineComponent({
-  props: ['token', 'children', 'style', 'className'],
-  inject: ['domain'],
-  data() {
-    return {
-      domain: this.domain,
-      user: undefined as unknown as any
-    }
-  },
-  watch: {
-    token: {
-      immediate: true,
-      async handler() {
-        // FIXME: なんかバウンスとかスロットルとか必要
-        const res = await fetch(
-          `https:/${this.token.host ?? this.domain}/api/users/search-by-username-and-host`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json; charset=utf-8'
-            },
-            body: JSON.stringify({
-              detail: false,
-              limit: 1,
+const props = defineProps<{
+  token?: any
+  children?: any
+  style?: object
+  className?: string
+}>()
 
-              username: this.token.username
-            })
-          }
-        )
-        this.user = (await res.json())[0]
+const domain = inject<any>('domain', '')
+const user = ref<any>(undefined)
+
+watch(
+  () => props.token,
+  async () => {
+    // FIXME: なんかバウンスとかスロットルとか必要
+    const res = await fetch(
+      `https:/${props.token.host ?? domain.value}/api/users/search-by-username-and-host`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8'
+        },
+        body: JSON.stringify({
+          detail: false,
+          limit: 1,
+          username: props.token.username
+        })
       }
-    }
-  }
-})
+    )
+    user.value = (await res.json())[0]
+  },
+  { immediate: true }
+)
 </script>
 
 <style>

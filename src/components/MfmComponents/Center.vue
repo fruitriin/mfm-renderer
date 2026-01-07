@@ -4,10 +4,12 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  props: ['children', 'class', 'className']
-}
+<script setup lang="ts">
+defineProps<{
+  children?: any
+  class?: string
+  className?: string
+}>()
 </script>
 <style>
 .center {

@@ -2,11 +2,14 @@
   <span :style="style">{{ token.emoji }}</span>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 // 本当は twimojiやfluent emojiに置き換える
-export default {
-  props: ['children', 'token', 'class', 'style']
-}
+defineProps<{
+  children?: any
+  token?: any
+  class?: string
+  style?: object
+}>()
 </script>
 
 <style scoped></style>

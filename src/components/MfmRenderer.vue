@@ -2,27 +2,16 @@
   <MfmComponent :tokens="parsedMfm" />
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { mfm } from '../utils/mfmUtil.ts'
-import { defineComponent } from 'vue'
+import { computed } from 'vue'
 import MfmComponent from './Mfm.vue'
 
-export default defineComponent({
-  components: {
-    MfmComponent
-  },
-  props: {
-    text: {
-      required: true,
-      type: String
-    }
-  },
-  computed: {
-    parsedMfm() {
-      return mfm(this.text, false)
-    }
-  }
-})
+const props = defineProps<{
+  text: string
+}>()
+
+const parsedMfm = computed(() => mfm(props.text, false))
 </script>
 
 <style scoped></style>

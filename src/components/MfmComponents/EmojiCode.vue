@@ -4,18 +4,18 @@
   <!--  <img class="emoji" :src="emoji()" />-->
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { inject } from 'vue'
 
-export default defineComponent({
-  inject: ['emojis'],
-  data() {
-    return {
-      emojis: this.emojis as Record<string, any>
-    }
-  },
-  props: ['token', 'children', 'className', 'class', 'style']
-})
+defineProps<{
+  token?: any
+  children?: any
+  className?: string
+  class?: string
+  style?: object
+}>()
+
+const emojis = inject<Record<string, any>>('emojis', {})
 </script>
 
 <style scoped>

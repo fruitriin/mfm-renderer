@@ -2,10 +2,13 @@
   <MfmComponent :tokens="children" />
 </template>
 
-<script lang="ts">
-export default {
-  props: ['children', 'token', 'style', 'className']
-}
+<script setup lang="ts">
+defineProps<{
+  children?: any
+  token?: any
+  style?: object
+  className?: string
+}>()
 </script>
 
 <style scoped></style>
