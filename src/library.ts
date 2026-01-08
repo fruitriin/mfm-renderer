@@ -35,6 +35,7 @@ import Twitch from './components/MfmComponents/Fn/Twitch.vue'
 import Shake from './components/MfmComponents/Fn/Shake.vue'
 import Bounce from './components/MfmComponents/Fn/Bounce.vue'
 import Rainbow from './components/MfmComponents/Fn/Rainbow.vue'
+import Sparkle from './components/MfmComponents/Fn/Sparkle.vue'
 import Ruby from './components/MfmComponents/Fn/Ruby.vue'
 import { App } from 'vue'
 import { ObjectPlugin } from 'vue'
@@ -86,6 +87,7 @@ export default {
       .component('Shake', Shake)
       .component('Bounce', Bounce)
       .component('Rainbow', Rainbow)
+      .component('Sparkle', Sparkle)
 
       .component('Ruby', Ruby)
 
