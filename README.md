@@ -64,6 +64,7 @@ createApp(App).use(Mfm).mount('#app')
 | rotate    | 回転          | よさそう         |
 | scale     | 拡大          | よさそう         |
 | position  | 位置変更        | よさそう         |
+| ruby      | ルビ（ふりがな）  | よさそう         |
 | （アニメーション) |             | delay 以外よさそう |
 | sparkle   | きらきら        | 未実装          |
 | unixtime  | 相対時間        | 未実装          | 
