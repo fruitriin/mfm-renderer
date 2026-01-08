@@ -1,7 +1,7 @@
 <!--
   Sparkle MFM Effect Component
 
-  Based on Misskey's MkMfm.ts implementation
+  Based on Misskey's MkSparkle.vue implementation
   Original source: https://github.com/misskey-dev/misskey
 
   SPDX-FileCopyrightText: syuilo and misskey-project
@@ -10,28 +10,35 @@
 <template>
   <span :class="`mfm-sparkle ${className ?? ''}`" :style="computedStyle">
     <MfmComponent :tokens="children" />
-    <span
+    <svg
       v-for="(particle, index) in particles"
       :key="index"
       class="mfm-sparkle-particle"
       :style="particle.style"
+      viewBox="0 0 256 256"
       aria-hidden="true"
     >
-      ✨
-    </span>
+      <path
+        fill="currentColor"
+        d="M197.58 129.06l-51.61-19-19-51.65a15.92 15.92 0 0 0-29.88 0L78.07 110l-51.65 19a15.92 15.92 0 0 0 0 29.88L78 178l19 51.62a15.92 15.92 0 0 0 29.88 0l19-51.61 51.65-19a15.92 15.92 0 0 0 0-29.88Z"
+      />
+    </svg>
   </span>
 </template>
 
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
+import type { MfmFn } from 'mfm-js'
 import { computed } from 'vue'
 
-const props = defineProps<{
-  token?: any
+interface SparkleProps {
+  token?: MfmFn
   children?: any
   style?: CSSProperties
   className?: string
-}>()
+}
+
+const props = defineProps<SparkleProps>()
 
 // Sparkle particles positioned around the content
 const particles = computed(() => {
@@ -40,27 +47,30 @@ const particles = computed(() => {
   return [
     {
       style: {
-        top: '-8px',
-        left: '-8px',
+        top: '-0.5em',
+        left: '-0.5em',
         animation: `mfm-sparkle ${speed} linear infinite`,
-        animationDelay: '0s'
+        animationDelay: '0s',
+        color: '#eb6f92'
       }
     },
     {
       style: {
-        top: '-8px',
-        right: '-8px',
+        top: '-0.5em',
+        right: '-0.5em',
         animation: `mfm-sparkle ${speed} linear infinite`,
-        animationDelay: '0.2s'
+        animationDelay: `calc(${speed} / 3)`,
+        color: '#f6c177'
       }
     },
     {
       style: {
-        bottom: '-8px',
+        bottom: '-0.5em',
         left: '50%',
-        transform: 'translateX(-50%)',
+        marginLeft: '-0.5em',
         animation: `mfm-sparkle ${speed} linear infinite`,
-        animationDelay: '0.4s'
+        animationDelay: `calc(${speed} * 2 / 3)`,
+        color: '#9ccfd8'
       }
     }
   ]
@@ -83,8 +93,9 @@ const computedStyle = computed<CSSProperties>(() => {
 
 .mfm-sparkle-particle {
   position: absolute;
+  width: 1em;
+  height: 1em;
   pointer-events: none;
-  font-size: 0.5em;
   will-change: opacity, transform;
 }
 
