@@ -4,9 +4,11 @@
 
 <script setup lang="ts">
 // smallが再帰を起こさないのは割りと謎
+import type { CSSProperties } from 'vue'
+
 defineProps<{
   children?: any
   token?: any
-  style?: object
+  style?: CSSProperties
 }>()
 </script>

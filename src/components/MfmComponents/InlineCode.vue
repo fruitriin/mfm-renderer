@@ -3,10 +3,12 @@
 </template>
 
 <script setup lang="ts">
+import type { CSSProperties } from 'vue'
+
 defineProps<{
   token?: any
   children?: any
-  style?: object
+  style?: CSSProperties
   className?: string
 }>()
 </script>

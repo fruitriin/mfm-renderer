@@ -6,6 +6,7 @@
 </template>
 
 <script setup lang="ts">
+import type { CSSProperties } from 'vue'
 import { computed } from 'vue'
 
 interface Props {
@@ -15,7 +16,7 @@ interface Props {
   className?: string
   nowrap?: boolean
   note?: object
-  style?: object
+  style?: CSSProperties
 }
 
 const props = withDefaults(defineProps<Props>(), {

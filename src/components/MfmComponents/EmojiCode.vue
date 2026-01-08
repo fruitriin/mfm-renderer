@@ -5,6 +5,7 @@
 </template>
 
 <script setup lang="ts">
+import type { CSSProperties } from 'vue'
 import { inject } from 'vue'
 
 defineProps<{
@@ -12,7 +13,7 @@ defineProps<{
   children?: any
   className?: string
   class?: string
-  style?: object
+  style?: CSSProperties
 }>()
 
 const emojis = inject<Record<string, any>>('emojis', {})
