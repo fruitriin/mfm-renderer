@@ -5,12 +5,13 @@
 </template>
 
 <script setup lang="ts">
+import type { CSSProperties } from 'vue'
 import { inject, ref, watch } from 'vue'
 
 const props = defineProps<{
   token?: any
   children?: any
-  style?: object
+  style?: CSSProperties
   className?: string
 }>()
 

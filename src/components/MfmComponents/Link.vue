@@ -6,13 +6,14 @@
 </template>
 
 <script setup lang="ts">
+import type { CSSProperties } from 'vue'
 import { inject } from 'vue'
 
 defineProps<{
   token?: any
   children?: object
   className?: string
-  style?: object
+  style?: CSSProperties
   class?: string
 }>()
 

@@ -18,14 +18,18 @@
 
 <script setup lang="ts">
 // class と className が混在してるのやばそう
+import type { CSSProperties } from 'vue'
 import { getComponent } from '../utils/mfmUtil.ts'
 
-defineProps<{
+const props = defineProps<{
   tokens: any
-  style?: object
+  style?: CSSProperties
   className?: string
   class?: string
+  debug?: boolean
 }>()
+
+const debugMode = props.debug ? true : false
 </script>
 
 <style scoped></style>

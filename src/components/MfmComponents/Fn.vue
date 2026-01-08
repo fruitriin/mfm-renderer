@@ -9,13 +9,14 @@
 </template>
 
 <script setup lang="ts">
+import type { CSSProperties } from 'vue'
 import { getComponent } from '../../utils/mfmUtil.ts'
 
 defineProps<{
   token?: any
   tokens?: any
   children?: any
-  style?: object
+  style?: CSSProperties
   className?: string
 }>()
 </script>
