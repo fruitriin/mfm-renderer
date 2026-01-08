@@ -35,7 +35,7 @@ mfm-renderer/
 │   │   │   ├── Bold.vue          # 太字
 │   │   │   ├── Italic.vue        # 斜体
 │   │   │   ├── Strike.vue        # 打ち消し線
-│   │   │   ├── Inlinecode.vue    # インラインコード
+│   │   │   ├── InlineCode.vue    # インラインコード
 │   │   │   ├── BlockCode.vue     # ブロックコード
 │   │   │   ├── Center.vue        # 中央寄せ
 │   │   │   ├── Quote.vue         # 引用
@@ -54,12 +54,12 @@ mfm-renderer/
 │   │   │       ├── Fg.vue        # 文字色
 │   │   │       ├── Bg.vue        # 背景色
 │   │   │       ├── Blur.vue      # ぼかし
-│   │   │       ├── font.vue      # フォント
+│   │   │       ├── Font.vue      # フォント
 │   │   │       ├── Rotate.vue    # 回転
 │   │   │       ├── Scale.vue     # 拡大縮小
 │   │   │       ├── Position.vue  # 位置
 │   │   │       ├── Flip.vue      # 反転
-│   │   │       ├── x2.vue, x3.vue, x4.vue  # サイズ
+│   │   │       ├── X2.vue, X3.vue, X4.vue  # サイズ
 │   │   │       ├── Spin.vue      # 回転アニメーション
 │   │   │       ├── Jump.vue      # ジャンプ
 │   │   │       ├── Bounce.vue    # バウンス
