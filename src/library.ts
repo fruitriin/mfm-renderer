@@ -9,7 +9,7 @@ import EmojiCode from './components/MfmComponents/EmojiCode.vue'
 import Mention from './components/MfmComponents/Mention.vue'
 import Plain from './components/MfmComponents/Plain.vue'
 import BlockCode from './components/MfmComponents/BlockCode.vue'
-import Inlinecode from './components/MfmComponents/Inlinecode.vue'
+import InlineCode from './components/MfmComponents/InlineCode.vue'
 import Search from './components/MfmComponents/Search.vue'
 import Strike from './components/MfmComponents/Strike.vue'
 import UnicodeEmoji from './components/MfmComponents/UnicodeEmoji.vue'
@@ -19,14 +19,14 @@ import Hashtag from './components/MfmComponents/Hashtag.vue'
 import Fn from './components/MfmComponents/Fn.vue'
 import Fg from './components/MfmComponents/Fn/Fg.vue'
 import Bg from './components/MfmComponents/Fn/Bg.vue'
-import Font from './components/MfmComponents/Fn/font.vue'
+import Font from './components/MfmComponents/Fn/Font.vue'
 import Blur from './components/MfmComponents/Fn/Blur.vue'
 import Flip from './components/MfmComponents/Fn/Flip.vue'
 import Scale from './components/MfmComponents/Fn/Scale.vue'
 import Position from './components/MfmComponents/Fn/Position.vue'
-import x2 from './components/MfmComponents/Fn/x2.vue'
-import x3 from './components/MfmComponents/Fn/x3.vue'
-import x4 from './components/MfmComponents/Fn/x4.vue'
+import X2 from './components/MfmComponents/Fn/X2.vue'
+import X3 from './components/MfmComponents/Fn/X3.vue'
+import X4 from './components/MfmComponents/Fn/X4.vue'
 import Jump from './components/MfmComponents/Fn/Jump.vue'
 import Tada from './components/MfmComponents/Fn/Tada.vue'
 import Jelly from './components/MfmComponents/Fn/Jelly.vue'
@@ -55,7 +55,7 @@ export default {
       .component('Mention', Mention)
       .component('Plain', Plain)
       .component('BlockCode', BlockCode)
-      .component('InlineCode', Inlinecode)
+      .component('InlineCode', InlineCode)
       .component('Search', Search)
       .component('Strike', Strike)
       .component('UnicodeEmoji', UnicodeEmoji)
@@ -74,9 +74,9 @@ export default {
       .component('Scale', Scale)
       .component('Position', Position)
 
-      .component('X2', x2)
-      .component('X3', x3)
-      .component('X4', x4)
+      .component('X2', X2)
+      .component('X3', X3)
+      .component('X4', X4)
 
       .component('Jump', Jump)
       .component('Tada', Tada)
