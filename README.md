@@ -34,7 +34,7 @@ createApp(App).use(Mfm).mount('#app')
 | Blockcode.vue    | 複数行のコード | スタイルがない  |
 | Bold.vue         | 太字      | よさそう     |
 | EmojiCode.vue    | カスタム絵文字 | よさそう     |
-| Inlinecode.vue   | 一行のコード  | スタイルがない  |
+| InlineCode.vue   | 一行のコード  | スタイルがない  |
 | Mention.vue      | メンション   | よさそう     |
 | Search.vue       | 検索      | よさそう     |
 | Text.vue         | テキスト    | よさそう     |
