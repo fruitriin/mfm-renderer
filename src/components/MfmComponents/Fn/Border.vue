@@ -9,15 +9,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { CSSProperties } from 'vue'
+import type { MfmFn, MfmInline } from 'mfm-js'
 
-type Props = {
-  token?: any
-  children?: any
+const props = defineProps<{
+  token?: MfmFn['props']
+  children?: MfmInline[]
   style?: CSSProperties
   className?: string
-}
-
-const props = defineProps<Props>()
+}>()
 
 /**
  * 16進数カラーコードが有効かどうかを検証する
@@ -27,7 +26,7 @@ const props = defineProps<Props>()
  */
 function validColor(color: string | undefined | null): string | undefined {
   if (!color) return undefined
-  if (/^[0-9a-f]{3}$|^[0-9a-f]{6}$/i.test(color)) return color
+  if (/^([0-9a-f]{3}|[0-9a-f]{6})$/i.test(color)) return color
   return undefined
 }
 
@@ -56,7 +55,7 @@ function validNumber(value: string | undefined | null): number | undefined {
 }
 
 const borderStyle = computed<CSSProperties>(() => {
-  const args = props.token?.args || {}
+  const args = props.token?.args ?? {}
 
   const color = validColor(args.color) || 'f00'
   const style = validBorderStyle(args.style) || 'solid'
