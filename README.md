@@ -3,6 +3,7 @@
 MFMをレンダリングするコンポーネント
 各文法ごとにコンポーネント化されているのでメンテナンスしやすい気がする。
 
+
 ## Installation
 
 main.js (main.ts) 的なところで createApp() しているところに .use(Mfm) を足す
