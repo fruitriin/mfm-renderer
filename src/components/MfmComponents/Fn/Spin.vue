@@ -5,6 +5,7 @@
            * $[spin.y 🍮] $[spin.y,left 🍮] $[spin.y,alternate 🍮]
            *
            * $[spin.speed=5s 🍮]
+           * $[spin.speed=2s,delay=1s 🍮]
            */
 -->
 <template>
@@ -13,7 +14,7 @@
     :tokens="children"
     :style="[
       {
-        animation: `${token.args.speed ?? '1.5s'} linear 0s infinite normal none running mfm-spin`
+        animation: `${validTime(token.args.speed) ?? '1.5s'} linear ${validTime(token.args.delay) ?? '0s'} infinite normal none running mfm-spin`
       },
       style
     ]"
@@ -22,6 +23,7 @@
 
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
+import { validTime } from '../../../utils/mfmUtil'
 
 defineProps<{
   token?: any
