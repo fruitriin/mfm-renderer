@@ -44,6 +44,7 @@ function validBorderStyle(style: string | undefined | null): string | undefined 
 
 /**
  * 数値が有効かどうかを検証する（本家Misskey準拠）
+ * parseFloatを使用し、負の値も許可
  * @param value - 検証する数値文字列
  * @returns 有効な数値ならパースした数値を返し、無効ならundefinedを返す
  */
