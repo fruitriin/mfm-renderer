@@ -8,10 +8,11 @@
 
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
+import type { MfmFn, MfmInline } from 'mfm-js'
 
 defineProps<{
-  token?: any
-  children?: any
+  token?: MfmFn['props']
+  children?: MfmInline[]
   style?: CSSProperties
   className?: string
 }>()

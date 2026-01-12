@@ -14,7 +14,7 @@
     :tokens="children"
     :style="[
       {
-        animation: `${validTime(token.args.speed) ?? '1.5s'} linear ${validTime(token.args.delay) ?? '0s'} infinite normal none running mfm-spin`
+        animation: `${validTime(token?.args.speed) ?? '1.5s'} linear ${validTime(token?.args.delay) ?? '0s'} infinite normal none running mfm-spin`
       },
       style
     ]"
@@ -23,11 +23,12 @@
 
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
+import type { MfmFn, MfmInline } from 'mfm-js'
 import { validTime } from '../../../utils/mfmUtil'
 
 defineProps<{
-  token?: any
-  children?: any
+  token?: MfmFn['props']
+  children?: MfmInline[]
   style?: CSSProperties
   className?: string
 }>()

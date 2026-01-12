@@ -4,7 +4,7 @@
     :tokens="children"
     :style="[
       {
-        transform: `rotate(${token.deg ?? 90}deg)`
+        transform: `rotate(${token?.args.deg ?? 90}deg)`
       },
       style
     ]"
@@ -13,10 +13,11 @@
 
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
+import type { MfmFn, MfmInline } from 'mfm-js'
 
 defineProps<{
-  token?: any
-  children?: any
+  token?: MfmFn['props']
+  children?: MfmInline[]
   style?: CSSProperties
   className?: string
 }>()
