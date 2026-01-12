@@ -2,16 +2,17 @@
   <MfmComponent
     :className="`bg ${className ?? ''}`"
     :tokens="children"
-    :style="[{ background: `#${token.args.color}` }, style]"
+    :style="[{ background: `#${token?.args.color}` }, style]"
   />
 </template>
 
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
+import type { MfmFn, MfmInline } from 'mfm-js'
 
 defineProps<{
-  token?: any
-  children?: any
+  token?: MfmFn['props']
+  children?: MfmInline[]
   style?: CSSProperties
   className?: string
 }>()

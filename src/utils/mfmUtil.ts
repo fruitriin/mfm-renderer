@@ -23,8 +23,8 @@ export function getComponent(string: string) {
  * @param time - 検証する時間文字列
  * @returns 有効な時間文字列ならそのまま返し、無効ならundefinedを返す
  */
-export function validTime(time: string | undefined | null): string | undefined {
-  if (!time) return undefined
+export function validTime(time: string | true | undefined | null): string | undefined {
+  if (!time || typeof time !== 'string') return undefined
   if (/^\-?[0-9.]+s$/.test(time)) return time
   return undefined
 }
