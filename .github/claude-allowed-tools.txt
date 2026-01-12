@@ -1,0 +1,1 @@
+Bash(npm:*),Bash(git:*),Bash(gh:*),Bash(curl:*),Edit,Read,Write,Glob,Grep,WebFetch
