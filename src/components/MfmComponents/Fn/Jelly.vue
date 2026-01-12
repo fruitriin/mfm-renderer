@@ -4,9 +4,7 @@
     :tokens="children"
     :style="[
       {
-        animation: `${
-          token.args.speed ?? '1s'
-        } linear 0s infinite normal both running mfm-rubberBand`
+        animation: `${validTime(token.args.speed) ?? '1s'} linear ${validTime(token.args.delay) ?? '0s'} infinite normal both running mfm-rubberBand`
       },
       style
     ]"
@@ -15,6 +13,7 @@
 
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
+import { validTime } from '../../../utils/mfmUtil'
 
 defineProps<{
   token?: any

@@ -30,6 +30,7 @@
 import type { CSSProperties } from 'vue'
 import type { MfmFn } from 'mfm-js'
 import { computed } from 'vue'
+import { validTime } from '../../../utils/mfmUtil'
 
 type SparkleProps = {
   token?: MfmFn
@@ -42,7 +43,8 @@ const props = defineProps<SparkleProps>()
 
 // Sparkle particles positioned around the content
 const particles = computed(() => {
-  const speed = props.token?.args?.speed ?? '1s'
+  const speed = validTime((props.token?.props?.args as any)?.speed) ?? '1s'
+  const delay = validTime((props.token?.props?.args as any)?.delay) ?? '0s'
 
   return [
     {
@@ -50,7 +52,7 @@ const particles = computed(() => {
         top: '-0.5em',
         left: '-0.5em',
         animation: `mfm-sparkle ${speed} linear infinite`,
-        animationDelay: '0s',
+        animationDelay: delay,
         color: '#eb6f92'
       }
     },
@@ -59,7 +61,7 @@ const particles = computed(() => {
         top: '-0.5em',
         right: '-0.5em',
         animation: `mfm-sparkle ${speed} linear infinite`,
-        animationDelay: `calc(${speed} / 3)`,
+        animationDelay: `calc(${delay} + ${speed} / 3)`,
         color: '#f6c177'
       }
     },
@@ -69,7 +71,7 @@ const particles = computed(() => {
         left: '50%',
         marginLeft: '-0.5em',
         animation: `mfm-sparkle ${speed} linear infinite`,
-        animationDelay: `calc(${speed} * 2 / 3)`,
+        animationDelay: `calc(${delay} + ${speed} * 2 / 3)`,
         color: '#9ccfd8'
       }
     }

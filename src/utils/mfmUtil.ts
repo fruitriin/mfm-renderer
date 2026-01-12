@@ -16,3 +16,15 @@ export function mfm(text: string, plain: boolean): MfmNode[] {
 export function getComponent(string: string) {
   return string.replace(/(^.)(.*)/, (_$1, $2, $3) => `${$2.toUpperCase() + $3}`)
 }
+
+/**
+ * 時間値の文字列が有効かどうかを検証する
+ * 本家Misskeyの実装を参考に、-?[0-9.]+s の形式を許可
+ * @param time - 検証する時間文字列
+ * @returns 有効な時間文字列ならそのまま返し、無効ならundefinedを返す
+ */
+export function validTime(time: string | undefined | null): string | undefined {
+  if (!time) return undefined
+  if (/^\-?[0-9.]+s$/.test(time)) return time
+  return undefined
+}

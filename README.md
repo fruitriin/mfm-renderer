@@ -80,17 +80,17 @@ createApp(App).use(Mfm).mount('#app')
 
 #### アニメーション
 
-| コンポーネント | せつめい   | 進み具合                              |
-|---------|--------|-----------------------------------|
-| spin    | 回転     | ⚠️ speedのみ対応（delay、axis、direction未対応） |
-| jump    | ジャンプ   | ⚠️ speedのみ対応（delay未対応）             |
-| bounce  | バウンス   | ⚠️ speedのみ対応（delay未対応）             |
-| shake   | シェイク   | ⚠️ speedのみ対応（delay未対応）             |
-| twitch  | けいれん   | ⚠️ speedのみ対応（delay未対応）             |
-| tada    | タダー    | ⚠️ speedのみ対応（delay未対応）             |
-| jelly   | ゼリー    | ⚠️ speedのみ対応（delay未対応）             |
-| rainbow | レインボー  | ⚠️ speedのみ対応（delay未対応）             |
-| sparkle | キラキラ   | 🟡 独自実装（本家とは異なるシンプル版）            |
+| コンポーネント | せつめい   | 進み具合                                   |
+|---------|--------|----------------------------------------|
+| spin    | 回転     | ⚠️ speed, delayのみ対応（axis、direction未対応） |
+| jump    | ジャンプ   | ✅ speed, delay対応済み                     |
+| bounce  | バウンス   | ✅ speed, delay対応済み                     |
+| shake   | シェイク   | ✅ speed, delay対応済み                     |
+| twitch  | けいれん   | ✅ speed, delay対応済み                     |
+| tada    | タダー    | ✅ speed, delay対応済み                     |
+| jelly   | ゼリー    | ✅ speed, delay対応済み                     |
+| rainbow | レインボー  | ✅ speed, delay対応済み                     |
+| sparkle | キラキラ   | ✅ speed, delay対応済み（独自実装）              |
 
 #### その他
 
@@ -116,7 +116,6 @@ createApp(App).use(Mfm).mount('#app')
 7. Clickable機能の実装
 8. Unixtime機能の実装
 9. Spin.vueのaxis/direction対応
-10. 全アニメーションのdelay対応（9コンポーネント）
 
 #### 🟡 中優先度（改善）
 

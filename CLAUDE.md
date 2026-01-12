@@ -171,13 +171,12 @@ npm run format       # Prettier で整形
 
 ### 未実装の Fn 機能
 
-- `sparkle`: キラキラエフェクト
 - `unixtime`: Unix タイムスタンプから相対時間表示
 
 ### アニメーション関連
 
-- ほとんどのアニメーションは実装済み
-- `delay` パラメータが未対応
+- 全てのアニメーションが実装済み（`delay`パラメータを含む）
+- `spin`コンポーネントの`axis`と`direction`パラメータは未対応
 
 ### Unicode Emoji
 
