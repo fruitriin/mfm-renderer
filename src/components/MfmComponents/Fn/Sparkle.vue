@@ -31,7 +31,7 @@ import type { CSSProperties } from 'vue'
 import type { MfmFn } from 'mfm-js'
 import { computed } from 'vue'
 
-interface SparkleProps {
+type SparkleProps = {
   token?: MfmFn
   children?: any
   style?: CSSProperties

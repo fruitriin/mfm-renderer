@@ -9,7 +9,7 @@
 import type { CSSProperties } from 'vue'
 import { computed } from 'vue'
 
-interface Props {
+type Props = {
   children?: object
   token?: any
   plain?: boolean
