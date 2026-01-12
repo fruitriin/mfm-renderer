@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-interface Props {
+type Props = {
   token: { query: string }
   children?: object
 }
