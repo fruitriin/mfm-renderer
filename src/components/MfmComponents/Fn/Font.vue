@@ -2,7 +2,15 @@
   <MfmComponent
     :className="`fg ${className ?? ''}`"
     :tokens="children"
-    :style="[{ fontFamily: Object.keys(token?.args ?? {}) }, style]"
+    :style="[{
+      fontFamily: token?.args?.serif ? 'serif' :
+                  token?.args?.monospace ? 'monospace' :
+                  token?.args?.cursive ? 'cursive' :
+                  token?.args?.fantasy ? 'fantasy' :
+                  token?.args?.emoji ? 'emoji' :
+                  token?.args?.math ? 'math' :
+                  'sans-serif'
+    }, style]"
   />
 </template>
 
