@@ -1,10 +1,10 @@
 <template>
   <MfmComponent
-    :className="`rotate ${className ?? ''}`"
+    :className="`scale ${className ?? ''}`"
     :tokens="children"
     :style="[
       {
-        transform: `scale(${token?.args.x}, ${token?.args.y})`
+        transform: `scale(${Math.min(token?.args.x ?? 1, 5)}, ${Math.min(token?.args.y ?? 1, 5)})`
       },
       style
     ]"
