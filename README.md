@@ -110,7 +110,7 @@ createApp(App).use(Mfm).mount('#app')
 | コンポーネント | せつめい     | 進み具合  |
 |---------|----------|-------|
 | ruby    | ルビ（ふりがな） | ✅ 完成  |
-| unixtime | 相対時間表示   | ❌ 未実装（Misskey と同じく `$[unixtime ...]` のまま表示する） |
+| unixtime | 日時と相対時間 | ✅ 完成 |
 | clickable | クリックイベント | ✅ 完成（`clickEv` イベント） |
 
 ### 優先度別の改善提案

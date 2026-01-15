@@ -169,10 +169,6 @@ npm run format       # Prettier で整形
 - `BlockCode.vue`: コードブロックのスタイルが未実装
 - `InlineCode.vue`: インラインコードのスタイルが未実装
 
-### 未実装の Fn 機能
-
-- `unixtime`: Unix タイムスタンプから相対時間表示
-
 ### アニメーション関連
 
 - 全てのアニメーションが実装済み（`delay`パラメータを含む）
