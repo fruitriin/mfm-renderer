@@ -37,6 +37,7 @@ import Bounce from './components/MfmComponents/Fn/Bounce.vue'
 import Rainbow from './components/MfmComponents/Fn/Rainbow.vue'
 import Sparkle from './components/MfmComponents/Fn/Sparkle.vue'
 import Ruby from './components/MfmComponents/Fn/Ruby.vue'
+import Border from './components/MfmComponents/Fn/Border.vue'
 import { App } from 'vue'
 import { ObjectPlugin } from 'vue'
 import MfmRenderer from './components/MfmRenderer.vue'
@@ -90,6 +91,7 @@ export default {
       .component('Sparkle', Sparkle)
 
       .component('Ruby', Ruby)
+      .component('Border', Border)
 
     return app
   }

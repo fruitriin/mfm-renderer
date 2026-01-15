@@ -28,3 +28,40 @@ export function validTime(time: string | true | undefined | null): string | unde
   if (/^\-?[0-9.]+s$/.test(time)) return time
   return undefined
 }
+
+/**
+ * 16進数カラーコードが有効かどうかを検証する
+ * 3〜6桁の16進数を許可（本家Misskey準拠）
+ * @param color - 検証するカラーコード（#なし）
+ * @returns 有効なカラーコードならそのまま返し、無効ならundefinedを返す
+ */
+export function validColor(color: string | undefined | null): string | undefined {
+  if (!color) return undefined
+  if (/^[0-9a-f]{3,6}$/i.test(color)) return color
+  return undefined
+}
+
+/**
+ * ボーダースタイルが有効かどうかを検証する
+ * @param style - 検証するボーダースタイル
+ * @returns 有効なボーダースタイルならそのまま返し、無効ならundefinedを返す
+ */
+export function validBorderStyle(style: string | undefined | null): string | undefined {
+  if (!style) return undefined
+  const normalized = style.toLowerCase()
+  const validStyles = ['hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset']
+  return validStyles.includes(normalized) ? normalized : undefined
+}
+
+/**
+ * 数値が有効かどうかを検証する（本家Misskey準拠）
+ * parseFloatを使用し、負の値も許可
+ * @param value - 検証する数値文字列
+ * @returns 有効な数値ならパースした数値を返し、無効ならundefinedを返す
+ */
+export function validNumber(value: string | undefined | null): number | undefined {
+  if (!value) return undefined
+  const num = parseFloat(value)
+  if (isNaN(num)) return undefined
+  return num
+}
