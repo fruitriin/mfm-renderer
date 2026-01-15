@@ -1,6 +1,6 @@
 <template>
   <MfmComponent
-    :className="`rotate ${className ?? ''}`"
+    :className="`bounce ${className ?? ''}`"
     :tokens="children"
     :style="[
       {

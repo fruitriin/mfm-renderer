@@ -1,6 +1,6 @@
 <template>
   <MfmComponent
-    :className="`rotate ${className ?? ''}`"
+    :className="`x2 ${className ?? ''}`"
     :tokens="children"
     :style="[{ fontSize: '200%' }, style]"
   />
