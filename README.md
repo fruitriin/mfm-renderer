@@ -62,16 +62,16 @@ createApp(App).use(Mfm).mount('#app')
 |---------|-------------|------------------------------|
 | fg      | 文字色         | ✅ 完成                         |
 | bg      | 背景色         | ✅ 完成                         |
-| blur    | ぼかし         | ❌ バグあり（不要なfontFamilyプロパティ） |
-| font    | フォント        | ❌ 致命的なバグ（Object.keys()の誤用）  |
-| border  | ボーダー        | ✅ 完成                         |
+| blur    | ぼかし         | ✅ 完成（#39で修正済み）                         |
+| font    | フォント        | ✅ 完成（#40で修正済み）  |
+| border  | ボーダー        | ✅ 完成（#37で実装済み）                         |
 
 #### 変形
 
 | コンポーネント | せつめい | 進み具合                              |
 |---------|------|-----------------------------------|
-| rotate  | 回転   | ❌ バグあり（token.deg → token.args.deg） |
-| scale   | 拡大縮小 | ❌ バグあり（classNameミス、最大値制限なし）     |
+| rotate  | 回転   | ✅ 完成（#39で修正済み） |
+| scale   | 拡大縮小 | ✅ 完成（#41で修正済み）     |
 | position | 位置調整 | ✅ 完成                              |
 | flip    | 反転   | ❌ ロジックバグ（反転方向が逆）                 |
 | x2      | 2倍   | ✅ 完成                              |
@@ -82,15 +82,15 @@ createApp(App).use(Mfm).mount('#app')
 
 | コンポーネント | せつめい   | 進み具合                                   |
 |---------|--------|----------------------------------------|
-| spin    | 回転     | ⚠️ speed, delayのみ対応（axis、direction未対応） |
-| jump    | ジャンプ   | ✅ speed, delay対応済み                     |
-| bounce  | バウンス   | ✅ speed, delay対応済み                     |
-| shake   | シェイク   | ✅ speed, delay対応済み                     |
-| twitch  | けいれん   | ✅ speed, delay対応済み                     |
-| tada    | タダー    | ✅ speed, delay対応済み                     |
-| jelly   | ゼリー    | ✅ speed, delay対応済み                     |
-| rainbow | レインボー  | ✅ speed, delay対応済み                     |
-| sparkle | キラキラ   | ✅ speed, delay対応済み（独自実装）              |
+| spin    | 回転     | ⚠️ speed, delay対応済み（#33）、axis・direction未対応 |
+| jump    | ジャンプ   | ✅ speed, delay対応済み（#33）                     |
+| bounce  | バウンス   | ✅ speed, delay対応済み（#33）                     |
+| shake   | シェイク   | ✅ speed, delay対応済み（#33）                     |
+| twitch  | けいれん   | ✅ speed, delay対応済み（#33）                     |
+| tada    | タダー    | ✅ speed, delay対応済み（#33）                     |
+| jelly   | ゼリー    | ✅ speed, delay対応済み（#33）                     |
+| rainbow | レインボー  | ✅ speed, delay対応済み（#33）                     |
+| sparkle | キラキラ   | ✅ speed, delay対応済み（#33、独自実装）              |
 
 #### その他
 
@@ -104,21 +104,23 @@ createApp(App).use(Mfm).mount('#app')
 
 #### 🔴 最優先（致命的なバグ）
 
-1. Font.vueのバグ修正 - `Object.keys()`を適切なフォント選択に修正
-2. Rotate.vueのパラメータ参照修正 - `token.deg` → `token.args.deg`
-3. Blur.vueの不要なfontFamily削除
-4. Flip.vueのロジック修正 - 反転の動作を正しく
-5. Scale.vueのclassName修正と最大値制限追加
+1. ✅ ~~Font.vueのバグ修正~~ - #40で修正済み
+2. ✅ ~~Rotate.vueのパラメータ参照修正~~ - #39で修正済み
+3. ✅ ~~Blur.vueの不要なfontFamily削除~~ - #39で修正済み
+4. ❌ **Flip.vueのロジック修正** - 反転の動作を正しく（#25は未対応）
+5. ✅ ~~Scale.vueのclassName修正と最大値制限追加~~ - #41で修正済み
 
 #### 🟠 高優先度（重要な機能の欠如）
 
-6. Clickable機能の実装
-7. Unixtime機能の実装
-8. Spin.vueのaxis/direction対応
+6. ❌ **Clickable機能の実装** - #29で追跡中
+7. ❌ **Unixtime機能の実装** - #27で追跡中
+8. ❌ **Spin.vueのaxis/direction対応** - #30で追跡中
+9. ✅ ~~全アニメーションのdelay対応~~ - #33で完了
+10. ✅ ~~Border機能の実装~~ - #37で完了
 
 #### 🟡 中優先度（改善）
 
-11. コードスタイルの改善（InlineCode.vue、BlockCode.vue）
+11. ❌ **コードスタイルの改善**（InlineCode.vue、BlockCode.vue） - #31で追跡中
 12. シンタックスハイライトの実装（BlockCode.vue）
 13. Mention.vueの最適化（デバウンス/キャッシュ）
 14. Unicode絵文字の置き換え（Twemoji等）
