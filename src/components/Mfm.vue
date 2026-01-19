@@ -2,14 +2,15 @@
   <component
     :style="style"
     :className="className"
-    v-for="token in tokens"
+    v-for="(token, index) in tokens"
+    :key="index"
     :is="`${getComponent(token.type)}`"
     :token="token.props"
     :children="token.children"
   />
 
   <div style="border: solid 1px red" v-if="debugMode">
-    <div v-for="token in tokens">
+    <div v-for="(token, index) in tokens" :key="index">
       <p>Selected: {{ getComponent(token.type) }}</p>
       <pre>{{ token }}</pre>
     </div>

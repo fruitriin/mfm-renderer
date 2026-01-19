@@ -1,0 +1,10 @@
+# ビルド出力
+dist
+dist-ssr
+
+# 依存関係
+node_modules
+
+# その他
+*.local
+coverage

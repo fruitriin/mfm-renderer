@@ -25,7 +25,7 @@ export function getComponent(string: string) {
  */
 export function validTime(time: string | true | undefined | null): string | undefined {
   if (!time || typeof time !== 'string') return undefined
-  if (/^\-?[0-9.]+s$/.test(time)) return time
+  if (/^-?[0-9.]+s$/.test(time)) return time
   return undefined
 }
 
