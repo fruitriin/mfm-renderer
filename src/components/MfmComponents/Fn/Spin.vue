@@ -14,7 +14,7 @@
     :tokens="children"
     :style="[
       {
-        animation: `${validTime(token?.args.speed) ?? '1.5s'} linear ${validTime(token?.args.delay) ?? '0s'} infinite normal none running mfm-spin`
+        animation: `${validTime(token?.args.speed) ?? '1.5s'} linear ${validTime(token?.args.delay) ?? '0s'} infinite ${animationDirection} none running ${animationName}`
       },
       style
     ]"
@@ -22,16 +22,31 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { CSSProperties } from 'vue'
 import type { MfmFn, MfmInline } from 'mfm-js'
 import { validTime } from '../../../utils/mfmUtil'
 
-defineProps<{
+const props = defineProps<{
   token?: MfmFn['props']
   children?: MfmInline[]
   style?: CSSProperties
   className?: string
 }>()
+
+// アニメーション名の決定（x軸、y軸、または通常の回転）
+const animationName = computed(() => {
+  if (props.token?.args.x) return 'mfm-spinX'
+  if (props.token?.args.y) return 'mfm-spinY'
+  return 'mfm-spin'
+})
+
+// アニメーションの方向を決定（reverse、alternate、または通常）
+const animationDirection = computed(() => {
+  if (props.token?.args.left) return 'reverse'
+  if (props.token?.args.alternate) return 'alternate'
+  return 'normal'
+})
 </script>
 
 <style></style>
