@@ -94,6 +94,7 @@ $[flip.h,v MisskeyでFediverseの世界が広がります]`
   $[spin 🍮] $[spin.left 🍮] $[spin.alternate 🍮]
   $[spin.x 🍮] $[spin.x,left 🍮] $[spin.x,alternate 🍮]
   $[spin.y 🍮] $[spin.y,left 🍮] $[spin.y,alternate 🍮]
+  $[spin.x,y 🍮] $[spin.x,y,left 🍮] $[spin.x,y,alternate 🍮]
 
   $[spin.speed=5s 🍮]`
   },

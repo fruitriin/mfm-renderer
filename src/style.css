@@ -163,6 +163,16 @@
   }
 }
 
+@keyframes mfm-spinXY {
+  0% {
+    transform: perspective(128px) rotateX(0) rotateY(0);
+  }
+
+  to {
+    transform: perspective(128px) rotateX(360deg) rotateY(360deg);
+  }
+}
+
 @keyframes mfm-jump {
   0% {
     transform: translateY(0);
