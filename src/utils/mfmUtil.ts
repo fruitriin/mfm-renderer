@@ -35,8 +35,8 @@ export function validTime(time: string | true | undefined | null): string | unde
  * @param color - 検証するカラーコード（#なし）
  * @returns 有効なカラーコードならそのまま返し、無効ならundefinedを返す
  */
-export function validColor(color: string | undefined | null): string | undefined {
-  if (!color) return undefined
+export function validColor(color: string | true | undefined | null): string | undefined {
+  if (!color || typeof color !== 'string') return undefined
   if (/^[0-9a-f]{3,6}$/i.test(color)) return color
   return undefined
 }
@@ -46,8 +46,8 @@ export function validColor(color: string | undefined | null): string | undefined
  * @param style - 検証するボーダースタイル
  * @returns 有効なボーダースタイルならそのまま返し、無効ならundefinedを返す
  */
-export function validBorderStyle(style: string | undefined | null): string | undefined {
-  if (!style) return undefined
+export function validBorderStyle(style: string | true | undefined | null): string | undefined {
+  if (!style || typeof style !== 'string') return undefined
   const normalized = style.toLowerCase()
   const validStyles = ['hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset']
   return validStyles.includes(normalized) ? normalized : undefined
@@ -59,8 +59,10 @@ export function validBorderStyle(style: string | undefined | null): string | und
  * @param value - 検証する数値文字列
  * @returns 有効な数値ならパースした数値を返し、無効ならundefinedを返す
  */
-export function validNumber(value: string | undefined | null): number | undefined {
+export function validNumber(value: string | true | number | undefined | null): number | undefined {
   if (!value) return undefined
+  if (typeof value === 'number') return value
+  if (typeof value !== 'string') return undefined
   const num = parseFloat(value)
   if (isNaN(num)) return undefined
   return num
