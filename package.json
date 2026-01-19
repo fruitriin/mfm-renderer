@@ -18,7 +18,7 @@
     "build": " vue-tsc --emitDeclarationOnly && vite build",
     "pages": " vue-tsc  --emitDeclarationOnly && vite build -c vite.config.docs.ts",
     "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
     "format": "prettier --write src/"
   },
   "dependencies": {

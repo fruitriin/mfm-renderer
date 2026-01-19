@@ -1,5 +1,5 @@
 <template>
-  <template v-for="(t, i) in parsedText">
+  <template v-for="(t, i) in parsedText" :key="i">
     <span class="text" :class="[className, $attrs.class]" :style="style"> {{ t }}</span>
     <br v-if="showBr(t, i)" />
   </template>

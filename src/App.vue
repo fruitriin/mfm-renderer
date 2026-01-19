@@ -29,7 +29,7 @@
 
     <hr />
     <h2>テストコード</h2>
-    <div style="display: flex" v-for="(sample, key) in samples">
+    <div style="display: flex" v-for="(sample, key) in samples" :key="key">
       <div style="width: 50%; padding: 8px">
         <h4>Parsed MFM: ({{ sample.title }})</h4>
         <hr />
