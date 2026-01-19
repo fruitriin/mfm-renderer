@@ -1,4 +1,5 @@
 import { MfmNode, parse, parseSimple } from 'mfm-js'
+import Unixtime from '../components/MfmComponents/Fn/Unixtime.vue'
 
 export function mfm(text: string, plain: boolean): MfmNode[] {
   if (text == null || text === '') {
@@ -14,6 +15,10 @@ export function mfm(text: string, plain: boolean): MfmNode[] {
  * @param string
  */
 export function getComponent(string: string) {
+  // unixtimeの場合は直接コンポーネントを返す
+  if (string === 'unixtime') {
+    return Unixtime
+  }
   return string.replace(/(^.)(.*)/, (_$1, $2, $3) => `${$2.toUpperCase() + $3}`)
 }
 
