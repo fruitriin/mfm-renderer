@@ -2,7 +2,9 @@
   "name": "mfm-renderer",
   "version": "0.0.1",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/MMFMRenderer.umd.cjs",
   "module": "./dist/MMFMRenderer.js",
   "exports": {
@@ -23,6 +25,7 @@
   },
   "dependencies": {
     "mfm-js": "^0.24.0",
+    "shiki": "^3.21.0",
     "vue": "^3.3.11"
   },
   "devDependencies": {

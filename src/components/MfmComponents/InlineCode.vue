@@ -1,5 +1,5 @@
 <template>
-  <pre class="inline-code">{{ token.code }}</pre>
+  <code class="inline-code">{{ token.code }}</code>
 </template>
 
 <script setup lang="ts">
@@ -12,3 +12,17 @@ defineProps<{
   className?: string
 }>()
 </script>
+
+<style scoped>
+.inline-code {
+  background-color: rgba(175, 184, 193, 0.2);
+  border: 1px solid rgba(175, 184, 193, 0.4);
+  border-radius: 3px;
+  padding: 2px 6px;
+  font-family: 'Courier New', Courier, monospace, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-size: 0.9em;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+</style>
