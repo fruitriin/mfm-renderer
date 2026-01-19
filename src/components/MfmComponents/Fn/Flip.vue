@@ -4,7 +4,7 @@
     :tokens="children"
     :style="[
       {
-        transform: `scale(${token?.args.h ? -1 : 1}, ${token?.args.v ? -1 : 1})`
+        transform: `scale(${token?.args.h ? 1 : -1}, ${token?.args.v ? -1 : 1})`
       },
       style
     ]"
