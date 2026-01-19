@@ -38,61 +38,60 @@ import Rainbow from './components/MfmComponents/Fn/Rainbow.vue'
 import Sparkle from './components/MfmComponents/Fn/Sparkle.vue'
 import Ruby from './components/MfmComponents/Fn/Ruby.vue'
 import Border from './components/MfmComponents/Fn/Border.vue'
-import { App } from 'vue'
-import { ObjectPlugin } from 'vue'
+import { App, ObjectPlugin } from 'vue'
 import MfmRenderer from './components/MfmRenderer.vue'
+
+// コンポーネントマップを定義
+const components = {
+  MfmRenderer,
+  MfmComponent: Mfm,
+  Bold,
+  Italic,
+  Quote,
+  Small,
+  Text,
+  Center,
+  EmojiCode,
+  Mention,
+  Plain,
+  BlockCode,
+  InlineCode,
+  Search,
+  Strike,
+  UnicodeEmoji,
+  Url,
+  Link,
+  Hashtag,
+  Fn,
+  Fg,
+  Bg,
+  Font,
+  Blur,
+  Flip,
+  Scale,
+  Position,
+  X2,
+  X3,
+  X4,
+  Jump,
+  Tada,
+  Jelly,
+  Spin,
+  Twitch,
+  Shake,
+  Bounce,
+  Rainbow,
+  Sparkle,
+  Ruby,
+  Border,
+} as const
 
 export default {
   install: (app: App) => {
-    app
-      .component('MfmRenderer', MfmRenderer)
-      .component('MfmComponent', Mfm)
-      .component('Bold', Bold)
-      .component('Italic', Italic)
-      .component('Quote', Quote)
-      .component('Small', Small)
-      .component('Text', Text)
-      .component('Center', Center)
-      .component('EmojiCode', EmojiCode)
-      .component('Mention', Mention)
-      .component('Plain', Plain)
-      .component('BlockCode', BlockCode)
-      .component('InlineCode', InlineCode)
-      .component('Search', Search)
-      .component('Strike', Strike)
-      .component('UnicodeEmoji', UnicodeEmoji)
-      .component('Url', Url)
-      .component('Link', Link)
-
-      .component('Hashtag', Hashtag)
-
-      .component('Fn', Fn)
-      .component('Fg', Fg)
-      .component('Bg', Bg)
-      .component('Font', Font)
-      .component('Blur', Blur)
-
-      .component('Flip', Flip)
-      .component('Scale', Scale)
-      .component('Position', Position)
-
-      .component('X2', X2)
-      .component('X3', X3)
-      .component('X4', X4)
-
-      .component('Jump', Jump)
-      .component('Tada', Tada)
-      .component('Jelly', Jelly)
-      .component('Spin', Spin)
-      .component('Twitch', Twitch)
-      .component('Shake', Shake)
-      .component('Bounce', Bounce)
-      .component('Rainbow', Rainbow)
-      .component('Sparkle', Sparkle)
-
-      .component('Ruby', Ruby)
-      .component('Border', Border)
-
+    // Object.entries を使用して登録
+    Object.entries(components).forEach(([name, component]) => {
+      app.component(name, component)
+    })
     return app
-  }
+  },
 } as ObjectPlugin
