@@ -14,7 +14,9 @@
     :tokens="children"
     :style="[
       {
-        animation: `${validTime(token?.args.speed) ?? '1.5s'} linear ${validTime(token?.args.delay) ?? '0s'} infinite ${animationDirection} none running ${animationName}`
+        animation: `${animationName} ${validTime(token?.args.speed) ?? '1.5s'} linear infinite`,
+        animationDirection: animationDirection,
+        animationDelay: validTime(token?.args.delay) ?? '0s'
       },
       style
     ]"
