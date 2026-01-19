@@ -2,7 +2,7 @@
   <MfmComponent
     :className="`blur ${className ?? ''}`"
     :tokens="children"
-    :style="[{ fontFamily: Object.keys(token?.args ?? {}) }, style]"
+    :style="style"
   />
 </template>
 
