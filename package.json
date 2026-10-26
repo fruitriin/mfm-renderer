@@ -24,7 +24,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "mfm-js": "^0.24.0",
+    "mfm-js": "^0.28.0",
     "shiki": "^3.21.0",
     "vue": "^3.3.11"
   },
