@@ -1,28 +1,36 @@
 <template>
-  <a class="mention" :href="token.host ?? 'https://' + domain + '/' + token.acct"
+  <a class="mention" :href="token.host ?? 'https://' + domainName + '/' + token.acct"
     ><img v-if="user" class="avatar" :src="user.avatarUrl" />{{ token.acct }}</a
   >
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, unref } from 'vue'
 
 export default defineComponent({
   props: ['token', 'children', 'style', 'className'],
   inject: ['domain'],
   data() {
     return {
-      domain: this.domain,
       user: undefined as unknown as any
+    }
+  },
+  computed: {
+    // provide 側は文字列でも computed でもよい
+    domainName(): string | null {
+      return unref(this.domain as any) ?? null
     }
   },
   watch: {
     token: {
       immediate: true,
       async handler() {
+        // 接続先が分からないときは、アバターを取りに行かずに名前だけ表示する
+        const host = this.token.host ?? this.domainName
+        if (!host) return
         // FIXME: なんかバウンスとかスロットルとか必要
         const res = await fetch(
-          `https:/${this.token.host ?? this.domain}/api/users/search-by-username-and-host`,
+          `https://${host}/api/users/search-by-username-and-host`,
           {
             method: 'POST',
             headers: {
@@ -35,7 +43,8 @@ export default defineComponent({
               username: this.token.username
             })
           }
-        )
+        ).catch(() => null)
+        if (!res?.ok) return
         this.user = (await res.json())[0]
       }
     }

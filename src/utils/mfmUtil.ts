@@ -1,4 +1,8 @@
 import { MfmNode, parse, parseSimple } from 'mfm-js'
+import type { InjectionKey } from 'vue'
+
+/** $[clickable] から MfmRenderer へクリックを伝えるための provide/inject のキー */
+export const mfmClickEvKey: InjectionKey<(ev: string) => void> = Symbol('mfmClickEv')
 
 export function mfm(text: string, plain: boolean): MfmNode[] {
   if (text == null || text === '') {

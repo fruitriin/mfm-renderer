@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { mfm } from '../utils/mfmUtil.ts'
+import { mfm, mfmClickEvKey } from '../utils/mfmUtil.ts'
 import { defineComponent } from 'vue'
 import MfmComponent from './Mfm.vue'
 
@@ -15,6 +15,12 @@ export default defineComponent({
     text: {
       required: true,
       type: String
+    }
+  },
+  emits: ['clickEv'],
+  provide() {
+    return {
+      [mfmClickEvKey as symbol]: (ev: string) => this.$emit('clickEv', ev)
     }
   },
   computed: {

@@ -36,6 +36,8 @@ import Shake from './components/MfmComponents/Fn/Shake.vue'
 import Bounce from './components/MfmComponents/Fn/Bounce.vue'
 import Rainbow from './components/MfmComponents/Fn/Rainbow.vue'
 import Ruby from './components/MfmComponents/Fn/Ruby.vue'
+import Rotate from './components/MfmComponents/Fn/Rotate.vue'
+import Clickable from './components/MfmComponents/Fn/Clickable.vue'
 import { App } from 'vue'
 import { ObjectPlugin } from 'vue'
 import MfmRenderer from './components/MfmRenderer.vue'
@@ -88,6 +90,8 @@ export default {
       .component('Rainbow', Rainbow)
 
       .component('Ruby', Ruby)
+      .component('Rotate', Rotate)
+      .component('Clickable', Clickable)
 
     return app
   }

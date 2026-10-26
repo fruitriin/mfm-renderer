@@ -4,7 +4,7 @@
     :tokens="children"
     :style="[
       {
-        transform: `rotate(${token.deg ?? 90}deg)`
+        transform: `rotate(${token.args.deg ?? 90}deg)`
       },
       style
     ]"
