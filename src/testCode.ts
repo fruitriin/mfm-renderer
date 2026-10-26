@@ -101,6 +101,7 @@ $[flip.h,v MisskeyでFediverseの世界が広がります]`
     body: `$[rotate.deg=30 misskey]`
   },
   { title: '日時(非対応)', body: `$[unixtime 1700000000]` },
+  { title: 'クリック可能（clickEv）', body: `$[clickable.ev=hello ここをクリック]` },
   { title: 'ルビ', body: `うま$[ruby 味 あじ]` },
   { title: '位置変更', body: `😏$[position.x=0.8,y=0.5 🍮]😀` },
 
