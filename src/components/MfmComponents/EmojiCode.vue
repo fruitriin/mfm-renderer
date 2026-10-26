@@ -1,12 +1,12 @@
 <template>
-  <img v-if="emojis[token.name]" :src="emojis[token.name].url" class="emoji" />
+  <img v-if="emojiMap[token.name]" :src="emojiMap[token.name].url" class="emoji" />
   <span v-else>:{{ token.name }}:</span>
   <!--  <img class="emoji" :src="emoji()" />-->
 </template>
 
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
-import { inject } from 'vue'
+import { computed, inject, unref } from 'vue'
 
 defineProps<{
   token?: any
@@ -16,7 +16,9 @@ defineProps<{
   style?: CSSProperties
 }>()
 
-const emojis = inject<Record<string, any>>('emojis', {})
+// provide 側は object でも ref・computed でもよい
+const emojis = inject<any>('emojis', {})
+const emojiMap = computed<Record<string, any>>(() => unref(emojis) ?? {})
 </script>
 
 <style scoped>
