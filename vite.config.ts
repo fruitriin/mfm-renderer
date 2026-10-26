@@ -2,37 +2,45 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path from "path";
 
+// ビルドは2回に分ける
+// - 既定（ES）: vue・mfm-js・shiki を external にし、利用側の依存から読み込ませる
+// - --mode umd: script タグでも使えるよう mfm-js は同梱する。shiki は大きいので同梱せず、読み込めなければハイライトなしで表示する
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [vue()],
+export default defineConfig(({ mode }) => {
+  const isUmd = mode === "umd";
+  return {
+    plugins: [vue()],
 
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
     },
-  },
 
-  build: {
-    outDir: "dist",
+    build: {
+      outDir: "dist",
+      // UMD は ES ビルドの後に同じ dist へ追加で出力する
+      emptyOutDir: !isUmd,
 
-    lib: {
-      // src/indext.ts is where we have exported the component(s)
-      entry: "src/library.ts",
-      name: "MMFMRenderer",
-      // the name of the output files when the build is run
-      fileName: "MMFMRenderer",
-    },
-    rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library
-      external: ["vue"],
-      output: {
-        // Provide global variables to use in the UMD build
-        // for externalized deps
-        globals: {
-          vue: "Vue",
+      lib: {
+        entry: "src/library.ts",
+        name: "MMFMRenderer",
+        fileName: "MMFMRenderer",
+        formats: isUmd ? ["umd"] : ["es"],
+      },
+      rollupOptions: {
+        // ライブラリに同梱しない依存
+        external: isUmd
+          ? ["vue", "shiki"]
+          : ["vue", "mfm-js", "shiki", /^shiki\//],
+        output: {
+          // UMD ビルドで external にした依存のグローバル名
+          globals: {
+            vue: "Vue",
+          },
+          ...(isUmd ? { inlineDynamicImports: true } : {}),
         },
       },
     },
-  },
+  };
 });

@@ -7,7 +7,6 @@
 
 <script setup lang="ts">
 import { ref, onMounted, type CSSProperties } from 'vue'
-import { codeToHtml } from 'shiki'
 
 const props = defineProps<{
   token?: any
@@ -21,6 +20,8 @@ const highlightedCode = ref<string>('')
 onMounted(async () => {
   if (props.token?.lang && props.token?.code) {
     try {
+      // shiki は必要になったときだけ読み込む。読み込めない環境（UMD を script タグで使う場合など）ではハイライトせずに表示する
+      const { codeToHtml } = await import('shiki')
       const html = await codeToHtml(props.token.code, {
         lang: props.token.lang,
         theme: 'github-dark'

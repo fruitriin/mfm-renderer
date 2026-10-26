@@ -21,3 +21,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# ビルド出力（インストール時に prepare でビルドする）
+dist
