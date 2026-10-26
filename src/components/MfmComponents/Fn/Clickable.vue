@@ -29,5 +29,7 @@ function onClick() {
 <style>
 .clickable {
   cursor: pointer;
+  /* Misskey 本体（#17904）に合わせ、押したときに文字が選択されないようにする */
+  user-select: none;
 }
 </style>
