@@ -1,5 +1,5 @@
 <template>
-  <a class="mention" :href="token.host ?? 'https://' + domainName + '/' + token.acct"
+  <a class="mention" :href="href"
     ><img v-if="user" class="avatar" :src="user.avatarUrl" />{{ token.acct }}</a
   >
 </template>
@@ -20,26 +20,39 @@ const domain = inject<any>('domain', '')
 const domainName = computed<string | null>(() => unref(domain) || null)
 const user = ref<any>(undefined)
 
+// 接続先のサーバーのユーザーページへのリンク。接続先が分からないときは、メンション先のサーバーへリンクする
+const href = computed(() => {
+  if (domainName.value) return `https://${domainName.value}/${props.token.acct}`
+  if (props.token.host) return `https://${props.token.host}/@${props.token.username}`
+  return undefined
+})
+
+// token が素早く変わったとき、古いレスポンスで上書きしないための世代番号
+let generation = 0
+
 watch(
-  () => props.token,
+  [() => props.token, domainName],
   async () => {
-    // 接続先が分からないときは、アバターを取りに行かずに名前だけ表示する
-    const host = props.token.host ?? domainName.value
-    if (!host) return
+    const current = ++generation
+    user.value = undefined
+    // アバターは接続先（domain）のサーバーにだけ問い合わせる。
+    // 本文に書かれたホストへ直接問い合わせると、閲覧者の IP が任意のサーバーに伝わってしまうため
+    if (!domainName.value) return
     // FIXME: なんかバウンスとかスロットルとか必要
-    const res = await fetch(`https://${host}/api/users/search-by-username-and-host`, {
+    const res = await fetch(`https://${domainName.value}/api/users/show`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=utf-8'
       },
       body: JSON.stringify({
-        detail: false,
-        limit: 1,
-        username: props.token.username
+        username: props.token.username,
+        host: props.token.host ?? null
       })
     }).catch(() => null)
     if (!res?.ok) return
-    user.value = (await res.json())[0]
+    const found = await res.json().catch(() => undefined)
+    if (current !== generation) return
+    user.value = found
   },
   { immediate: true }
 )
