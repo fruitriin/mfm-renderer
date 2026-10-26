@@ -52,7 +52,8 @@ watch(
     if (!res?.ok) return
     const found = await res.json().catch(() => undefined)
     if (current !== generation) return
-    user.value = found
+    // 想定外の形の応答では、アバターなしで表示する
+    if (typeof found?.avatarUrl === 'string') user.value = found
   },
   { immediate: true }
 )
