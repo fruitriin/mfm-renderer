@@ -6,6 +6,13 @@ MFMをレンダリングするコンポーネント
 
 ## Installation
 
+npm から入れるか、GitHub のタグを指定して入れる。GitHub から入れたときは、インストール時に `prepare` でビルドされる。
+
+```
+npm install mfm-renderer
+npm install github:fruitriin/mfm-renderer#v0.2.0
+```
+
 main.js (main.ts) 的なところで createApp() しているところに .use(Mfm) を足す
 
 ```
@@ -13,18 +20,24 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 import Mfm from "mfm-renderer"
+import "mfm-renderer/style.css"
 
 createApp(App).use(Mfm).mount('#app')
 ```
 
+`vue` は peerDependencies なので、利用側で入れておく。
 
 ## 使い方
 
-コンポーネントの中で MfmText コンポーネントを使う
+コンポーネントの中で MfmRenderer コンポーネントを使う
 
 ```
-<MfmText text="Hello **mfm**" />
+<MfmRenderer text="Hello **mfm**" @click-ev="(ev) => console.log(ev)" />
 ```
+
+- `$[clickable.ev=名前 ...]` が押されると、`clickEv` イベントで `名前` を渡す
+- メンションのアバターとカスタム絵文字は、`provide('domain', 'misskey.io')` と `provide('emojis', { 名前: { url } })` で渡す（ref や computed でもよい）。`domain` がないときは、アバターを取りに行かない
+- コードブロックのハイライトには `shiki` を使う。読み込めない環境（UMD を script タグで使う場合など）では、ハイライトせずに表示する
 
 ## 進み具合
 
@@ -32,7 +45,7 @@ createApp(App).use(Mfm).mount('#app')
 
 | ファイル名            | 説明      | 進捗                        |
 |------------------|---------|---------------------------|
-| Blockcode.vue    | 複数行のコード | ⚠️ スタイルがない、シンタックスハイライト未実装 |
+| Blockcode.vue    | 複数行のコード | ✅ Shiki でハイライト            |
 | Bold.vue         | 太字      | ✅ 完成                     |
 | EmojiCode.vue    | カスタム絵文字 | ✅ 完成                     |
 | InlineCode.vue   | 一行のコード  | ⚠️ スタイルがない               |
@@ -70,7 +83,7 @@ createApp(App).use(Mfm).mount('#app')
 
 | コンポーネント | せつめい | 進み具合                              |
 |---------|------|-----------------------------------|
-| rotate  | 回転   | ❌ バグあり（token.deg → token.args.deg） |
+| rotate  | 回転   | ✅ 完成                              |
 | scale   | 拡大縮小 | ❌ バグあり（classNameミス、最大値制限なし）     |
 | position | 位置調整 | ✅ 完成                              |
 | flip    | 反転   | ❌ ロジックバグ（反転方向が逆）                 |
@@ -97,22 +110,22 @@ createApp(App).use(Mfm).mount('#app')
 | コンポーネント | せつめい     | 進み具合  |
 |---------|----------|-------|
 | ruby    | ルビ（ふりがな） | ✅ 完成  |
-| unixtime | 相対時間表示   | ❌ 未実装 |
-| clickable | クリックイベント | ❌ 未実装 |
+| unixtime | 相対時間表示   | ❌ 未実装（Misskey と同じく `$[unixtime ...]` のまま表示する） |
+| clickable | クリックイベント | ✅ 完成（`clickEv` イベント） |
 
 ### 優先度別の改善提案
 
 #### 🔴 最優先（致命的なバグ）
 
 1. Font.vueのバグ修正 - `Object.keys()`を適切なフォント選択に修正
-2. Rotate.vueのパラメータ参照修正 - `token.deg` → `token.args.deg`
+2. ~~Rotate.vueのパラメータ参照修正 - `token.deg` → `token.args.deg`~~（対応済み）
 3. Blur.vueの不要なfontFamily削除
 4. Flip.vueのロジック修正 - 反転の動作を正しく
 5. Scale.vueのclassName修正と最大値制限追加
 
 #### 🟠 高優先度（重要な機能の欠如）
 
-6. Clickable機能の実装
+6. ~~Clickable機能の実装~~（対応済み）
 7. Unixtime機能の実装
 8. Spin.vueのaxis/direction対応
 
