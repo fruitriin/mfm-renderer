@@ -10,6 +10,8 @@ import { ref } from 'vue'
 type Props = {
   token: { query: string }
   children?: object
+  // 受け取らないと要素の className に入り、class="search" が消える
+  className?: string
 }
 
 const props = defineProps<Props>()

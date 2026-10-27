@@ -11,6 +11,8 @@ defineProps<{
   token?: any
   class?: string
   style?: CSSProperties
+  // 受け取らないと要素の className に入ってしまう
+  className?: string
 }>()
 </script>
 

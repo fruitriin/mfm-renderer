@@ -6,6 +6,8 @@
 defineProps<{
   token?: any
   children?: object
+  // 受け取らないと要素の className に入り、class="url" が消える
+  className?: string
 }>()
 </script>
 

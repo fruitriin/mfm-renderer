@@ -35,7 +35,7 @@ import { computed } from 'vue'
 import { useMfmAnimation, validTime } from '../../../utils/mfmUtil'
 
 type SparkleProps = {
-  token?: MfmFn
+  token?: MfmFn['props']
   children?: any
   style?: CSSProperties
   className?: string
@@ -47,8 +47,8 @@ const useAnim = useMfmAnimation()
 
 // Sparkle particles positioned around the content
 const particles = computed(() => {
-  const speed = validTime((props.token?.props?.args as any)?.speed) ?? '1s'
-  const delay = validTime((props.token?.props?.args as any)?.delay) ?? '0s'
+  const speed = validTime(props.token?.args.speed) ?? '1s'
+  const delay = validTime(props.token?.args.delay) ?? '0s'
 
   return [
     {
