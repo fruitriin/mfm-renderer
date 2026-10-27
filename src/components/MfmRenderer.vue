@@ -15,6 +15,7 @@ import {
   DEFAULT_TWEMOJI_BASE
 } from '../utils/mfmUtil.ts'
 import type { MfmRenderOptions } from '../utils/mfmUtil.ts'
+import { loadNyaize, shouldNyaize as decideNyaize } from '../core/index.ts'
 import { computed, provide, shallowRef, watch } from 'vue'
 import MfmComponent from './Mfm.vue'
 
@@ -60,7 +61,7 @@ const emit = defineEmits<{
 // $[clickable.ev=名前 ...] が押されたら clickEv イベントで ev の値を渡す
 provide(mfmClickEvKey, (ev: string) => emit('clickEv', ev))
 
-const shouldNyaize = computed(() => (props.nyaize === 'respect' ? props.author?.isCat === true : false))
+const shouldNyaize = computed(() => decideNyaize(props.nyaize, props.author))
 
 // にゃー化は misskey-js の nyaize を使う。必要になったときだけ読み込み、読み込めない環境（UMD を script タグで使う場合など）ではにゃー化しない
 const nyaizeFn = shallowRef<((text: string) => string) | null>(null)
@@ -68,12 +69,7 @@ watch(
   shouldNyaize,
   async (should) => {
     if (!should || nyaizeFn.value) return
-    try {
-      const { nyaize } = await import('misskey-js/nyaize.js')
-      nyaizeFn.value = nyaize
-    } catch (error) {
-      console.warn('nyaize を読み込めませんでした:', error)
-    }
+    nyaizeFn.value = await loadNyaize()
   },
   { immediate: true }
 )
