@@ -178,3 +178,21 @@
   0% { filter: hue-rotate(0deg) contrast(150%) saturate(150%); }
   100% { filter: hue-rotate(360deg) contrast(150%) saturate(150%); }
 }
+
+/* $[sparkle] の粒。Misskey の MkSparkle とは別の、このライブラリ独自の実装で使う */
+@keyframes mfm-sparkle {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0) rotate(360deg);
+  }
+}

@@ -97,29 +97,13 @@ const computedStyle = computed<CSSProperties>(() => {
   display: inline-block;
 }
 
+/* keyframes の mfm-sparkle は mfm.css にある。scoped style に置くと名前が書き換わり、インラインの animation から参照できない */
 .mfm-sparkle-particle {
   position: absolute;
   width: 1em;
   height: 1em;
   pointer-events: none;
   will-change: opacity, transform;
-}
-
-@keyframes mfm-sparkle {
-  0% {
-    opacity: 0;
-    transform: scale(0) rotate(0deg);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1) rotate(180deg);
-  }
-
-  100% {
-    opacity: 0;
-    transform: scale(0) rotate(360deg);
-  }
 }
 
 /* Reduce motion for accessibility */
