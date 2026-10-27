@@ -10,6 +10,7 @@
   - `MfmRenderer`・`MfmProvider`・`MfmComponent` と、構文ごとのコンポーネント（`MfmBold`・`MfmX2` など）を使える
   - CSS は `mfm-renderer/react/style.css` を読み込む
   - Vue 版と同じ入力で同じ HTML を出力する。テストで Vue 版の出力と突き合わせている
+  - props は Vue 版の `MfmRenderer` と同じ（`emojiStyle`・`twemojiBase` を含む）。`@click-ev` は `onClickEv`、`provide` する `domain`・`emojis` は props か `MfmProvider` で渡す
 - `react`（18・19）を任意の peerDependencies に加えた。`vue` も任意にしたので、Vue 版だけ・React 版だけのどちらでも、使わないほうは入らない
 - プレビューに React 版のページと、Vue 版と React 版を並べて比べるページを足した
 
