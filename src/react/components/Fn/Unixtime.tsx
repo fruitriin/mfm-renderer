@@ -22,7 +22,8 @@ export function Unixtime({ children, className, style }: MfmSyntaxProps<MfmFn['p
   const isValid = !Number.isNaN(time)
   const absoluteTime = isValid ? new Date(time).toLocaleString() : ''
   return (
-    <span className={cx('unixtime', className)} style={style} title={absoluteTime}>
+    // 時刻の表示は描画した時点の時計とロケールで決まり、サーバー側の描画と食い違うので、ハイドレーションの不一致の警告を出さない
+    <span className={cx('unixtime', className)} style={style} title={absoluteTime} suppressHydrationWarning>
       <i className="ti ti-clock"></i>
       {isValid ? `${absoluteTime} (${relativeTime(time)})` : '無効な日時'}
     </span>

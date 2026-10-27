@@ -22,6 +22,8 @@ export function MfmComponent({ tokens }: Props) {
           console.error('unrecognized ast type:', token.type)
           return null
         }
+        // AST のノードには安定した ID がないので、位置を key にする。text が変わると同じ位置のコンポーネントの state は引き継がれるため、
+        // state を持つコンポーネント（Mention など）は、入力から作った key で前の入力の state を捨てる
         return <Component key={index} token={token.props} children={'children' in token ? token.children : undefined} />
       })}
     </>

@@ -169,6 +169,7 @@ function MyLink({ token }: MfmSyntaxProps<MfmLink['props']>) {
 <MfmRenderer text={text} components={{ Link: MyLink }} />
 ```
 
+- 差し替えるコンポーネントには、位置（何番目のノードか）を key にして描画する。state を持つコンポーネントは、`text` が変わると前の入力の state が残ることがあるので、`token` の値から作った key で state を作り直す
 - `MfmSyntaxProps` の `token` の型は、指定しないと `any` になる。構文ごとに型が違うためである。上の例のように mfm-js の型（`MfmLink['props']` など）を指定すると型が付く
 
 - 構文ごとのコンポーネントや、解析済みの AST を描画する `MfmComponent` も import できる（`MfmBold`・`MfmX2` など、Vue 版の登録名と同じ）
