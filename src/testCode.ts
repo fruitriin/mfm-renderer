@@ -3,6 +3,13 @@ import { ref } from 'vue'
 type Sample = { title: string; body: string }
 export const samples = ref<Sample[]>([
   {
+    title: 'にゃー化（猫ユーザーのとき）',
+    body: `なにかな？ Good morning everyone, banana!
+うま$[ruby 味 あじ]な$[ruby 七 なな]
+> 引用の中はにゃー化しない: なんでもない
+[リンクもにゃー化しない: なんでもない](https://example.com)`
+  },
+  {
     title: '基本構文',
     body: `**太字** <i>斜め</i> ~~打ち消し~~
 \`inline code (JavaScript highlight)\`

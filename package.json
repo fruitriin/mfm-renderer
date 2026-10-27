@@ -53,6 +53,7 @@
   },
   "dependencies": {
     "mfm-js": "^0.28.0",
+    "misskey-js": "^2026.10.1",
     "shiki": "^3.21.0"
   },
   "devDependencies": {

@@ -13,11 +13,13 @@
     :className="`position ${className ?? ''}`"
     :tokens="children"
     :style="[
-      {
-        animation: `${animationName} ${validTime(token?.args.speed) ?? '1.5s'} linear infinite`,
-        animationDirection: animationDirection,
-        animationDelay: validTime(token?.args.delay) ?? '0s'
-      },
+      useAnim
+        ? {
+            animation: `${animationName} ${validTime(token?.args.speed) ?? '1.5s'} linear infinite`,
+            animationDirection: animationDirection,
+            animationDelay: validTime(token?.args.delay) ?? '0s'
+          }
+        : {},
       style
     ]"
   />
@@ -27,7 +29,7 @@
 import { computed } from 'vue'
 import type { CSSProperties } from 'vue'
 import type { MfmFn, MfmInline } from 'mfm-js'
-import { validTime } from '../../../utils/mfmUtil'
+import { useMfmAnimation, validTime } from '../../../utils/mfmUtil'
 
 const props = defineProps<{
   token?: MfmFn['props']
@@ -35,6 +37,9 @@ const props = defineProps<{
   style?: CSSProperties
   className?: string
 }>()
+
+// Misskey と同じく、アニメーションを止める設定のときは動かさない
+const useAnim = useMfmAnimation()
 
 // アニメーション名の決定（x軸、y軸、または通常の回転）
 const animationName = computed(() => {
