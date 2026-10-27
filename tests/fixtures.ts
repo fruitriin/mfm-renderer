@@ -28,12 +28,14 @@ export const syntaxFixtures: Fixture[] = [
   { name: 'emojiCode（未登録）', text: ':unknown_emoji:' },
   { name: 'unicodeEmoji', text: '🍮😀' },
   { name: 'search', text: 'misskey 検索' },
-  { name: 'mathInline', text: '\\(x^2\\)' }
+  { name: 'mathInline', text: '\\(x^2\\)' },
+  { name: 'mathBlock', text: '\\[\nx^2\n\\]' }
 ]
 
 export const fnFixtures: Fixture[] = [
   { name: 'fg', text: '$[fg.color=00f 青] $[fg 既定の赤] $[fg.color=red 無効な色]' },
   { name: 'bg', text: '$[bg.color=ff0 黄] $[bg 既定の赤]' },
+  { name: 'font（指定なし）', text: '$[font 指定なし]' },
   { name: 'font', text: '$[font.serif 明朝] $[font.monospace 等幅] $[font.cursive 筆記] $[font.fantasy 装飾] $[font.emoji 絵文字] $[font.math 数式]' },
   { name: 'blur', text: '$[blur ぼかし]' },
   { name: 'flip', text: '$[flip 左右] $[flip.v 上下] $[flip.h,v 両方]' },
@@ -54,5 +56,9 @@ export const fnFixtures: Fixture[] = [
   { name: 'rainbow', text: '$[rainbow 🍮] $[rainbow.speed=2s 🍮]' },
   { name: 'sparkle', text: '$[sparkle 🍮]' },
   { name: '未対応の関数', text: '$[foo 中身]' },
-  { name: '入れ子', text: '$[x2 $[fg.color=f00 **赤い太字**]]' }
+  { name: '入れ子', text: '$[x2 $[fg.color=f00 **赤い太字**]]' },
+  { name: 'x2 の入れ子', text: '$[x2 $[x2 $[x2 3 重]]]' },
+  { name: 'transform の入れ子', text: '$[rotate.deg=45 $[flip 回して反転]]' },
+  { name: '子が複数ある関数', text: '$[spin 回る **太字** と :emoji: と @alice]' },
+  { name: 'ruby（本文がテキストでない）', text: '$[ruby **太字** ふとじ]' }
 ]

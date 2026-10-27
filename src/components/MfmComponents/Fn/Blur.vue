@@ -1,9 +1,8 @@
 <template>
-  <MfmComponent
-    :className="`blur ${className ?? ''}`"
-    :tokens="children"
-    :style="style"
-  />
+  <!-- ぼかしは mfm.css の mfm-blur で付ける。マウスを載せると見える -->
+  <span :class="['mfm-blur', className]" :style="style">
+    <MfmComponent :tokens="children" />
+  </span>
 </template>
 
 <script setup lang="ts">
@@ -17,13 +16,3 @@ defineProps<{
   className?: string
 }>()
 </script>
-
-<style>
-.blur {
-  filter: blur(6px);
-  transition: filter 0.3s;
-}
-.blur:hover {
-  filter: blur(0px);
-}
-</style>

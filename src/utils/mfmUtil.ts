@@ -111,14 +111,14 @@ export function validColor(color: string | true | undefined | null): string | un
 
 /**
  * ボーダースタイルが有効かどうかを検証する
+ * Misskey と同じく、小文字で書かれたものだけを受け付ける
  * @param style - 検証するボーダースタイル
  * @returns 有効なボーダースタイルならそのまま返し、無効ならundefinedを返す
  */
 export function validBorderStyle(style: string | true | undefined | null): string | undefined {
   if (!style || typeof style !== 'string') return undefined
-  const normalized = style.toLowerCase()
   const validStyles = ['hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset']
-  return validStyles.includes(normalized) ? normalized : undefined
+  return validStyles.includes(style) ? style : undefined
 }
 
 /**

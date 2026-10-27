@@ -11,6 +11,8 @@ import Plain from './components/MfmComponents/Plain.vue'
 import BlockCode from './components/MfmComponents/BlockCode.vue'
 import InlineCode from './components/MfmComponents/InlineCode.vue'
 import Search from './components/MfmComponents/Search.vue'
+import MathInline from './components/MfmComponents/MathInline.vue'
+import MathBlock from './components/MfmComponents/MathBlock.vue'
 import Strike from './components/MfmComponents/Strike.vue'
 import UnicodeEmoji from './components/MfmComponents/UnicodeEmoji.vue'
 import Url from './components/MfmComponents/Url.vue'
@@ -44,6 +46,8 @@ import Unixtime from './components/MfmComponents/Fn/Unixtime.vue'
 import { App, ObjectPlugin } from 'vue'
 import MfmRenderer from './components/MfmRenderer.vue'
 import { mfmComponentPrefix } from './utils/mfmUtil.ts'
+// アニメーションの keyframes など、MFM の表示に使う CSS。ライブラリの style.css に含める
+import './mfm.css'
 
 // 構文ごとのコンポーネント。Mfm 接頭辞を付けて登録する（Bold → MfmBold）
 const syntaxComponents = {
@@ -59,6 +63,8 @@ const syntaxComponents = {
   BlockCode,
   InlineCode,
   Search,
+  MathInline,
+  MathBlock,
   Strike,
   UnicodeEmoji,
   Url,

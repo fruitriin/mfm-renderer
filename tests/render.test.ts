@@ -55,11 +55,12 @@ describe('MfmRenderer の props', () => {
     expect(render({ text: 'a', nowrap: true }).find('.mfm-nowrap').exists()).toBe(true)
   })
 
-  it('advancedMfm が false のときは x2 で大きくしない', () => {
+  it('advancedMfm が false のときは x2 で大きくせず、position は $[position ...] のまま表示する', () => {
     const on = render({ text: '$[x2 大]' })
     const off = render({ text: '$[x2 大]', advancedMfm: false })
-    expect(on.html()).toContain('font-size: 200%')
-    expect(off.html()).not.toContain('font-size: 200%')
+    expect(on.find('.mfm-x2').exists()).toBe(true)
+    expect(off.find('.mfm-x2').exists()).toBe(false)
+    expect(render({ text: '$[position.x=1 移動]', advancedMfm: false }).text()).toBe('$[position 移動]')
   })
 
   it('animatedMfm が false のときはアニメーションを付けない', () => {
