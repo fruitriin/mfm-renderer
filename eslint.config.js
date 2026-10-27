@@ -2,6 +2,7 @@ import { globalIgnores } from 'eslint/config'
 import pluginVue from 'eslint-plugin-vue'
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
 import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
+import reactHooks from 'eslint-plugin-react-hooks'
 
 export default defineConfigWithVueTs(
   // ビルド出力と依存関係
@@ -9,6 +10,11 @@ export default defineConfigWithVueTs(
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
   skipFormatting,
+  // React 版（src/react/）と、そのテスト
+  {
+    files: ['src/react/**/*.{ts,tsx}', 'tests/**/*.tsx'],
+    ...reactHooks.configs.flat['recommended-latest']
+  },
   {
     rules: {
       // プロジェクトに応じてルールをカスタマイズ

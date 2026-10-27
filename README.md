@@ -3,6 +3,10 @@
 MFMをレンダリングするコンポーネント
 各文法ごとにコンポーネント化されているのでメンテナンスしやすい気がする。
 
+Vue 3 と React（18・19）で使える。React 版は `mfm-renderer/react` から読み込む（[React で使う](#react-で使う)）。
+
+プレビュー: [Vue 版](https://fruitriin.github.io/mfm-renderer/)・[React 版](https://fruitriin.github.io/mfm-renderer/react.html)・[Vue と React を比べる](https://fruitriin.github.io/mfm-renderer/compare.html)
+
 
 ## Installation
 
@@ -25,7 +29,7 @@ import "mfm-renderer/style.css"
 createApp(App).use(Mfm).mount('#app')
 ```
 
-`vue` は peerDependencies なので、利用側で入れておく。
+`vue` は peerDependencies なので、利用側で入れておく。React 版だけを使うときは `vue` は要らない。
 
 ## 版ごとの使い方
 
@@ -119,6 +123,60 @@ v0.2.x では構文ごとのコンポーネントを `Bold`・`Link`・`Search` 
 - メンションのアバターとカスタム絵文字は、`provide('domain', 'misskey.io')` と `provide('emojis', { 名前: { url } })` で渡す（ref や computed でもよい）。`domain` がないときは、アバターを取りに行かない
 - コードブロックのハイライトには `shiki` を使う。読み込めない環境（UMD を script タグで使う場合など）では、ハイライトせずに表示する
 - 色は Misskey のテーマと同じ CSS 変数（`--MI_THEME-fg`・`--MI_THEME-accent`・`--MI_THEME-divider`・`--MI_THEME-mention`・`--MI_THEME-hashtag`）を使う。なければ 2024.10 より前の名前（`--fg` など）を使う
+
+## React で使う
+
+`react` と `react-dom` を入れておく（18 か 19）。`vue` は要らない。
+
+```
+npm install github:fruitriin/mfm-renderer#v0.4.0 react react-dom
+```
+
+```tsx
+import { MfmRenderer } from 'mfm-renderer/react'
+import 'mfm-renderer/react/style.css'
+
+const emojis = { blobcat: { url: 'https://example.com/blobcat.png' } }
+
+export function Note({ text }: { text: string }) {
+  return <MfmRenderer text={text} domain="misskey.io" emojis={emojis} onClickEv={(ev) => console.log(ev)} />
+}
+```
+
+- Vue 版の `.use()` のようなグローバル登録はしない。使う場所で import する
+- `mfm-renderer/react` は ES Modules だけで配布する（`require` では読み込めない）。UMD 版もない
+- サーバー側で描画（SSR）しても使える。ただし `$[unixtime]` の表示は描画した時点の時計とロケールで決まるので、サーバーとブラウザで食い違うことがある。ハイドレーションの不一致の警告は出さない
+- props は Vue 版の `MfmRenderer` と同じ（`plain`・`nowrap`・`rootScale`・`nyaize`・`author`・`advancedMfm`・`animatedMfm`・`emojiStyle`・`twemojiBase`）。Vue 版の `@click-ev` は `onClickEv` になる
+- `domain` と `emojis` は props で渡す。Vue 版の `provide('domain')`・`provide('emojis')` に当たる
+- たくさんの投稿で同じものを使うときは、`MfmProvider` で外側から一度だけ渡せる。`MfmRenderer` の props で渡したものが優先される
+
+```tsx
+import { MfmProvider, MfmRenderer } from 'mfm-renderer/react'
+
+<MfmProvider domain="misskey.io" emojis={emojis}>
+  {notes.map((note) => <MfmRenderer key={note.id} text={note.text} />)}
+</MfmProvider>
+```
+
+- 構文ごとのコンポーネントは `components` で差し替えられる。キーは接頭辞なしの名前（`Link`・`Mention`・`X2` など）である。`$[foo ...]` のように、新しい関数を足すこともできる
+
+```tsx
+import type { MfmLink } from 'mfm-js'
+import type { MfmSyntaxProps } from 'mfm-renderer/react'
+
+function MyLink({ token }: MfmSyntaxProps<MfmLink['props']>) {
+  return <a href={token?.url} target="_blank" rel="noopener noreferrer">{token?.url}</a>
+}
+
+<MfmRenderer text={text} components={{ Link: MyLink }} />
+```
+
+- `components`・`emojis` をインラインのオブジェクトで書くと、描画のたびに作り直され、中身がすべて描画し直される。たくさんの投稿に使うときは、モジュールに置くか `useMemo` で作って渡す
+
+- 差し替えるコンポーネントには、位置（何番目のノードか）を key にして描画する。state を持つコンポーネントは、`text` が変わると前の入力の state が残ることがあるので、`token` の値から作った key で state を作り直す
+- `MfmSyntaxProps` の `token` の型は、指定しないと `any` になる。構文ごとに型が違うためである。上の例のように mfm-js の型（`MfmLink['props']` など）を指定すると型が付く
+
+- 構文ごとのコンポーネントや、解析済みの AST を描画する `MfmComponent` も import できる（`MfmBold`・`MfmX2` など、Vue 版の登録名と同じ）
 
 ## 進み具合
 
