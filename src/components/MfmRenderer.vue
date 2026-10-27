@@ -11,7 +11,8 @@ import {
   mfm,
   mfmClickEvKey,
   mfmRenderOptionsKey,
-  mfmScaleKey
+  mfmScaleKey,
+  DEFAULT_TWEMOJI_BASE
 } from '../utils/mfmUtil.ts'
 import type { MfmRenderOptions } from '../utils/mfmUtil.ts'
 import { computed, provide, shallowRef, watch } from 'vue'
@@ -34,6 +35,10 @@ const props = withDefaults(
     advancedMfm?: boolean
     /** false のときはアニメーションを止める */
     animatedMfm?: boolean
+    /** Unicode の絵文字の描き方。'native' は OS の絵文字、'twemoji' は Twemoji の画像（Misskey の既定の見た目） */
+    emojiStyle?: 'native' | 'twemoji'
+    /** Twemoji の SVG を置いている場所。省くと jsDelivr の @discordapp/twemoji を使う */
+    twemojiBase?: string
   }>(),
   {
     plain: false,
@@ -42,7 +47,9 @@ const props = withDefaults(
     nyaize: false,
     author: null,
     advancedMfm: true,
-    animatedMfm: true
+    animatedMfm: true,
+    emojiStyle: 'native',
+    twemojiBase: DEFAULT_TWEMOJI_BASE
   }
 )
 
@@ -78,7 +85,9 @@ provide(
     nowrap: props.nowrap,
     advancedMfm: props.advancedMfm,
     animatedMfm: props.animatedMfm,
-    nyaize: shouldNyaize.value ? nyaizeFn.value : null
+    nyaize: shouldNyaize.value ? nyaizeFn.value : null,
+    emojiStyle: props.emojiStyle,
+    twemojiBase: props.twemojiBase.replace(/\/+$/, '')
   }))
 )
 provide(

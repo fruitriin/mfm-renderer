@@ -110,6 +110,8 @@ v0.2.x では構文ごとのコンポーネントを `Bold`・`Link`・`Search` 
 | `author` | `null` | 投稿者。今は `isCat` だけを使う |
 | `advancedMfm` | `true` | false のときは x2〜x4・position・scale を効かせず、アニメーションも止める |
 | `animatedMfm` | `true` | false のときはアニメーションを止める。rainbow は静的な虹色、sparkle は中身だけで表示する |
+| `emojiStyle` | `'native'` | Unicode の絵文字の描き方。`'twemoji'` にすると Twemoji の画像で、Misskey の既定の見た目（高さ 1.25em）になる。カスタム絵文字（高さ 2em）との大きさの差も Misskey と同じになる |
+| `twemojiBase` | jsDelivr の `@discordapp/twemoji@16.0.1/dist/svg` | Twemoji の SVG を置いている場所。自分のサーバーに置くときに変える |
 
 にゃー化には `misskey-js` の `nyaize` を使い、必要になったときだけ読み込む。読み込めない環境（UMD を script タグで使う場合など）では、にゃー化しない。
 
