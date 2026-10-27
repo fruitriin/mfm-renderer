@@ -24,6 +24,7 @@
 
 - **アニメーションなどの CSS がライブラリに入っていなかった**のを直した。`$[spin]`・`$[tada]`・`$[rainbow]` などの keyframes は開発用のページにしかなく、`mfm-renderer/style.css` を読み込んでも動かなかった。Misskey と同じに見えるように `src/mfm.css` に書き起こし、`style.css` に含めた（Misskey の CSS は写していない）
   - keyframes はグローバルに定義され、名前は Misskey と同じ `mfm-spin` などである。Misskey の CSS と同じページで読み込むと、後から読み込んだほうの定義が使われる。どちらでも見た目はほぼ同じだが、twitch・shake の細かい揺れ方は違う
+  - 開発用のページの `src/style.css` から、keyframes（`tada`・`blink` など）を外した。このファイルはライブラリの `style.css` に入っていなかったので、利用側には影響しない
 - `$[sparkle]` の粒が動いていなかったのを直した。keyframes を scoped style に置いていたため名前が書き換わり、インラインの animation から参照できなかった
 - `$[...]` の関数が、Misskey と同じく自分の要素（`display: inline-block` の span）で中身を包むようにした。これまでは中身の要素それぞれにスタイルを配っていたため、次のことが起きていた
   - Unicode 絵文字・カスタム絵文字・メンションなど、スタイルを受け取らない中身には効かなかった（`$[spin 🍮]` が回らない、`$[fg.color=f00 #tag]` に色が付かないなど）

@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { flushPromises, mount } from '@vue/test-utils'
 import MfmPlugin from '../src/library.ts'
@@ -74,6 +75,38 @@ describe('MfmRenderer の props', () => {
     const rainbow = render({ text: '$[rainbow 虹]', animatedMfm: false })
     expect(rainbow.find('.mfm-rainbow-fallback').exists()).toBe(true)
     expect(rainbow.html()).not.toContain('animation')
+  })
+
+  // アニメーションのある関数。sparkle は粒の svg に animation を付ける
+  const animatedFns = ['spin', 'spin.x', 'spin.y', 'jump', 'bounce', 'shake', 'twitch', 'tada', 'jelly', 'rainbow', 'sparkle']
+
+  it('animatedMfm が false のときは、どの関数にもアニメーションを付けない', () => {
+    for (const name of animatedFns) {
+      expect(render({ text: `$[${name} 字]`, animatedMfm: false }).html(), name).not.toContain('animation')
+    }
+    // tada は Misskey と同じく、大きさだけ残す
+    expect(render({ text: '$[tada 字]', animatedMfm: false }).html()).toContain('font-size: 150%')
+  })
+
+  it('advancedMfm が false のときは、アニメーション・x2〜x4・position・scale を効かせない', () => {
+    for (const name of animatedFns) {
+      expect(render({ text: `$[${name} 字]`, advancedMfm: false }).html(), name).not.toContain('animation')
+    }
+    for (const name of ['x2', 'x3', 'x4']) {
+      expect(render({ text: `$[${name} 字]`, advancedMfm: false }).find(`.mfm-${name}`).exists(), name).toBe(false)
+    }
+  })
+
+  it('関数が使う animation の名前は、すべて mfm.css に keyframes として定義されている', () => {
+    const css = readFileSync('src/mfm.css', 'utf8') // テストはリポジトリの直下で実行する
+    const defined = new Set([...css.matchAll(/@keyframes ([\w-]+)/g)].map((m) => m[1]))
+    const used = new Set<string>()
+    for (const name of animatedFns) {
+      const html = render({ text: `$[${name} 字]` }).html()
+      for (const m of html.matchAll(/animation: ([\w-]+)/g)) used.add(m[1])
+    }
+    expect(used.size).toBeGreaterThanOrEqual(11)
+    for (const name of used) expect(defined, name).toContain(name)
   })
 
   it('rootScale と x2〜x4 を掛けて 2.5 以上になった絵文字に original-size を付ける', () => {
