@@ -17,6 +17,20 @@ export type MfmRenderOptions = {
   animatedMfm: boolean
   /** にゃー化する関数。にゃー化しないとき（読み込み中を含む）は null */
   nyaize: ((text: string) => string) | null
+  /** Unicode の絵文字の描き方。'native' は OS の絵文字、'twemoji' は Twemoji の画像（Misskey の既定） */
+  emojiStyle: 'native' | 'twemoji'
+  /** Twemoji の SVG を置いている場所（末尾の / はなし） */
+  twemojiBase: string
+}
+
+/** Twemoji の SVG の既定の置き場所。Misskey と同じ @discordapp/twemoji の版を、jsDelivr から読む */
+export const DEFAULT_TWEMOJI_BASE = 'https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg'
+
+/** 絵文字から Twemoji の SVG のファイル名を作る（Misskey の char2twemojiFilePath と同じ規則） */
+export function twemojiFileName(char: string): string {
+  let codes = Array.from(char, (x) => x.codePointAt(0)?.toString(16) ?? '')
+  if (!codes.includes('200d')) codes = codes.filter((x) => x !== 'fe0f')
+  return codes.filter((x) => x.length > 0).join('-')
 }
 
 const defaultRenderOptions: MfmRenderOptions = {
@@ -24,7 +38,9 @@ const defaultRenderOptions: MfmRenderOptions = {
   nowrap: false,
   advancedMfm: true,
   animatedMfm: true,
-  nyaize: null
+  nyaize: null,
+  emojiStyle: 'native',
+  twemojiBase: DEFAULT_TWEMOJI_BASE
 }
 
 export const mfmRenderOptionsKey: InjectionKey<ComputedRef<MfmRenderOptions>> = Symbol('mfmRenderOptions')

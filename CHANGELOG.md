@@ -16,6 +16,7 @@
 - テストを追加した（`npm test`）。検証関数（`validTime` など）の単体テスト、構文と関数ごとの出力のスナップショット、`MfmRenderer` の props・イベントのテストを含む
 - 型チェックだけを行う `npm run typecheck` を追加した。CI でもテストと型チェックを実行する
 - `\(x^2\)`・`\[x^2\]`（数式）を、Misskey と同じく `<code>` でそのまま表示するようにした（`MfmMathInline`・`MfmMathBlock`）。これまでは未知の要素になっていた
+- `MfmRenderer` に `emojiStyle` と `twemojiBase` を追加した。`emojiStyle: 'twemoji'` にすると、Unicode の絵文字を Twemoji の画像（高さ 1.25em）で描き、Misskey の既定の見た目になる。既定は今までどおり `'native'`（OS の絵文字）。画像を読めなかったときは OS の絵文字で表示する
 
 ### 修正（Misskey との違い）
 
