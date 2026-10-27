@@ -27,7 +27,7 @@
 - **フレームワーク**: Vue 3 (Composition API)
 - **言語**: TypeScript
 - **ビルドツール**: Vite
-- **パーサー**: mfm-js (v0.24.0)
+- **パーサー**: mfm-js (v0.28.0)
 - **スタイリング**: CSS (scoped styles in Vue components)
 - **コード品質**: ESLint, Prettier
 
