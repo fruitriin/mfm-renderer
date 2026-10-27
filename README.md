@@ -165,7 +165,7 @@ import type { MfmLink } from 'mfm-js'
 import type { MfmSyntaxProps } from 'mfm-renderer/react'
 
 function MyLink({ token }: MfmSyntaxProps<MfmLink['props']>) {
-  return <a href={token?.url} target="_blank">{token?.url}</a>
+  return <a href={token?.url} target="_blank" rel="noopener noreferrer">{token?.url}</a>
 }
 
 <MfmRenderer text={text} components={{ Link: MyLink }} />

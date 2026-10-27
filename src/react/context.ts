@@ -7,6 +7,8 @@ import { DEFAULT_TWEMOJI_BASE } from '../core/index.ts'
  * 構文ごとのコンポーネントが受け取る props。Vue 版と同じ形にしている
  * - token: AST のノードの props（Fn では関数名と引数）
  * - children: AST のノードの子
+ *
+ * 差し替えたコンポーネントは位置（何番目のノードか）を key にして描画される。state を持つときは、text が変わると前の入力の state が残ることに気をつける
  */
 // 構文ごとに token の型が違うコンポーネントを 1 つの一覧（MfmComponentMap）に入れるため、既定は any にする
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -107,9 +109,11 @@ export function useMfmAnimation(): boolean {
 }
 
 /** 引用・リンクの中を除いて、にゃー化する関数を返す */
+const identity = (text: string) => text
+
 export function useMfmNyaize(): (text: string) => string {
   const { options, disableNyaize } = useMfmRender()
-  return !disableNyaize && options.nyaize ? options.nyaize : (text: string) => text
+  return !disableNyaize && options.nyaize ? options.nyaize : identity
 }
 
 /** class の文字列をつなぐ。空のものは除く */
