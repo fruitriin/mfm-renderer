@@ -1,15 +1,15 @@
 <template>
   <pre class="block-code" v-if="highlightedCode" v-html="highlightedCode"></pre>
-  <pre class="block-code" v-else>
-    <code>{{ token.code }}</code>
-  </pre>
+  <!-- pre の中に改行やインデントを入れると、そのまま表示されてしまう -->
+  <pre class="block-code" v-else><code>{{ token?.code }}</code></pre>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, type CSSProperties } from 'vue'
+import { ref, watch, type CSSProperties } from 'vue'
+import type { MfmCodeBlock } from 'mfm-js'
 
 const props = defineProps<{
-  token?: any
+  token?: MfmCodeBlock['props']
   children?: any
   style?: CSSProperties
   className?: string
@@ -17,27 +17,40 @@ const props = defineProps<{
 
 const highlightedCode = ref<string>('')
 
-onMounted(async () => {
-  if (props.token?.lang && props.token?.code) {
+// 同じコンポーネントのまま code や lang が変わることがあるので、そのたびにハイライトし直す
+watch(
+  () => [props.token?.code, props.token?.lang] as const,
+  async ([code, lang], _old, onCleanup) => {
+    let cancelled = false
+    onCleanup(() => {
+      cancelled = true
+    })
+    if (!lang || !code) {
+      highlightedCode.value = ''
+      return
+    }
+    // 新しい結果ができるまでは前のハイライトを残し、入力中のちらつきを抑える
     try {
       // shiki は必要になったときだけ読み込む。読み込めない環境（UMD を script タグで使う場合など）ではハイライトせずに表示する
       const { codeToHtml } = await import('shiki')
-      const html = await codeToHtml(props.token.code, {
-        lang: props.token.lang,
-        theme: 'github-dark'
-      })
-      highlightedCode.value = html
+      const html = await codeToHtml(code, { lang, theme: 'github-dark' })
+      // 待っている間に次の入力が来ていたら、古い結果で上書きしない
+      if (!cancelled) highlightedCode.value = html
     } catch (error) {
       // 言語が認識できない場合はフォールバック
       console.warn('Shiki highlighting failed:', error)
+      if (!cancelled) highlightedCode.value = ''
     }
-  }
-})
+  },
+  { immediate: true }
+)
 </script>
 
 <style scoped>
 .block-code {
   background-color: #1e1e1e;
+  /* ハイライトしないときも暗い背景で読めるよう、文字色を明示する */
+  color: #e1e4e8;
   border: 1px solid #404040;
   border-radius: 6px;
   padding: 12px 16px;
