@@ -8,7 +8,9 @@
   SPDX-License-Identifier: AGPL-3.0-only
 -->
 <template>
-  <span :class="`mfm-sparkle ${className ?? ''}`" :style="computedStyle">
+  <!-- Misskey と同じく、アニメーションを止める設定のときは中身だけを表示する -->
+  <MfmComponent v-if="!useAnim" :tokens="children" />
+  <span v-else :class="`mfm-sparkle ${className ?? ''}`" :style="computedStyle">
     <MfmComponent :tokens="children" />
     <svg
       v-for="(particle, index) in particles"
@@ -30,7 +32,7 @@
 import type { CSSProperties } from 'vue'
 import type { MfmFn } from 'mfm-js'
 import { computed } from 'vue'
-import { validTime } from '../../../utils/mfmUtil'
+import { useMfmAnimation, validTime } from '../../../utils/mfmUtil'
 
 type SparkleProps = {
   token?: MfmFn
@@ -40,6 +42,8 @@ type SparkleProps = {
 }
 
 const props = defineProps<SparkleProps>()
+
+const useAnim = useMfmAnimation()
 
 // Sparkle particles positioned around the content
 const particles = computed(() => {

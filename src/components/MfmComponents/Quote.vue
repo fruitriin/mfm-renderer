@@ -1,5 +1,7 @@
 <template>
-  <div
+  <!-- nowrap のときは Misskey と同じく span で描画する -->
+  <component
+    :is="options.nowrap ? 'span' : 'div'"
     class="quote"
     style="
       display: block;
@@ -11,13 +13,21 @@
     "
   >
     <MfmComponent :tokens="children" />
-  </div>
+  </component>
 </template>
 
 <script setup lang="ts">
+import { provide } from 'vue'
+import { mfmDisableNyaizeKey, useMfmRenderOptions } from '../../utils/mfmUtil.ts'
+
 defineProps<{
   children?: any
   // 受け取らないと要素の className に入り、class="quote" が消える
   className?: string
 }>()
+
+const options = useMfmRenderOptions()
+
+// Misskey と同じく、引用の中はにゃー化しない
+provide(mfmDisableNyaizeKey, true)
 </script>

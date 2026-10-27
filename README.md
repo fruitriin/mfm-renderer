@@ -35,6 +35,21 @@ createApp(App).use(Mfm).mount('#app')
 <MfmRenderer text="Hello **mfm**" @click-ev="(ev) => console.log(ev)" />
 ```
 
+`MfmRenderer` は、Misskey の MFM コンポーネントと同じ次の props を受け取る。
+
+| props | 既定値 | せつめい |
+|---|---|---|
+| `text` | （必須） | 描画する MFM |
+| `plain` | `false` | テキスト・絵文字・プレーンだけを解析し、改行を空白にする。絵文字は文字の大きさに合わせる（ユーザー名など向け） |
+| `nowrap` | `false` | 1 行に収め、はみ出たら省略する |
+| `rootScale` | `1` | 文字の倍率の初期値。x2〜x4 と scale で掛け合わされ、2.5 以上になったカスタム絵文字には `original-size` クラスが付く |
+| `nyaize` | `false` | `'respect'` のとき、`author.isCat` が true ならにゃー化する（Misskey と同じく、`true` ではにゃー化しない）。引用とリンクの中はにゃー化しない |
+| `author` | `null` | 投稿者。今は `isCat` だけを使う |
+| `advancedMfm` | `true` | false のときは x2〜x4・position・scale を効かせず、アニメーションも止める |
+| `animatedMfm` | `true` | false のときはアニメーションを止める。rainbow は静的な虹色、sparkle は中身だけで表示する |
+
+にゃー化には `misskey-js` の `nyaize` を使い、必要になったときだけ読み込む。読み込めない環境（UMD を script タグで使う場合など）では、にゃー化しない。
+
 - `$[clickable.ev=名前 ...]` が押されると、`clickEv` イベントで `名前` を渡す
 - メンションのアバターとカスタム絵文字は、`provide('domain', 'misskey.io')` と `provide('emojis', { 名前: { url } })` で渡す（ref や computed でもよい）。`domain` がないときは、アバターを取りに行かない
 - コードブロックのハイライトには `shiki` を使う。読み込めない環境（UMD を script タグで使う場合など）では、ハイライトせずに表示する

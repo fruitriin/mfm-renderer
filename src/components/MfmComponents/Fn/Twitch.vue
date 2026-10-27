@@ -3,9 +3,11 @@
     :className="`rotate ${className ?? ''}`"
     :tokens="children"
     :style="[
-      {
-        animation: `${validTime(token?.args.speed) ?? '1s'} linear ${validTime(token?.args.delay) ?? '0s'} infinite normal none running mfm-twitch`
-      },
+      useAnim
+        ? {
+            animation: `${validTime(token?.args.speed) ?? '1s'} linear ${validTime(token?.args.delay) ?? '0s'} infinite normal none running mfm-twitch`
+          }
+        : {},
       style
     ]"
   />
@@ -14,7 +16,7 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
 import type { MfmFn, MfmInline } from 'mfm-js'
-import { validTime } from '../../../utils/mfmUtil'
+import { useMfmAnimation, validTime } from '../../../utils/mfmUtil'
 
 defineProps<{
   token?: MfmFn['props']
@@ -22,6 +24,9 @@ defineProps<{
   style?: CSSProperties
   className?: string
 }>()
+
+// Misskey と同じく、アニメーションを止める設定のときは動かさない
+const useAnim = useMfmAnimation()
 </script>
 
 <style></style>

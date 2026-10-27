@@ -1,12 +1,14 @@
 <template>
-  <!-- Misskey と同じく、数値でない・指定がないほうは 0 とみなす -->
+  <!-- Misskey と同じく、数値でない・指定がないほうは 0 とみなす。高度な MFM を止める設定のときは動かさない -->
   <MfmComponent
     :className="`position ${className ?? ''}`"
     :tokens="children"
     :style="[
-      {
-        transform: `translateX(${validNumber(token?.args.x) ?? 0}em) translateY(${validNumber(token?.args.y) ?? 0}em)`
-      },
+      options.advancedMfm
+        ? {
+            transform: `translateX(${validNumber(token?.args.x) ?? 0}em) translateY(${validNumber(token?.args.y) ?? 0}em)`
+          }
+        : {},
       style
     ]"
   />
@@ -15,7 +17,7 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
 import type { MfmFn, MfmInline } from 'mfm-js'
-import { validNumber } from '@/utils/mfmUtil'
+import { useMfmRenderOptions, validNumber } from '@/utils/mfmUtil'
 
 defineProps<{
   token?: MfmFn['props']
@@ -23,6 +25,8 @@ defineProps<{
   style?: CSSProperties
   className?: string
 }>()
+
+const options = useMfmRenderOptions()
 </script>
 
 <style></style>

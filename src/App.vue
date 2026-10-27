@@ -12,6 +12,23 @@
       <div>
         <input v-model.lazy="domain" />
       </div>
+      <div>
+        <label><input type="checkbox" v-model="isCat" /> 猫ユーザー（にゃー化）</label>
+      </div>
+      <div>
+        <label><input type="checkbox" v-model="advancedMfm" /> 高度な MFM</label>
+      </div>
+      <div>
+        <label
+          ><input type="checkbox" v-model="animatedMfm" :disabled="!advancedMfm" /> アニメーション</label
+        >
+      </div>
+      <div>
+        <label><input type="checkbox" v-model="plain" /> plain</label>
+      </div>
+      <div>
+        <label><input type="checkbox" v-model="nowrap" /> nowrap</label>
+      </div>
 
       <div v-if="false" style="overflow-x: hidden; overflow-y: auto; width: 300px; height: 10rem">
         <pre>{{ Object.keys(emojis) }}</pre>
@@ -20,7 +37,7 @@
     <hr />
     <div style="display: flex">
       <div style="width: 50%; padding: 8px">
-        <MfmRenderer :text="text" />
+        <MfmRenderer :text="text" v-bind="rendererOptions" />
       </div>
       <div style="width: 50%; padding: 8px">
         <textarea v-model="text" style="height: 6rem; width: 100%" />
@@ -33,7 +50,7 @@
       <div style="width: 50%; padding: 8px">
         <h4>Parsed MFM: ({{ sample.title }})</h4>
         <hr />
-        <MfmRenderer :text="sample.body" />
+        <MfmRenderer :text="sample.body" v-bind="rendererOptions" />
         <MfmAst v-if="ast" :text="sample.body" />
 
         <hr />
@@ -65,6 +82,21 @@ const text = ref(`#mfmart @mention :110:
 > 引用
 >> 引用の引用`)
 const emojis = reactive<Record<string, any>>({})
+
+// MfmRenderer の描画オプションを切り替えて確かめる
+const isCat = ref(false)
+const advancedMfm = ref(true)
+const animatedMfm = ref(true)
+const plain = ref(false)
+const nowrap = ref(false)
+const rendererOptions = computed(() => ({
+  nyaize: 'respect' as const,
+  author: { isCat: isCat.value },
+  advancedMfm: advancedMfm.value,
+  animatedMfm: animatedMfm.value,
+  plain: plain.value,
+  nowrap: nowrap.value
+}))
 
 provide('ast', computed(() => ast.value))
 provide('debugMode', computed(() => debugMode.value))

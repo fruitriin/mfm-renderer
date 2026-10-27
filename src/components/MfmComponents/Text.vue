@@ -8,6 +8,7 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
 import { computed } from 'vue'
+import { useMfmNyaize, useMfmRenderOptions } from '../../utils/mfmUtil.ts'
 
 type Props = {
   children?: object
@@ -24,9 +25,14 @@ const props = withDefaults(defineProps<Props>(), {
   nowrap: false
 })
 
+const options = useMfmRenderOptions()
+const nyaize = useMfmNyaize()
+
 const parsedText = computed(() => {
-  if (!props.plain) return props.token.text.split(/\r\n|\n|\r/)
-  return [props.token.text.replace(/\n/g, ' ')]
+  const text = nyaize.value(props.token.text)
+  // plain は MfmRenderer から渡される。props の plain は以前からある指定のため残す
+  if (!props.plain && !options.value.plain) return text.split(/\r\n|\n|\r/)
+  return [text.replace(/\r\n|\n|\r/g, ' ')]
 })
 
 const showBr = (_text: string, index: number) => {
