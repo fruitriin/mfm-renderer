@@ -1,6 +1,7 @@
 import { createContext, useContext } from 'react'
 import type { ComponentType, CSSProperties } from 'react'
 import type { MfmNode } from 'mfm-js'
+import { DEFAULT_TWEMOJI_BASE } from '../core/index.ts'
 
 /**
  * 構文ごとのコンポーネントが受け取る props。Vue 版と同じ形にしている
@@ -34,6 +35,10 @@ export type MfmRenderOptions = {
   animatedMfm: boolean
   /** にゃー化する関数。にゃー化しないとき（読み込み中を含む）は null */
   nyaize: ((text: string) => string) | null
+  /** Unicode の絵文字の描き方。'native' は OS の絵文字、'twemoji' は Twemoji の画像（Misskey の既定） */
+  emojiStyle: 'native' | 'twemoji'
+  /** Twemoji の SVG を置いている場所（末尾の / はなし） */
+  twemojiBase: string
 }
 
 /** MfmProvider と MfmRenderer で渡す、利用側の環境（Vue 版で provide する emojis・domain に当たる） */
@@ -64,7 +69,15 @@ export type MfmRenderState = {
 
 /** MfmRenderer の外で使われたときは、Misskey の既定と同じくすべて有効として描画する */
 export const MfmRenderContext = createContext<MfmRenderState>({
-  options: { plain: false, nowrap: false, advancedMfm: true, animatedMfm: true, nyaize: null },
+  options: {
+    plain: false,
+    nowrap: false,
+    advancedMfm: true,
+    animatedMfm: true,
+    nyaize: null,
+    emojiStyle: 'native',
+    twemojiBase: DEFAULT_TWEMOJI_BASE
+  },
   scale: 1,
   disableNyaize: false,
   onClickEv: () => {}

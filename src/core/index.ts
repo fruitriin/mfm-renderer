@@ -90,3 +90,13 @@ export function validNumber(value: string | true | number | undefined | null): n
   if (isNaN(num)) return undefined
   return num
 }
+
+/** Twemoji の SVG の既定の置き場所。Misskey と同じ @discordapp/twemoji の版を、jsDelivr から読む */
+export const DEFAULT_TWEMOJI_BASE = 'https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg'
+
+/** 絵文字から Twemoji の SVG のファイル名を作る（Misskey の char2twemojiFilePath と同じ規則） */
+export function twemojiFileName(char: string): string {
+  let codes = Array.from(char, (x) => x.codePointAt(0)?.toString(16) ?? '')
+  if (!codes.includes('200d')) codes = codes.filter((x) => x !== 'fe0f')
+  return codes.filter((x) => x.length > 0).join('-')
+}

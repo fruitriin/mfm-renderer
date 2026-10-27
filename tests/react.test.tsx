@@ -67,7 +67,8 @@ describe('Vue 版と同じ出力になる', () => {
       name: 'にゃー化',
       props: { text: 'なにかな\n> なにかな\n[なにかな](https://example.com)\n$[ruby なにかな なな]', nyaize: 'respect', author: { isCat: true } }
     },
-    { name: '言語付きのコードブロック', props: { text: '```js\nconst a = 1\n```' } }
+    { name: '言語付きのコードブロック', props: { text: '```js\nconst a = 1\n```' } },
+    { name: 'Twemoji', props: { text: '😀 👨‍👩‍👧 ❤️ $[spin 🍮]', emojiStyle: 'twemoji', twemojiBase: 'https://example.com/svg/' } }
   ]
   const emojis = { pudding: { url: 'https://example.com/pudding.png' } }
 

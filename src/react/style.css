@@ -139,3 +139,9 @@
     opacity: 0.5;
   }
 }
+
+/* Misskey の MkEmoji と同じ大きさ（カスタム絵文字の 2em より小さい） */
+.twemoji {
+  height: 1.25em;
+  vertical-align: -0.25em;
+}

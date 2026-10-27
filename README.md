@@ -144,7 +144,7 @@ export function Note({ text }: { text: string }) {
 ```
 
 - Vue 版の `.use()` のようなグローバル登録はしない。使う場所で import する
-- props は Vue 版の `MfmRenderer` と同じ（`plain`・`nowrap`・`rootScale`・`nyaize`・`author`・`advancedMfm`・`animatedMfm`）。Vue 版の `@click-ev` は `onClickEv` になる
+- props は Vue 版の `MfmRenderer` と同じ（`plain`・`nowrap`・`rootScale`・`nyaize`・`author`・`advancedMfm`・`animatedMfm`・`emojiStyle`・`twemojiBase`）。Vue 版の `@click-ev` は `onClickEv` になる
 - `domain` と `emojis` は props で渡す。Vue 版の `provide('domain')`・`provide('emojis')` に当たる
 - たくさんの投稿で同じものを使うときは、`MfmProvider` で外側から一度だけ渡せる。`MfmRenderer` の props で渡したものが優先される
 

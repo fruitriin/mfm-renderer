@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { loadNyaize, mfm, shouldNyaize as decideNyaize } from '../core/index.ts'
+import { DEFAULT_TWEMOJI_BASE, loadNyaize, mfm, shouldNyaize as decideNyaize } from '../core/index.ts'
 import { MfmRenderContext } from './context.ts'
 import type { MfmRenderState } from './context.ts'
 import { MfmComponent } from './Mfm.tsx'
@@ -22,6 +22,10 @@ export type MfmRendererProps = Omit<MfmProviderProps, 'children'> & {
   advancedMfm?: boolean
   /** false のときはアニメーションを止める */
   animatedMfm?: boolean
+  /** Unicode の絵文字の描き方。'native' は OS の絵文字、'twemoji' は Twemoji の画像（Misskey の既定の見た目） */
+  emojiStyle?: 'native' | 'twemoji'
+  /** Twemoji の SVG を置いている場所。省くと jsDelivr の @discordapp/twemoji を使う */
+  twemojiBase?: string
   /** $[clickable.ev=名前 ...] が押されたら、ev の値を渡して呼ぶ */
   onClickEv?: (ev: string) => void
 }
@@ -38,6 +42,8 @@ export function MfmRenderer({
   author = null,
   advancedMfm = true,
   animatedMfm = true,
+  emojiStyle = 'native',
+  twemojiBase = DEFAULT_TWEMOJI_BASE,
   onClickEv = noop,
   emojis,
   domain,
@@ -60,12 +66,20 @@ export function MfmRenderer({
 
   const state = useMemo<MfmRenderState>(
     () => ({
-      options: { plain, nowrap, advancedMfm, animatedMfm, nyaize: shouldNyaize ? nyaizeFn : null },
+      options: {
+        plain,
+        nowrap,
+        advancedMfm,
+        animatedMfm,
+        nyaize: shouldNyaize ? nyaizeFn : null,
+        emojiStyle,
+        twemojiBase: twemojiBase.replace(/\/+$/, '')
+      },
       scale: rootScale,
       disableNyaize: false,
       onClickEv
     }),
-    [plain, nowrap, advancedMfm, animatedMfm, shouldNyaize, nyaizeFn, rootScale, onClickEv]
+    [plain, nowrap, advancedMfm, animatedMfm, shouldNyaize, nyaizeFn, emojiStyle, twemojiBase, rootScale, onClickEv]
   )
 
   const tokens = useMemo(() => mfm(text, plain), [text, plain])

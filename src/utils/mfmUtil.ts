@@ -1,9 +1,17 @@
-import { toComponentName } from '../core/index.ts'
+import { DEFAULT_TWEMOJI_BASE, toComponentName } from '../core/index.ts'
 import { computed, inject } from 'vue'
 import type { ComputedRef, InjectionKey } from 'vue'
 
 // フレームワークに依存しない処理は core にある。以前からの import 先を変えないよう、ここからも使えるようにする
-export { mfm, validTime, validColor, validBorderStyle, validNumber } from '../core/index.ts'
+export {
+  mfm,
+  validTime,
+  validColor,
+  validBorderStyle,
+  validNumber,
+  DEFAULT_TWEMOJI_BASE,
+  twemojiFileName
+} from '../core/index.ts'
 
 /** $[clickable] から MfmRenderer へクリックを伝えるための provide/inject のキー */
 export const mfmClickEvKey: InjectionKey<(ev: string) => void> = Symbol('mfmClickEv')
@@ -24,16 +32,6 @@ export type MfmRenderOptions = {
   emojiStyle: 'native' | 'twemoji'
   /** Twemoji の SVG を置いている場所（末尾の / はなし） */
   twemojiBase: string
-}
-
-/** Twemoji の SVG の既定の置き場所。Misskey と同じ @discordapp/twemoji の版を、jsDelivr から読む */
-export const DEFAULT_TWEMOJI_BASE = 'https://cdn.jsdelivr.net/npm/@discordapp/twemoji@16.0.1/dist/svg'
-
-/** 絵文字から Twemoji の SVG のファイル名を作る（Misskey の char2twemojiFilePath と同じ規則） */
-export function twemojiFileName(char: string): string {
-  let codes = Array.from(char, (x) => x.codePointAt(0)?.toString(16) ?? '')
-  if (!codes.includes('200d')) codes = codes.filter((x) => x !== 'fe0f')
-  return codes.filter((x) => x.length > 0).join('-')
 }
 
 const defaultRenderOptions: MfmRenderOptions = {
