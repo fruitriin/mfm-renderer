@@ -144,6 +144,8 @@ export function Note({ text }: { text: string }) {
 ```
 
 - Vue 版の `.use()` のようなグローバル登録はしない。使う場所で import する
+- `mfm-renderer/react` は ES Modules だけで配布する（`require` では読み込めない）。UMD 版もない
+- サーバー側で描画（SSR）しても使える。ただし `$[unixtime]` の表示は描画した時点の時計とロケールで決まるので、サーバーとブラウザで食い違うことがある。ハイドレーションの不一致の警告は出さない
 - props は Vue 版の `MfmRenderer` と同じ（`plain`・`nowrap`・`rootScale`・`nyaize`・`author`・`advancedMfm`・`animatedMfm`・`emojiStyle`・`twemojiBase`）。Vue 版の `@click-ev` は `onClickEv` になる
 - `domain` と `emojis` は props で渡す。Vue 版の `provide('domain')`・`provide('emojis')` に当たる
 - たくさんの投稿で同じものを使うときは、`MfmProvider` で外側から一度だけ渡せる。`MfmRenderer` の props で渡したものが優先される
