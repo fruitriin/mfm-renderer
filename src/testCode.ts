@@ -142,6 +142,6 @@ $[rainbow $[fg.color=f0f 色付き文字]]`
   },
   {
     title: 'スパークル',
-    body: `$[sparkle 🍮]`
+    body: `$[sparkle 🍮] $[sparkle.speed=3s 🍮] $[sparkle.speed=0.5s,delay=1s 🍮]`
   }
 ])

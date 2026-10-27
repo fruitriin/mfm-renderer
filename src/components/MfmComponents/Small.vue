@@ -10,5 +10,7 @@ defineProps<{
   children?: any
   token?: any
   style?: CSSProperties
+  // 受け取らないと要素の className に入り、class="small" が消える
+  className?: string
 }>()
 </script>

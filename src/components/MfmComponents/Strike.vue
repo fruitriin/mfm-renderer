@@ -6,5 +6,7 @@
 defineProps<{
   token?: any
   children?: any
+  // 受け取らないと要素の className に入り、class="strike" が消える
+  className?: string
 }>()
 </script>
