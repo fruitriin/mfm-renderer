@@ -60,13 +60,20 @@ watch(
 </script>
 
 <style>
+/* Misskey 2024.10 以降のテーマ変数（--MI_THEME-*）を使い、なければ以前の名前を使う */
 .mention {
   background: rgba(93, 176, 218, 0.1);
 
   display: inline-block;
   padding: 4px 8px 4px 4px;
   border-radius: 999px;
-  color: var(--mention);
+  color: var(--MI_THEME-mention, var(--mention));
+}
+/* 相対色に対応したブラウザでは、背景もテーマのメンション色に合わせる */
+@supports (color: color(from red srgb r g b / 0.1)) {
+  .mention {
+    background: color(from var(--MI_THEME-mention, var(--mention, rgb(93, 176, 218))) srgb r g b / 0.1);
+  }
 }
 .avatar {
   width: 1.5em;

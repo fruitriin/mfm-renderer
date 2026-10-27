@@ -38,6 +38,7 @@ createApp(App).use(Mfm).mount('#app')
 - `$[clickable.ev=名前 ...]` が押されると、`clickEv` イベントで `名前` を渡す
 - メンションのアバターとカスタム絵文字は、`provide('domain', 'misskey.io')` と `provide('emojis', { 名前: { url } })` で渡す（ref や computed でもよい）。`domain` がないときは、アバターを取りに行かない
 - コードブロックのハイライトには `shiki` を使う。読み込めない環境（UMD を script タグで使う場合など）では、ハイライトせずに表示する
+- 色は Misskey のテーマと同じ CSS 変数（`--MI_THEME-fg`・`--MI_THEME-accent`・`--MI_THEME-divider`・`--MI_THEME-mention`・`--MI_THEME-hashtag`）を使う。なければ 2024.10 より前の名前（`--fg` など）を使う
 
 ## 進み具合
 

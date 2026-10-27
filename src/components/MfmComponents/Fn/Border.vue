@@ -29,7 +29,7 @@ const borderStyle = computed<CSSProperties>(() => {
   const noclip = 'noclip' in args
 
   return {
-    border: color ? `${width}px ${style} #${color}` : `${width}px ${style} var(--accent)`,
+    border: color ? `${width}px ${style} #${color}` : `${width}px ${style} var(--MI_THEME-accent, var(--accent))`,
     borderRadius: `${radius}px`,
     ...(!noclip && { overflow: 'clip' })
   }

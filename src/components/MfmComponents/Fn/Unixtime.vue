@@ -53,7 +53,7 @@ const relativeTime = computed(() => {
 .unixtime {
   display: inline-block;
   font-size: 90%;
-  border: solid 1px var(--MI_THEME-divider, rgba(128, 128, 128, 0.3));
+  border: solid 1px var(--MI_THEME-divider, var(--divider, rgba(128, 128, 128, 0.3)));
   border-radius: 999px;
   padding: 4px 10px 4px 6px;
 }
