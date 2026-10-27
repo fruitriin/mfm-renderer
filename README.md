@@ -10,7 +10,7 @@ npm から入れるか、GitHub のタグを指定して入れる。GitHub か�
 
 ```
 npm install mfm-renderer
-npm install github:fruitriin/mfm-renderer#v0.2.0
+npm install github:fruitriin/mfm-renderer#v0.2.1
 ```
 
 main.js (main.ts) 的なところで createApp() しているところに .use(Mfm) を足す
