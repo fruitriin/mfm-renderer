@@ -74,6 +74,8 @@ exports[`関数（$[...]）ごとの出力 > rotate 1`] = `"<span class="Fn rota
 
 exports[`関数（$[...]）ごとの出力 > ruby 1`] = `"<ruby class="Fn ruby">漢字<rt>かんじ</rt></ruby><span class="text"> </span><ruby class="Fn ruby"><b class="bold"><span class="text">太字</span></b><rt>ふとじ</rt></ruby>"`;
 
+exports[`関数（$[...]）ごとの出力 > ruby（最後がテキストでない） 1`] = `"<ruby class="Fn ruby"><span class="text">漢字 </span><rt></rt></ruby>"`;
+
 exports[`関数（$[...]）ごとの出力 > ruby（本文がテキストでない） 1`] = `"<ruby class="Fn ruby"><b class="bold"><span class="text">太字</span></b><rt>ふとじ</rt></ruby>"`;
 
 exports[`関数（$[...]）ごとの出力 > scale 1`] = `"<span class="Fn scale" style="display: inline-block; transform: scale(2, 3);"><span class="text">拡大</span></span><span class="text"> </span><span class="Fn scale" style="display: inline-block; transform: scale(5, 1);"><span class="text">上限は 5</span></span>"`;

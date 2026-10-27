@@ -60,5 +60,7 @@ export const fnFixtures: Fixture[] = [
   { name: 'x2 の入れ子', text: '$[x2 $[x2 $[x2 3 重]]]' },
   { name: 'transform の入れ子', text: '$[rotate.deg=45 $[flip 回して反転]]' },
   { name: '子が複数ある関数', text: '$[spin 回る **太字** と :emoji: と @alice]' },
-  { name: 'ruby（本文がテキストでない）', text: '$[ruby **太字** ふとじ]' }
+  { name: 'ruby（本文がテキストでない）', text: '$[ruby **太字** ふとじ]' },
+  // Misskey と同じく、最後がテキストでなければルビは空になる
+  { name: 'ruby（最後がテキストでない）', text: '$[ruby 漢字 **かんじ**]' }
 ]

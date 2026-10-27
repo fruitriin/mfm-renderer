@@ -55,12 +55,14 @@ describe('MfmRenderer の props', () => {
     expect(render({ text: 'a', nowrap: true }).find('.mfm-nowrap').exists()).toBe(true)
   })
 
-  it('advancedMfm が false のときは x2 で大きくせず、position は $[position ...] のまま表示する', () => {
+  it('advancedMfm が false のときは x2・scale で大きくせず、position は $[position ...] のまま表示する', () => {
     const on = render({ text: '$[x2 大]' })
     const off = render({ text: '$[x2 大]', advancedMfm: false })
     expect(on.find('.mfm-x2').exists()).toBe(true)
     expect(off.find('.mfm-x2').exists()).toBe(false)
     expect(render({ text: '$[position.x=1 移動]', advancedMfm: false }).text()).toBe('$[position 移動]')
+    expect(render({ text: '$[scale.x=2 拡大]' }).html()).toContain('scale(2, 1)')
+    expect(render({ text: '$[scale.x=2 拡大]', advancedMfm: false }).html()).not.toContain('scale(')
   })
 
   it('animatedMfm が false のときはアニメーションを付けない', () => {
@@ -68,6 +70,10 @@ describe('MfmRenderer の props', () => {
     const off = render({ text: '$[spin 🍮]', animatedMfm: false })
     expect(on.html()).toContain('animation')
     expect(off.html()).not.toContain('animation')
+    // rainbow は Misskey と同じく、動かない虹色の class にする
+    const rainbow = render({ text: '$[rainbow 虹]', animatedMfm: false })
+    expect(rainbow.find('.mfm-rainbow-fallback').exists()).toBe(true)
+    expect(rainbow.html()).not.toContain('animation')
   })
 
   it('rootScale と x2〜x4 を掛けて 2.5 以上になった絵文字に original-size を付ける', () => {
