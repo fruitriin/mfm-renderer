@@ -4,6 +4,15 @@
 
 ## [Unreleased]
 
+### 追加（React 版）
+
+- React 版を追加した。`mfm-renderer/react` から読み込む（#73）
+  - `MfmRenderer`・`MfmProvider`・`MfmComponent` と、構文ごとのコンポーネント（`MfmBold`・`MfmX2` など）を使える
+  - CSS は `mfm-renderer/react/style.css` を読み込む
+  - Vue 版と同じ入力で同じ HTML を出力する。テストで Vue 版の出力と突き合わせている
+- `react`（18・19）を任意の peerDependencies に加えた。`vue` も任意にしたので、Vue 版だけ・React 版だけのどちらでも、使わないほうは入らない
+- プレビューに React 版のページと、Vue 版と React 版を並べて比べるページを足した
+
 ### 変更
 
 - 開発用のツールを新しくした。Vite 5 → 8、vue-tsc 1 → 3、TypeScript 5.3 → 6.0、ESLint 8 → 10（flat config の `eslint.config.js` に移した）、Vitest 1 → 5
@@ -15,6 +24,7 @@
 
 - テストを追加した（`npm test`）。検証関数（`validTime` など）の単体テスト、構文と関数ごとの出力のスナップショット、`MfmRenderer` の props・イベントのテストを含む
 - 型チェックだけを行う `npm run typecheck` を追加した。CI でもテストと型チェックを実行する
+- 検証関数（`validTime` など）とにゃー化の判定を、Vue と React で共有するため `src/core/` に移した。`src/utils/mfmUtil.ts` からも今までどおり使える
 - `\(x^2\)`・`\[x^2\]`（数式）を、Misskey と同じく `<code>` でそのまま表示するようにした（`MfmMathInline`・`MfmMathBlock`）。これまでは未知の要素になっていた
 - `MfmRenderer` に `emojiStyle` と `twemojiBase` を追加した。`emojiStyle: 'twemoji'` にすると、Unicode の絵文字を Twemoji の画像（高さ 1.25em）で描き、Misskey の既定の見た目になる。既定は今までどおり `'native'`（OS の絵文字）。画像を読めなかったときは OS の絵文字で表示する
 

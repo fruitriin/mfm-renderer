@@ -8,7 +8,7 @@
 
 ## プロジェクト概要
 
-**Meintenable MFM Renderer Component** は、MFM (Misskey Flavored Markdown) をレンダリングする Vue 3 コンポーネントライブラリです。
+**Meintenable MFM Renderer Component** は、MFM (Misskey Flavored Markdown) をレンダリングする Vue 3 コンポーネントライブラリです。同じパッケージに React 版（`mfm-renderer/react`、`src/react/`）も含みます。
 
 ### コードの起源と設計思想
 
@@ -24,7 +24,7 @@
 
 ## 技術スタック
 
-- **フレームワーク**: Vue 3 (Composition API)
+- **フレームワーク**: Vue 3 (Composition API)、React 18・19（React 版）
 - **言語**: TypeScript
 - **ビルドツール**: Vite 8。ビルドだけなら Node.js 20.19 以降で動く（GitHub から入れた利用側の `prepare` もこの条件）。テスト（Vitest 5・jsdom 30）には Node.js 22 以降が要る
 - **パーサー**: mfm-js (v0.28.0)
@@ -80,8 +80,17 @@ mfm-renderer/
 │   │   ├── Mfm.vue               # メインコンポーネント
 │   │   ├── MfmAst.vue            # AST レンダラー
 │   │   └── MfmRenderer.vue       # レンダラーコンポーネント
+│   ├── core/
+│   │   └── index.ts              # Vue と React で共有する、フレームワークに依存しない処理（検証関数・解析・にゃー化の判定）
+│   ├── react/                    # React 版（mfm-renderer/react）
+│   │   ├── index.ts              # React 版のエントリーポイント
+│   │   ├── MfmRenderer.tsx, MfmProvider.tsx, Mfm.tsx
+│   │   ├── context.ts            # Vue 版の provide/inject に当たる Context
+│   │   ├── style.css             # Vue 版の各コンポーネントの <style> と同じ内容
+│   │   └── components/           # 構文ごとのコンポーネント（Vue 版と同じ構成。Fn/ も同じ）
+│   ├── demo/                     # プレビュー（index.html・react.html・compare.html）の部品
 │   ├── utils/
-│   │   └── mfmUtil.ts            # ユーティリティ関数
+│   │   └── mfmUtil.ts            # Vue 版のユーティリティ関数
 │   ├── mfm.css                   # アニメーションの keyframes など（Misskey の見た目に合わせて書き起こした。ライブラリの style.css に含める）
 │   ├── library.ts                # ライブラリエントリーポイント
 │   └── main.ts                   # 開発用エントリーポイント
@@ -179,6 +188,15 @@ npm run format       # Prettier で整形
 - 各関数 (`fg`, `bg`, `spin` など) は `Fn/` ディレクトリ内に独立したコンポーネントとして実装
 - 各関数は Misskey と同じく、自分の span で中身（`<MfmComponent :tokens="children" />`）を包み、その span にスタイルを付ける。`className`（`Fn 関数名`）と `style` もその span に付ける
 - 新しい関数を追加する場合は、`Fn/` に関数名のファイル（`$[foo ...]` なら `Foo.vue`）を作り、`library.ts` に登録する。登録されていない関数は、Misskey と同じく `$[foo ...]` のまま表示される
+
+## React 版
+
+- `src/react/components/` に、Vue 版と同じ名前で構文ごとのコンポーネントを置く（`Bold.vue` に対して `Bold.tsx`）
+- Vue 版と同じ入力で同じ HTML を出力する。`tests/react.test.tsx` で、`tests/fixtures.ts` の入力を両方で描画して比べている。どちらかの出力を変えたら、もう片方も同じように変える
+- 構文の追加・修正は、Vue 版と React 版の両方に入れる。`src/react/components/index.ts` の一覧にも足す
+- スタイルは `src/react/style.css` に置く。Vue 版のコンポーネントの `<style>` を変えたら、こちらも合わせる
+- 検証関数などのフレームワークに依存しない処理は `src/core/` に置き、両方から使う
+- プレビューは `npm run dev` で `/`（Vue 版）・`/react.html`（React 版）・`/compare.html`（並べて比べる）を開ける
 
 ## 未実装機能と改善が必要な箇所
 

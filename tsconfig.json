@@ -15,6 +15,8 @@
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
+    // React 版（src/react/）の .tsx に使う
+    "jsx": "react-jsx",
 
     /* Path aliases */
     "paths": {
@@ -27,5 +29,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "vite.config.ts", "vite.config.docs.ts", "vitest.config.ts"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx", "vite.config.ts", "vite.config.docs.ts", "vitest.config.ts"]
 }
