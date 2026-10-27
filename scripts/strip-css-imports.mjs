@@ -10,6 +10,11 @@ for (const entry of readdirSync(dir, { recursive: true })) {
   const file = path.join(dir, entry.toString())
   if (!file.endsWith('.d.ts')) continue
   const source = readFileSync(file, 'utf8')
-  const stripped = source.replace(/^import '[^']+\.css';\n/gm, '')
+  const stripped = source.replace(/^import\s+['"][^'"]+\.css['"];?\r?\n/gm, '')
+  // tsc の出力の形が変わって取り除けなかったときは、気づけるようビルドを失敗させる
+  if (/^\s*import\s+['"][^'"]+\.css['"]/m.test(stripped)) {
+    console.error(`${file} に CSS の import が残っています`)
+    process.exit(1)
+  }
   if (stripped !== source) writeFileSync(file, stripped)
 }

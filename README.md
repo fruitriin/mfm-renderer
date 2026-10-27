@@ -171,6 +171,8 @@ function MyLink({ token }: MfmSyntaxProps<MfmLink['props']>) {
 <MfmRenderer text={text} components={{ Link: MyLink }} />
 ```
 
+- `components`・`emojis` をインラインのオブジェクトで書くと、描画のたびに作り直され、中身がすべて描画し直される。たくさんの投稿に使うときは、モジュールに置くか `useMemo` で作って渡す
+
 - 差し替えるコンポーネントには、位置（何番目のノードか）を key にして描画する。state を持つコンポーネントは、`text` が変わると前の入力の state が残ることがあるので、`token` の値から作った key で state を作り直す
 - `MfmSyntaxProps` の `token` の型は、指定しないと `any` になる。構文ごとに型が違うためである。上の例のように mfm-js の型（`MfmLink['props']` など）を指定すると型が付く
 

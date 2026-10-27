@@ -213,6 +213,23 @@ describe('React 版だけの使い方', () => {
     expect(normalizeHtml(container.innerHTML)).toBe(await renderVue({ text }))
   })
 
+  it('入れ子の MfmProvider の components は、外側の差し替えに内側の差し替えを重ねる', async () => {
+    const OuterLink = () => <span className="outer-link" />
+    const InnerLink = () => <span className="inner-link" />
+    const Shout = () => <span className="shout" />
+    const container = await renderReact(
+      <MfmProvider components={{ Link: OuterLink, Shout }}>
+        <MfmRenderer text="[a](https://example.com) $[shout x]" />
+        <MfmProvider components={{ Link: InnerLink }}>
+          <MfmRenderer text="[a](https://example.com) $[shout x]" />
+        </MfmProvider>
+      </MfmProvider>
+    )
+    expect(container.querySelectorAll('.outer-link')).toHaveLength(1)
+    expect(container.querySelectorAll('.inner-link')).toHaveLength(1)
+    expect(container.querySelectorAll('.shout')).toHaveLength(2)
+  })
+
   it('components で構文ごとのコンポーネントを差し替えられる', async () => {
     const MyLink = ({ token }: { token?: { url: string } }) => <span className="my-link">{token?.url}</span>
     const container = await renderReact(<MfmRenderer text="[リンク](https://example.com) $[x2 大]" components={{ Link: MyLink }} />)
