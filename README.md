@@ -14,7 +14,7 @@ npm から入れるか、GitHub のタグを指定して入れる。GitHub か�
 
 ```
 npm install mfm-renderer
-npm install github:fruitriin/mfm-renderer#v0.3.0
+npm install github:fruitriin/mfm-renderer#v0.4.0
 ```
 
 main.js (main.ts) 的なところで createApp() しているところに .use(Mfm) を足す
@@ -44,7 +44,7 @@ createApp(App).use(Mfm).mount('#app')
 ### v0.3.0 以降
 
 ```
-npm install github:fruitriin/mfm-renderer#v0.3.0
+npm install github:fruitriin/mfm-renderer#v0.4.0
 ```
 
 ```vue

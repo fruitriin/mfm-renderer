@@ -1,6 +1,6 @@
 {
   "name": "mfm-renderer",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "MFM (Misskey Flavored Markdown) を描画する Vue 3・React のコンポーネント。文法ごとにコンポーネントを分けている",
   "keywords": [
     "misskey",
