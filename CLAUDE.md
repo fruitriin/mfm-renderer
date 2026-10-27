@@ -26,7 +26,7 @@
 
 - **フレームワーク**: Vue 3 (Composition API)
 - **言語**: TypeScript
-- **ビルドツール**: Vite 8（Node.js 20.19 以降が必要）
+- **ビルドツール**: Vite 8。ビルドだけなら Node.js 20.19 以降で動く（GitHub から入れた利用側の `prepare` もこの条件）。テスト（Vitest 5・jsdom 30）には Node.js 22 以降が要る
 - **パーサー**: mfm-js (v0.28.0)
 - **スタイリング**: CSS (scoped styles in Vue components)
 - **コード品質**: ESLint（flat config の `eslint.config.js`）, Prettier

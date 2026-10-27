@@ -38,6 +38,9 @@
   "sideEffects": [
     "*.css"
   ],
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build && vite build --mode umd && vue-tsc -p tsconfig.build.json",
