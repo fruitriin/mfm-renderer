@@ -159,14 +159,17 @@ import { MfmProvider, MfmRenderer } from 'mfm-renderer/react'
 - 構文ごとのコンポーネントは `components` で差し替えられる。キーは接頭辞なしの名前（`Link`・`Mention`・`X2` など）である。`$[foo ...]` のように、新しい関数を足すこともできる
 
 ```tsx
+import type { MfmLink } from 'mfm-js'
 import type { MfmSyntaxProps } from 'mfm-renderer/react'
 
-function MyLink({ token }: MfmSyntaxProps<{ url: string }>) {
+function MyLink({ token }: MfmSyntaxProps<MfmLink['props']>) {
   return <a href={token?.url} target="_blank">{token?.url}</a>
 }
 
 <MfmRenderer text={text} components={{ Link: MyLink }} />
 ```
+
+- `MfmSyntaxProps` の `token` の型は、指定しないと `any` になる。構文ごとに型が違うためである。上の例のように mfm-js の型（`MfmLink['props']` など）を指定すると型が付く
 
 - 構文ごとのコンポーネントや、解析済みの AST を描画する `MfmComponent` も import できる（`MfmBold`・`MfmX2` など、Vue 版の登録名と同じ）
 

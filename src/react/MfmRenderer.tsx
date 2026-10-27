@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { DEFAULT_TWEMOJI_BASE, loadNyaize, mfm, shouldNyaize as decideNyaize } from '../core/index.ts'
 import { MfmRenderContext } from './context.ts'
 import type { MfmRenderState } from './context.ts'
@@ -64,6 +64,13 @@ export function MfmRenderer({
     }
   }, [shouldNyaize, nyaizeFn])
 
+  // onClickEv はインラインの関数で渡されても描画し直さないよう、最新のものを ref から呼ぶ
+  const onClickEvRef = useRef(onClickEv)
+  useEffect(() => {
+    onClickEvRef.current = onClickEv
+  }, [onClickEv])
+  const handleClickEv = useCallback((ev: string) => onClickEvRef.current(ev), [])
+
   const state = useMemo<MfmRenderState>(
     () => ({
       options: {
@@ -77,9 +84,9 @@ export function MfmRenderer({
       },
       scale: rootScale,
       disableNyaize: false,
-      onClickEv
+      onClickEv: handleClickEv
     }),
-    [plain, nowrap, advancedMfm, animatedMfm, shouldNyaize, nyaizeFn, emojiStyle, twemojiBase, rootScale, onClickEv]
+    [plain, nowrap, advancedMfm, animatedMfm, shouldNyaize, nyaizeFn, emojiStyle, twemojiBase, rootScale, handleClickEv]
   )
 
   const tokens = useMemo(() => mfm(text, plain), [text, plain])

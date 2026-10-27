@@ -7,6 +7,8 @@ import { flushPromises, mount } from '@vue/test-utils'
 import MfmPlugin from '../src/library.ts'
 import VueMfmRenderer from '../src/components/MfmRenderer.vue'
 import { MfmProvider, MfmRenderer } from '../src/react/index.ts'
+import { useMfmRender } from '../src/react/context.ts'
+import type { MfmRenderState } from '../src/react/context.ts'
 import type { MfmRendererProps } from '../src/react/index.ts'
 import { fnFixtures, syntaxFixtures } from './fixtures.ts'
 import { normalizeHtml } from './normalizeHtml.ts'
@@ -100,6 +102,31 @@ describe('React 版だけの使い方', () => {
     expect(onClickEv).toHaveBeenCalledWith('hello')
   })
 
+  it('onClickEv をインラインの関数で渡し直しても描画の状態を作り直さず、新しい関数を呼ぶ', async () => {
+    const states: MfmRenderState[] = []
+    const Bold = () => {
+      states.push(useMfmRender())
+      return null
+    }
+    const first = vi.fn()
+    const second = vi.fn()
+    const container = await renderReact(
+      <MfmRenderer text="**太字** $[clickable.ev=hello 押す]" components={{ Bold }} onClickEv={(ev) => first(ev)} />
+    )
+    await act(async () => {
+      roots[roots.length - 1].render(
+        <MfmRenderer text="**太字** $[clickable.ev=hello 押す]" components={{ Bold }} onClickEv={(ev) => second(ev)} />
+      )
+    })
+    expect(states.length).toBeGreaterThan(1)
+    expect(new Set(states).size).toBe(1)
+    await act(async () => {
+      container.querySelector<HTMLElement>('.clickable')?.click()
+    })
+    expect(first).not.toHaveBeenCalled()
+    expect(second).toHaveBeenCalledWith('hello')
+  })
+
   it('MfmProvider で渡した emojis と domain を使い、MfmRenderer の props で上書きできる', async () => {
     const fetchMock = vi.fn(async () => ({ ok: true, json: async () => ({ avatarUrl: 'https://a.example/avatar.png' }) }))
     vi.stubGlobal('fetch', fetchMock)
@@ -115,6 +142,68 @@ describe('React 版だけの使い方', () => {
     expect(fetchMock).toHaveBeenCalledWith('https://a.example/api/users/show', expect.anything())
     expect(container.querySelector('a.mention')?.getAttribute('href')).toBe('https://a.example/@alice@remote.example')
     expect(container.querySelector('img.avatar')?.getAttribute('src')).toBe('https://a.example/avatar.png')
+  })
+
+  it('domain がないときはアバターを問い合わせず、メンション先のサーバーへリンクする', async () => {
+    const fetchMock = vi.fn()
+    vi.stubGlobal('fetch', fetchMock)
+    const container = await renderReact(<MfmRenderer text="@alice@remote.example" />)
+    expect(fetchMock).not.toHaveBeenCalled()
+    expect(container.querySelector('a.mention')?.getAttribute('href')).toBe('https://remote.example/@alice')
+    expect(container.querySelector('img.avatar')).toBeNull()
+  })
+
+  it('アバターの問い合わせに失敗したときや、応答の形が違うときはアバターなしで表示する', async () => {
+    for (const fetchMock of [
+      vi.fn(async () => {
+        throw new Error('network')
+      }),
+      vi.fn(async () => ({ ok: false, json: async () => ({}) })),
+      vi.fn(async () => ({ ok: true, json: async () => ({ avatarUrl: 123 }) }))
+    ]) {
+      vi.stubGlobal('fetch', fetchMock)
+      const container = await renderReact(<MfmRenderer text="@alice" domain="a.example" />)
+      expect(fetchMock).toHaveBeenCalledTimes(1)
+      expect(container.querySelector('a.mention')?.textContent).toBe('@alice')
+      expect(container.querySelector('img.avatar')).toBeNull()
+    }
+  })
+
+  it('アバターの応答が届く前に外しても、エラーを出さない', async () => {
+    let respond: (value: unknown) => void = () => {}
+    vi.stubGlobal('fetch', vi.fn(() => new Promise((resolve) => (respond = resolve))))
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {})
+    await renderReact(<MfmRenderer text="@alice" domain="a.example" />)
+    act(() => roots.splice(0).forEach((root) => root.unmount()))
+    await act(async () => {
+      respond({ ok: true, json: async () => ({ avatarUrl: 'https://a.example/avatar.png' }) })
+      await flushPromises()
+    })
+    expect(consoleError).not.toHaveBeenCalled()
+    consoleError.mockRestore()
+  })
+
+  it('メンション先が変わったら、前のユーザーのアバターを出さない', async () => {
+    let respond: (value: unknown) => void = () => {}
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (_url: string, init: { body: string }) =>
+        JSON.parse(init.body).username === 'alice'
+          ? { ok: true, json: async () => ({ avatarUrl: 'https://a.example/alice.png' }) }
+          : new Promise((resolve) => (respond = resolve))
+      )
+    )
+    const container = await renderReact(<MfmRenderer text="@alice" domain="a.example" />)
+    expect(container.querySelector('img.avatar')?.getAttribute('src')).toBe('https://a.example/alice.png')
+    await act(async () => {
+      roots[roots.length - 1].render(<MfmRenderer text="@bob" domain="a.example" />)
+    })
+    expect(container.querySelector('img.avatar')).toBeNull()
+    await act(async () => {
+      respond({ ok: true, json: async () => ({ avatarUrl: 'https://a.example/bob.png' }) })
+      await flushPromises()
+    })
+    expect(container.querySelector('img.avatar')?.getAttribute('src')).toBe('https://a.example/bob.png')
   })
 
   it('components で構文ごとのコンポーネントを差し替えられる', async () => {
