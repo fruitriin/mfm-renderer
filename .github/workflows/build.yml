@@ -15,6 +15,12 @@ jobs:
           node-version: '24.x'
       - run: npm ci
       - run: npm run build
+      # アニメーションの keyframes がライブラリの style.css に入っていることを確かめる
+      - name: Check keyframes in dist/style.css
+        run: |
+          for name in mfm-spin mfm-spinX mfm-spinY mfm-jump mfm-bounce mfm-twitch mfm-shake mfm-rubberBand mfm-tada mfm-rainbow mfm-sparkle; do
+            grep -q "@keyframes $name" dist/style.css || { echo "@keyframes $name が dist/style.css にない"; exit 1; }
+          done
       - run: npm run typecheck
       - run: npm test
 

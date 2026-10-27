@@ -12,17 +12,19 @@ exports[`構文ごとの出力 > hashtag 1`] = `"<a class="hashtag" href="/tags/
 
 exports[`構文ごとの出力 > inlineCode 1`] = `"<code class="inline-code">const a = 1</code>"`;
 
-exports[`構文ごとの出力 > italic 1`] = `"<i class="italic"><span class="text">斜体</span></i><span class="text"> と *アスタリスク*</span>"`;
+exports[`構文ごとの出力 > italic 1`] = `"<i class="italic" style="font-style: oblique;"><span class="text">斜体</span></i><span class="text"> と *アスタリスク*</span>"`;
 
 exports[`構文ごとの出力 > link 1`] = `"<a class="link" href="https://example.com"><span class="text">リンク </span><b class="bold"><span class="text">太字</span></b></a>"`;
 
 exports[`構文ごとの出力 > link（silent） 1`] = `"<a class="link" href="https://example.com"><span class="text">プレビューなし</span></a>"`;
 
-exports[`構文ごとの出力 > mathInline 1`] = `"<mfmmathinline class="" token="[object Object]"></mfmmathinline>"`;
+exports[`構文ごとの出力 > mathBlock 1`] = `"<code class="math-block">x^2</code>"`;
+
+exports[`構文ごとの出力 > mathInline 1`] = `"<code class="math-inline">x^2</code>"`;
 
 exports[`構文ごとの出力 > mention 1`] = `"<a class="mention">@alice</a><span class="text"> と </span><a class="mention" href="https://example.com/@bob">@bob@example.com</a>"`;
 
-exports[`構文ごとの出力 > plain 1`] = `"<span class="text">**太字にしない** @mention #tag</span>"`;
+exports[`構文ごとの出力 > plain 1`] = `"<span class="plain"><span class="text">**太字にしない** @mention #tag</span></span>"`;
 
 exports[`構文ごとの出力 > quote 1`] = `"<div class="quote" style="display: block; margin: 8px; padding: 6px 0px 6px 12px; color: var(--MI_THEME-fg, var(--fg)); border-left: solid 3px var(--MI_THEME-fg, var(--fg)); opacity: 0.7;"><span class="text">引用</span><div class="quote" style="display: block; margin: 8px; padding: 6px 0px 6px 12px; color: var(--MI_THEME-fg, var(--fg)); border-left: solid 3px var(--MI_THEME-fg, var(--fg)); opacity: 0.7;"><span class="text">引用の引用</span></div></div>"`;
 
@@ -42,48 +44,60 @@ exports[`構文ごとの出力 > url 1`] = `"<a class="url" href="https://exampl
 
 exports[`構文ごとの出力 > url（山括弧） 1`] = `"<a class="url" href="https://example.com/日本語">https://example.com/日本語</a>"`;
 
-exports[`関数（$[...]）ごとの出力 > bg 1`] = `"<span class="text bg Fn bg" style="background-color: rgb(255, 255, 0); overflow-wrap: anywhere;">黄</span><span class="text"> </span><span class="text bg Fn bg" style="background-color: rgb(255, 0, 0); overflow-wrap: anywhere;">既定の赤</span>"`;
+exports[`関数（$[...]）ごとの出力 > bg 1`] = `"<span class="Fn bg" style="display: inline-block; background-color: rgb(255, 255, 0); overflow-wrap: anywhere;"><span class="text">黄</span></span><span class="text"> </span><span class="Fn bg" style="display: inline-block; background-color: rgb(255, 0, 0); overflow-wrap: anywhere;"><span class="text">既定の赤</span></span>"`;
 
-exports[`関数（$[...]）ごとの出力 > blur 1`] = `"<span class="text blur Fn blur">ぼかし</span>"`;
+exports[`関数（$[...]）ごとの出力 > blur 1`] = `"<span class="mfm-blur Fn blur"><span class="text">ぼかし</span></span>"`;
 
-exports[`関数（$[...]）ごとの出力 > border 1`] = `"<span class="text border Fn border" style="border: 1px solid var(--MI_THEME-accent, var(--accent)); border-radius: 0px; overflow: clip;">既定</span><span class="text"> </span><span class="text border Fn border" style="border: 2px dashed rgb(255, 0, 0); border-radius: 4px; overflow: clip;">指定</span><span class="text"> </span><span class="text border Fn border" style="border: 1px solid var(--MI_THEME-accent, var(--accent)); border-radius: 0px;">無効なスタイル</span>"`;
+exports[`関数（$[...]）ごとの出力 > border 1`] = `"<span class="Fn border" style="display: inline-block; border: 1px solid var(--MI_THEME-accent, var(--accent)); border-radius: 0px; overflow: clip;"><span class="text">既定</span></span><span class="text"> </span><span class="Fn border" style="display: inline-block; border: 2px dashed rgb(255, 0, 0); border-radius: 4px; overflow: clip;"><span class="text">指定</span></span><span class="text"> </span><span class="Fn border" style="display: inline-block; border: 1px solid var(--MI_THEME-accent, var(--accent)); border-radius: 0px;"><span class="text">無効なスタイル</span></span>"`;
 
-exports[`関数（$[...]）ごとの出力 > bounce 1`] = `"<span style="animation: 0.75s linear 0s infinite normal none running mfm-bounce; transform-origin: center bottom;">🍮</span><span class="text"> </span><span style="animation: 2s linear 0s infinite normal none running mfm-bounce; transform-origin: center bottom;">🍮</span>"`;
+exports[`関数（$[...]）ごとの出力 > bounce 1`] = `"<span class="Fn bounce" style="display: inline-block; animation: mfm-bounce 0.75s linear infinite; animation-delay: 0s; transform-origin: center bottom;"><span>🍮</span></span><span class="text"> </span><span class="Fn bounce" style="display: inline-block; animation: mfm-bounce 2s linear infinite; animation-delay: 0s; transform-origin: center bottom;"><span>🍮</span></span>"`;
 
 exports[`関数（$[...]）ごとの出力 > clickable 1`] = `"<span class="clickable Fn clickable"><span class="text">押す</span></span>"`;
 
-exports[`関数（$[...]）ごとの出力 > fg 1`] = `"<span class="text fg Fn fg" style="color: rgb(0, 0, 255); overflow-wrap: anywhere;">青</span><span class="text"> </span><span class="text fg Fn fg" style="color: rgb(255, 0, 0); overflow-wrap: anywhere;">既定の赤</span><span class="text"> </span><span class="text fg Fn fg" style="color: rgb(255, 0, 0); overflow-wrap: anywhere;">無効な色</span>"`;
+exports[`関数（$[...]）ごとの出力 > fg 1`] = `"<span class="Fn fg" style="display: inline-block; color: rgb(0, 0, 255); overflow-wrap: anywhere;"><span class="text">青</span></span><span class="text"> </span><span class="Fn fg" style="display: inline-block; color: rgb(255, 0, 0); overflow-wrap: anywhere;"><span class="text">既定の赤</span></span><span class="text"> </span><span class="Fn fg" style="display: inline-block; color: rgb(255, 0, 0); overflow-wrap: anywhere;"><span class="text">無効な色</span></span>"`;
 
-exports[`関数（$[...]）ごとの出力 > flip 1`] = `"<span class="text flip Fn flip" style="transform: scale(-1, 1);">左右</span><span class="text"> </span><span class="text flip Fn flip" style="transform: scale(1, -1);">上下</span><span class="text"> </span><span class="text flip Fn flip" style="transform: scale(-1, -1);">両方</span>"`;
+exports[`関数（$[...]）ごとの出力 > flip 1`] = `"<span class="Fn flip" style="display: inline-block; transform: scaleX(-1);"><span class="text">左右</span></span><span class="text"> </span><span class="Fn flip" style="display: inline-block; transform: scaleY(-1);"><span class="text">上下</span></span><span class="text"> </span><span class="Fn flip" style="display: inline-block; transform: scale(-1, -1);"><span class="text">両方</span></span>"`;
 
-exports[`関数（$[...]）ごとの出力 > font 1`] = `"<span class="text fg Fn font" style="font-family: serif;">明朝</span><span class="text"> </span><span class="text fg Fn font" style="font-family: monospace;">等幅</span><span class="text"> </span><span class="text fg Fn font" style="font-family: cursive;">筆記</span><span class="text"> </span><span class="text fg Fn font" style="font-family: fantasy;">装飾</span><span class="text"> </span><span class="text fg Fn font" style="font-family: emoji;">絵文字</span><span class="text"> </span><span class="text fg Fn font" style="font-family: math;">数式</span>"`;
+exports[`関数（$[...]）ごとの出力 > font 1`] = `"<span class="Fn font" style="display: inline-block; font-family: serif;"><span class="text">明朝</span></span><span class="text"> </span><span class="Fn font" style="display: inline-block; font-family: monospace;"><span class="text">等幅</span></span><span class="text"> </span><span class="Fn font" style="display: inline-block; font-family: cursive;"><span class="text">筆記</span></span><span class="text"> </span><span class="Fn font" style="display: inline-block; font-family: fantasy;"><span class="text">装飾</span></span><span class="text"> </span><span class="Fn font" style="display: inline-block; font-family: emoji;"><span class="text">絵文字</span></span><span class="text"> </span><span class="Fn font" style="display: inline-block; font-family: math;"><span class="text">数式</span></span>"`;
 
-exports[`関数（$[...]）ごとの出力 > jelly 1`] = `"<span style="animation: 1s linear 0s infinite normal both running mfm-rubberBand;">🍮</span><span class="text"> </span><span style="animation: 2s linear 0s infinite normal both running mfm-rubberBand;">🍮</span>"`;
+exports[`関数（$[...]）ごとの出力 > font（指定なし） 1`] = `"<span class="Fn font">$[font <span class="text">指定なし</span>]</span>"`;
 
-exports[`関数（$[...]）ごとの出力 > jump 1`] = `"<span style="animation: 0.75s linear 0s infinite normal none running mfm-jump;">🍮</span><span class="text"> </span><span style="animation: 2s linear 0s infinite normal none running mfm-jump;">🍮</span>"`;
+exports[`関数（$[...]）ごとの出力 > jelly 1`] = `"<span class="Fn jelly" style="display: inline-block; animation: mfm-rubberBand 1s linear infinite both; animation-delay: 0s;"><span>🍮</span></span><span class="text"> </span><span class="Fn jelly" style="display: inline-block; animation: mfm-rubberBand 2s linear infinite both; animation-delay: 0s;"><span>🍮</span></span>"`;
 
-exports[`関数（$[...]）ごとの出力 > position 1`] = `"<span class="text position Fn position" style="transform: translateX(1em) translateY(-0.5em);">移動</span>"`;
+exports[`関数（$[...]）ごとの出力 > jump 1`] = `"<span class="Fn jump" style="display: inline-block; animation: mfm-jump 0.75s linear infinite; animation-delay: 0s;"><span>🍮</span></span><span class="text"> </span><span class="Fn jump" style="display: inline-block; animation: mfm-jump 2s linear infinite; animation-delay: 0s;"><span>🍮</span></span>"`;
 
-exports[`関数（$[...]）ごとの出力 > rainbow 1`] = `"<span style="animation: 0.5s ease 0s infinite normal none running mfm-rainbow;">🍮</span><span class="text"> </span><span style="animation: 2s ease 0s infinite normal none running mfm-rainbow;">🍮</span>"`;
+exports[`関数（$[...]）ごとの出力 > position 1`] = `"<span class="Fn position" style="display: inline-block; transform: translateX(1em) translateY(-0.5em);"><span class="text">移動</span></span>"`;
 
-exports[`関数（$[...]）ごとの出力 > rotate 1`] = `"<span class="text rotate Fn rotate" style="transform: rotate(90deg); transform-origin: center center;">既定</span><span class="text"> </span><span class="text rotate Fn rotate" style="transform: rotate(30deg); transform-origin: center center;">30 度</span>"`;
+exports[`関数（$[...]）ごとの出力 > rainbow 1`] = `"<span class="Fn rainbow" style="display: inline-block; animation: mfm-rainbow 1s linear infinite; animation-delay: 0s;"><span>🍮</span></span><span class="text"> </span><span class="Fn rainbow" style="display: inline-block; animation: mfm-rainbow 2s linear infinite; animation-delay: 0s;"><span>🍮</span></span>"`;
 
-exports[`関数（$[...]）ごとの出力 > ruby 1`] = `"<ruby>漢字 <rt>かんじ</rt></ruby><span class="text"> </span><ruby> <rt></rt></ruby>"`;
+exports[`関数（$[...]）ごとの出力 > rotate 1`] = `"<span class="Fn rotate" style="display: inline-block; transform: rotate(90deg); transform-origin: center center;"><span class="text">既定</span></span><span class="text"> </span><span class="Fn rotate" style="display: inline-block; transform: rotate(30deg); transform-origin: center center;"><span class="text">30 度</span></span>"`;
 
-exports[`関数（$[...]）ごとの出力 > scale 1`] = `"<span class="text scale Fn scale" style="transform: scale(2, 3);">拡大</span><span class="text"> </span><span class="text scale Fn scale" style="transform: scale(5, 1);">上限は 5</span>"`;
+exports[`関数（$[...]）ごとの出力 > ruby 1`] = `"<ruby class="Fn ruby">漢字<rt>かんじ</rt></ruby><span class="text"> </span><ruby class="Fn ruby"><b class="bold"><span class="text">太字</span></b><rt>ふとじ</rt></ruby>"`;
 
-exports[`関数（$[...]）ごとの出力 > shake 1`] = `"<span style="animation: 0.5s ease 0s infinite normal none running mfm-shake;">🍮</span><span class="text"> </span><span style="animation: 2s ease 0s infinite normal none running mfm-shake;">🍮</span>"`;
+exports[`関数（$[...]）ごとの出力 > ruby（最後がテキストでない） 1`] = `"<ruby class="Fn ruby"><span class="text">漢字 </span><rt></rt></ruby>"`;
+
+exports[`関数（$[...]）ごとの出力 > ruby（本文がテキストでない） 1`] = `"<ruby class="Fn ruby"><b class="bold"><span class="text">太字</span></b><rt>ふとじ</rt></ruby>"`;
+
+exports[`関数（$[...]）ごとの出力 > scale 1`] = `"<span class="Fn scale" style="display: inline-block; transform: scale(2, 3);"><span class="text">拡大</span></span><span class="text"> </span><span class="Fn scale" style="display: inline-block; transform: scale(5, 1);"><span class="text">上限は 5</span></span>"`;
+
+exports[`関数（$[...]）ごとの出力 > shake 1`] = `"<span class="Fn shake" style="display: inline-block; animation: mfm-shake 0.5s ease infinite; animation-delay: 0s;"><span>🍮</span></span><span class="text"> </span><span class="Fn shake" style="display: inline-block; animation: mfm-shake 2s ease infinite; animation-delay: 0s;"><span>🍮</span></span>"`;
 
 exports[`関数（$[...]）ごとの出力 > sparkle 1`] = `"<span class="mfm-sparkle Fn sparkle" style="position: relative; display: inline-block;"><span>🍮</span><svg class="mfm-sparkle-particle" style="top: -0.5em; left: -0.5em; animation: mfm-sparkle 1s linear infinite; animation-delay: 0s; color: rgb(235, 111, 146);" viewBox="0 0 256 256" aria-hidden="true"><path fill="currentColor" d="M197.58 129.06l-51.61-19-19-51.65a15.92 15.92 0 0 0-29.88 0L78.07 110l-51.65 19a15.92 15.92 0 0 0 0 29.88L78 178l19 51.62a15.92 15.92 0 0 0 29.88 0l19-51.61 51.65-19a15.92 15.92 0 0 0 0-29.88Z"></path></svg><svg class="mfm-sparkle-particle" style="top: -0.5em; right: -0.5em; animation: mfm-sparkle 1s linear infinite; animation-delay: calc(0.333333s); color: rgb(246, 193, 119);" viewBox="0 0 256 256" aria-hidden="true"><path fill="currentColor" d="M197.58 129.06l-51.61-19-19-51.65a15.92 15.92 0 0 0-29.88 0L78.07 110l-51.65 19a15.92 15.92 0 0 0 0 29.88L78 178l19 51.62a15.92 15.92 0 0 0 29.88 0l19-51.61 51.65-19a15.92 15.92 0 0 0 0-29.88Z"></path></svg><svg class="mfm-sparkle-particle" style="bottom: -0.5em; left: 50%; margin-left: -0.5em; animation: mfm-sparkle 1s linear infinite; animation-delay: calc(0.666667s); color: rgb(156, 207, 216);" viewBox="0 0 256 256" aria-hidden="true"><path fill="currentColor" d="M197.58 129.06l-51.61-19-19-51.65a15.92 15.92 0 0 0-29.88 0L78.07 110l-51.65 19a15.92 15.92 0 0 0 0 29.88L78 178l19 51.62a15.92 15.92 0 0 0 29.88 0l19-51.61 51.65-19a15.92 15.92 0 0 0 0-29.88Z"></path></svg></span>"`;
 
-exports[`関数（$[...]）ごとの出力 > spin 1`] = `"<span style="animation: mfm-spin 1.5s linear infinite; animation-direction: normal; animation-delay: 0s;">🍮</span><span class="text"> </span><span style="animation: mfm-spin 1.5s linear infinite; animation-direction: reverse; animation-delay: 0s;">🍮</span><span class="text"> </span><span style="animation: mfm-spin 1.5s linear infinite; animation-direction: alternate; animation-delay: 0s;">🍮</span><span class="text"> </span><span style="animation: mfm-spinX 1.5s linear infinite; animation-direction: normal; animation-delay: 0s;">🍮</span><span class="text"> </span><span style="animation: mfm-spinY 3s linear infinite; animation-direction: normal; animation-delay: 0s;">🍮</span>"`;
+exports[`関数（$[...]）ごとの出力 > spin 1`] = `"<span class="Fn spin" style="display: inline-block; animation: mfm-spin 1.5s linear infinite; animation-direction: normal; animation-delay: 0s;"><span>🍮</span></span><span class="text"> </span><span class="Fn spin" style="display: inline-block; animation: mfm-spin 1.5s linear infinite; animation-direction: reverse; animation-delay: 0s;"><span>🍮</span></span><span class="text"> </span><span class="Fn spin" style="display: inline-block; animation: mfm-spin 1.5s linear infinite; animation-direction: alternate; animation-delay: 0s;"><span>🍮</span></span><span class="text"> </span><span class="Fn spin" style="display: inline-block; animation: mfm-spinX 1.5s linear infinite; animation-direction: normal; animation-delay: 0s;"><span>🍮</span></span><span class="text"> </span><span class="Fn spin" style="display: inline-block; animation: mfm-spinY 3s linear infinite; animation-direction: normal; animation-delay: 0s;"><span>🍮</span></span>"`;
 
-exports[`関数（$[...]）ごとの出力 > tada 1`] = `"<span style="animation: 1s linear 0s infinite normal both running tada;">🍮</span><span class="text"> </span><span style="animation: 2s linear 1s infinite normal both running tada;">🍮</span>"`;
+exports[`関数（$[...]）ごとの出力 > tada 1`] = `"<span class="Fn tada" style="display: inline-block; font-size: 150%; animation: mfm-tada 1s linear infinite both; animation-delay: 0s;"><span>🍮</span></span><span class="text"> </span><span class="Fn tada" style="display: inline-block; font-size: 150%; animation: mfm-tada 2s linear infinite both; animation-delay: 1s;"><span>🍮</span></span>"`;
 
-exports[`関数（$[...]）ごとの出力 > twitch 1`] = `"<span style="animation: 1s linear 0s infinite normal none running mfm-twitch;">🍮</span><span class="text"> </span><span style="animation: 2s linear 0s infinite normal none running mfm-twitch;">🍮</span>"`;
+exports[`関数（$[...]）ごとの出力 > transform の入れ子 1`] = `"<span class="Fn rotate" style="display: inline-block; transform: rotate(45deg); transform-origin: center center;"><span class="Fn flip" style="display: inline-block; transform: scaleX(-1);"><span class="text">回して反転</span></span></span>"`;
 
-exports[`関数（$[...]）ごとの出力 > x2・x3・x4 1`] = `"<span class="text x2 Fn x2" style="font-size: 200%;">2 倍</span><span class="text"> </span><span class="text x3 Fn x3" style="font-size: 300%;">3 倍</span><span class="text"> </span><span class="text x4 Fn x4" style="font-size: 400%;">4 倍</span>"`;
+exports[`関数（$[...]）ごとの出力 > twitch 1`] = `"<span class="Fn twitch" style="display: inline-block; animation: mfm-twitch 0.5s ease infinite; animation-delay: 0s;"><span>🍮</span></span><span class="text"> </span><span class="Fn twitch" style="display: inline-block; animation: mfm-twitch 2s ease infinite; animation-delay: 0s;"><span>🍮</span></span>"`;
 
-exports[`関数（$[...]）ごとの出力 > 入れ子 1`] = `"<b class="bold" style="color: rgb(255, 0, 0); overflow-wrap: anywhere; font-size: 200%;"><span class="text">赤い太字</span></b>"`;
+exports[`関数（$[...]）ごとの出力 > x2 の入れ子 1`] = `"<span class="mfm-x2 Fn x2"><span class="mfm-x2 Fn x2"><span class="mfm-x2 Fn x2"><span class="text">3 重</span></span></span></span>"`;
+
+exports[`関数（$[...]）ごとの出力 > x2・x3・x4 1`] = `"<span class="mfm-x2 Fn x2"><span class="text">2 倍</span></span><span class="text"> </span><span class="mfm-x3 Fn x3"><span class="text">3 倍</span></span><span class="text"> </span><span class="mfm-x4 Fn x4"><span class="text">4 倍</span></span>"`;
+
+exports[`関数（$[...]）ごとの出力 > 入れ子 1`] = `"<span class="mfm-x2 Fn x2"><span class="Fn fg" style="display: inline-block; color: rgb(255, 0, 0); overflow-wrap: anywhere;"><b class="bold"><span class="text">赤い太字</span></b></span></span>"`;
+
+exports[`関数（$[...]）ごとの出力 > 子が複数ある関数 1`] = `"<span class="Fn spin" style="display: inline-block; animation: mfm-spin 1.5s linear infinite; animation-direction: normal; animation-delay: 0s;"><span class="text">回る </span><b class="bold"><span class="text">太字</span></b><span class="text"> と </span><span>:emoji:</span><span class="text"> と </span><a class="mention">@alice</a></span>"`;
 
 exports[`関数（$[...]）ごとの出力 > 未対応の関数 1`] = `"<span class="Fn">$[foo <span class="text">中身</span>]</span>"`;

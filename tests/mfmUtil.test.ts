@@ -35,12 +35,12 @@ describe('validColor', () => {
 })
 
 describe('validBorderStyle', () => {
-  it('CSS のボーダースタイルを小文字にして返す', () => {
+  it('CSS のボーダースタイルをそのまま返す', () => {
     expect(validBorderStyle('dashed')).toBe('dashed')
-    expect(validBorderStyle('SOLID')).toBe('solid')
   })
 
-  it('知らないスタイルは undefined を返す', () => {
+  it('知らないスタイル・大文字のスタイルは undefined を返す（Misskey と同じ）', () => {
+    expect(validBorderStyle('SOLID')).toBeUndefined()
     expect(validBorderStyle('none')).toBeUndefined()
     expect(validBorderStyle('solid; color: red')).toBeUndefined()
     expect(validBorderStyle(true)).toBeUndefined()

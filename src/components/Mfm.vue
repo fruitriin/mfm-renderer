@@ -33,4 +33,8 @@ const props = defineProps<{
 const debugMode = props.debug ? true : false
 </script>
 
-<style scoped></style>
+<!--
+  アニメーションの keyframes など、MFM の表示に使う CSS。ライブラリの style.css に含める。
+  library.ts で import すると、型定義（library.d.ts）に CSS の import が残り、利用側の型チェックで見つからないと言われる
+-->
+<style src="../mfm.css"></style>

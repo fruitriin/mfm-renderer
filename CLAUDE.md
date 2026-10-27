@@ -56,6 +56,7 @@ mfm-renderer/
 │   │   │   ├── Small.vue         # 小さい文字
 │   │   │   ├── Plain.vue         # プレーン
 │   │   │   ├── Text.vue          # テキスト
+│   │   │   ├── MathInline.vue, MathBlock.vue  # 数式（<code> でそのまま表示）
 │   │   │   ├── Fn.vue            # 関数構文 ($[...])
 │   │   │   └── Fn/               # Fn 関数のサブコンポーネント
 │   │   │       ├── Fg.vue        # 文字色
@@ -81,6 +82,7 @@ mfm-renderer/
 │   │   └── MfmRenderer.vue       # レンダラーコンポーネント
 │   ├── utils/
 │   │   └── mfmUtil.ts            # ユーティリティ関数
+│   ├── mfm.css                   # アニメーションの keyframes など（Misskey の見た目に合わせて書き起こした。ライブラリの style.css に含める）
 │   ├── library.ts                # ライブラリエントリーポイント
 │   └── main.ts                   # 開発用エントリーポイント
 ├── dist/                         # ビルド出力
@@ -175,6 +177,7 @@ npm run format       # Prettier で整形
 
 - `Fn.vue` が親コンポーネント
 - 各関数 (`fg`, `bg`, `spin` など) は `Fn/` ディレクトリ内に独立したコンポーネントとして実装
+- 各関数は Misskey と同じく、自分の span で中身（`<MfmComponent :tokens="children" />`）を包み、その span にスタイルを付ける。`className`（`Fn 関数名`）と `style` もその span に付ける
 - 新しい関数を追加する場合は、`Fn/` に関数名のファイル（`$[foo ...]` なら `Foo.vue`）を作り、`library.ts` に登録する。登録されていない関数は、Misskey と同じく `$[foo ...]` のまま表示される
 
 ## 未実装機能と改善が必要な箇所

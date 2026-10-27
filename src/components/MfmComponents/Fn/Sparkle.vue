@@ -1,11 +1,6 @@
 <!--
-  Sparkle MFM Effect Component
-
-  Based on Misskey's MkSparkle.vue implementation
-  Original source: https://github.com/misskey-dev/misskey
-
-  SPDX-FileCopyrightText: syuilo and misskey-project
-  SPDX-License-Identifier: AGPL-3.0-only
+  $[sparkle] の効果。Misskey の MkSparkle.vue のコードは使わず、このライブラリで書いた。
+  粒は乱数で出さず、決まった位置の 3 つを順に光らせる
 -->
 <template>
   <!-- Misskey と同じく、アニメーションを止める設定のときは中身だけを表示する -->
@@ -97,29 +92,13 @@ const computedStyle = computed<CSSProperties>(() => {
   display: inline-block;
 }
 
+/* keyframes の mfm-sparkle は mfm.css にある。scoped style に置くと名前が書き換わり、インラインの animation から参照できない */
 .mfm-sparkle-particle {
   position: absolute;
   width: 1em;
   height: 1em;
   pointer-events: none;
   will-change: opacity, transform;
-}
-
-@keyframes mfm-sparkle {
-  0% {
-    opacity: 0;
-    transform: scale(0) rotate(0deg);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1) rotate(180deg);
-  }
-
-  100% {
-    opacity: 0;
-    transform: scale(0) rotate(360deg);
-  }
 }
 
 /* Reduce motion for accessibility */

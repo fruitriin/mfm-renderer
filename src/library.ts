@@ -11,6 +11,8 @@ import Plain from './components/MfmComponents/Plain.vue'
 import BlockCode from './components/MfmComponents/BlockCode.vue'
 import InlineCode from './components/MfmComponents/InlineCode.vue'
 import Search from './components/MfmComponents/Search.vue'
+import MathInline from './components/MfmComponents/MathInline.vue'
+import MathBlock from './components/MfmComponents/MathBlock.vue'
 import Strike from './components/MfmComponents/Strike.vue'
 import UnicodeEmoji from './components/MfmComponents/UnicodeEmoji.vue'
 import Url from './components/MfmComponents/Url.vue'
@@ -59,6 +61,8 @@ const syntaxComponents = {
   BlockCode,
   InlineCode,
   Search,
+  MathInline,
+  MathBlock,
   Strike,
   UnicodeEmoji,
   Url,

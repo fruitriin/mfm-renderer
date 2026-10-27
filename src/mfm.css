@@ -1,0 +1,185 @@
+/*
+ * MFM の表示に使う CSS。ライブラリの style.css に含める
+ *
+ * Misskey の CSS は写さず、このライブラリで書き起こした。
+ * 名前（mfm-spin など）と、動きの大きさ・既定の速さは、Misskey と同じに見えるように合わせている。
+ * 揺れ（twitch・shake）の値は乱数で作った独自のものなので、Misskey と細かい動きは違う。
+ */
+
+/* $[blur]: ふだんはぼかし、指を乗せると読める */
+.mfm-blur {
+  filter: blur(6px);
+  transition: filter 0.3s;
+}
+
+.mfm-blur:hover {
+  filter: none;
+}
+
+/*
+ * $[x2]・$[x3]・$[x4]
+ * 入れ子にしたとき、2 重目は大きくなる分が半分になり、3 重目からは大きくならない
+ */
+.mfm-x2 {
+  --mfm-zoom-size: 200%;
+}
+
+.mfm-x3 {
+  --mfm-zoom-size: 400%;
+}
+
+.mfm-x4 {
+  --mfm-zoom-size: 600%;
+}
+
+.mfm-x2,
+.mfm-x3,
+.mfm-x4 {
+  font-size: var(--mfm-zoom-size);
+}
+
+:is(.mfm-x2, .mfm-x3, .mfm-x4) :is(.mfm-x2, .mfm-x3, .mfm-x4) {
+  font-size: calc(50% + var(--mfm-zoom-size) / 2);
+}
+
+:is(.mfm-x2, .mfm-x3, .mfm-x4) :is(.mfm-x2, .mfm-x3, .mfm-x4) :is(.mfm-x2, .mfm-x3, .mfm-x4) {
+  font-size: 100%;
+}
+
+/* アニメーションを止めたときの $[rainbow]: 文字を虹色のグラデーションで塗る */
+.mfm-rainbow-fallback {
+  background-image: linear-gradient(
+    90deg,
+    hsl(0deg 100% 50%),
+    hsl(60deg 100% 50%),
+    hsl(120deg 100% 50%),
+    hsl(180deg 100% 50%),
+    hsl(240deg 100% 50%),
+    hsl(300deg 100% 50%)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* $[spin]: 一回転する。.x・.y は奥行きをつけて縦・横に回す */
+@keyframes mfm-spin {
+  from { transform: rotate(0); }
+  to { transform: rotate(1turn); }
+}
+
+@keyframes mfm-spinX {
+  from { transform: perspective(128px) rotateX(0); }
+  to { transform: perspective(128px) rotateX(1turn); }
+}
+
+@keyframes mfm-spinY {
+  from { transform: perspective(128px) rotateY(0); }
+  to { transform: perspective(128px) rotateY(1turn); }
+}
+
+/* $[jump]: 16px 跳ねてから、半分の高さでもう一度跳ねる */
+@keyframes mfm-jump {
+  0%, 50%, 100% { transform: none; }
+  25% { transform: translateY(-16px); }
+  75% { transform: translateY(-8px); }
+}
+
+/* $[bounce]: 跳ねたあと、着地でつぶれる */
+@keyframes mfm-bounce {
+  0%, 50%, 100% { transform: none; }
+  25% { transform: translateY(-16px); }
+  75% { transform: scale(1.5, 0.75); }
+}
+
+/* $[tada]: 少し縮んでから、大きくなって左右に揺れる */
+@keyframes mfm-tada {
+  0%, 100% { transform: none; }
+  10%, 20% { transform: scale(0.92) rotate(-2deg); }
+  30%, 50%, 70%, 90% { transform: scale(1.08) rotate(2deg); }
+  40%, 60%, 80% { transform: scale(1.08) rotate(-2deg); }
+}
+
+/* $[jelly]: 縦横に伸び縮みしながら元に戻る */
+@keyframes mfm-rubberBand {
+  0%, 100% { transform: none; }
+  30% { transform: scale(1.25, 0.75); }
+  40% { transform: scale(0.75, 1.25); }
+  55% { transform: scale(1.12, 0.88); }
+  70% { transform: scale(0.96, 1.04); }
+  85% { transform: scale(1.03, 0.97); }
+}
+
+/* $[rainbow]: 色相を一周させる */
+@keyframes mfm-rainbow {
+  from { filter: hue-rotate(0deg) contrast(150%) saturate(150%); }
+  to { filter: hue-rotate(360deg) contrast(150%) saturate(150%); }
+}
+
+/* $[twitch]: 上下左右に 9px までの範囲で小刻みに動く */
+@keyframes mfm-twitch {
+  0% { transform: translate(-8px, -8px); }
+  5% { transform: translate(-2px, 5px); }
+  10% { transform: translate(7px, 4px); }
+  15% { transform: translate(-1px, 1px); }
+  20% { transform: translate(-4px, 7px); }
+  25% { transform: translate(-4px, -6px); }
+  30% { transform: translate(-4px, -2px); }
+  35% { transform: translate(-2px, 6px); }
+  40% { transform: translate(5px, -8px); }
+  45% { transform: translate(-5px, -7px); }
+  50% { transform: translate(-3px, 8px); }
+  55% { transform: translate(0px, 7px); }
+  60% { transform: translate(-5px, -5px); }
+  65% { transform: translate(9px, 5px); }
+  70% { transform: translate(3px, 5px); }
+  75% { transform: translate(-3px, -6px); }
+  80% { transform: translate(1px, 2px); }
+  85% { transform: translate(7px, -5px); }
+  90% { transform: translate(2px, 9px); }
+  95% { transform: translate(-3px, 5px); }
+  100% { transform: translate(-8px, -8px); }
+}
+
+/* $[shake]: 3px までずれながら、11 度まで傾く */
+@keyframes mfm-shake {
+  0% { transform: translate(-2px, -1px) rotate(1deg); }
+  5% { transform: translate(0px, -1px) rotate(-4deg); }
+  10% { transform: translate(-1px, 2px) rotate(0deg); }
+  15% { transform: translate(2px, 2px) rotate(0deg); }
+  20% { transform: translate(3px, 1px) rotate(9deg); }
+  25% { transform: translate(2px, 2px) rotate(-3deg); }
+  30% { transform: translate(-1px, -1px) rotate(-7deg); }
+  35% { transform: translate(-1px, 1px) rotate(11deg); }
+  40% { transform: translate(-2px, 3px) rotate(-9deg); }
+  45% { transform: translate(2px, 3px) rotate(1deg); }
+  50% { transform: translate(1px, 0px) rotate(-10deg); }
+  55% { transform: translate(0px, -2px) rotate(5deg); }
+  60% { transform: translate(-1px, 0px) rotate(6deg); }
+  65% { transform: translate(-2px, 2px) rotate(2deg); }
+  70% { transform: translate(2px, -3px) rotate(3deg); }
+  75% { transform: translate(-1px, 1px) rotate(-2deg); }
+  80% { transform: translate(1px, -1px) rotate(-5deg); }
+  85% { transform: translate(-1px, 0px) rotate(7deg); }
+  90% { transform: translate(-3px, 1px) rotate(-7deg); }
+  95% { transform: translate(-1px, -2px) rotate(-10deg); }
+  100% { transform: translate(-2px, -1px) rotate(1deg); }
+}
+
+/* $[sparkle] の粒。Misskey の MkSparkle とは別の、このライブラリ独自の実装で使う */
+@keyframes mfm-sparkle {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0) rotate(360deg);
+  }
+}

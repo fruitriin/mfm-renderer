@@ -1,24 +1,16 @@
 <template>
-  <MfmComponent
-    :className="`position ${className ?? ''}`"
-    :tokens="children"
-    :style="[
-      useAnim
-        ? {
-            animation: `${validTime(token?.args.speed) ?? '0.5s'} ease ${validTime(token?.args.delay) ?? '0s'} infinite normal none running mfm-shake`
-          }
-        : {},
-      style
-    ]"
-  />
+  <span :class="className" :style="[wrapperStyle, style]">
+    <MfmComponent :tokens="children" />
+  </span>
 </template>
 
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
+import { computed } from 'vue'
 import type { MfmFn, MfmInline } from 'mfm-js'
 import { useMfmAnimation, validTime } from '../../../utils/mfmUtil'
 
-defineProps<{
+const props = defineProps<{
   token?: MfmFn['props']
   children?: MfmInline[]
   style?: CSSProperties
@@ -27,6 +19,14 @@ defineProps<{
 
 // Misskey と同じく、アニメーションを止める設定のときは動かさない
 const useAnim = useMfmAnimation()
-</script>
 
-<style></style>
+const wrapperStyle = computed<CSSProperties>(() => ({
+  display: 'inline-block',
+  ...(useAnim.value
+    ? {
+        animation: `mfm-shake ${validTime(props.token?.args.speed) ?? '0.5s'} ease infinite`,
+        animationDelay: validTime(props.token?.args.delay) ?? '0s'
+      }
+    : {})
+}))
+</script>

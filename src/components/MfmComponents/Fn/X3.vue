@@ -1,9 +1,8 @@
 <template>
-  <MfmComponent
-    :className="`x3 ${className ?? ''}`"
-    :tokens="children"
-    :style="[advancedMfm ? { fontSize: '300%' } : {}, style]"
-  />
+  <!-- 大きさは mfm.css の mfm-x3 で決める。入れ子にすると効きが弱くなる（Misskey と同じ） -->
+  <span :class="[advancedMfm ? 'mfm-x3' : '', className]" :style="style">
+    <MfmComponent :tokens="children" />
+  </span>
 </template>
 
 <script setup lang="ts">
@@ -18,6 +17,7 @@ defineProps<{
   style?: CSSProperties
   className?: string
 }>()
+
 // Misskey と同じく、高度な MFM を止める設定のときは大きくしない
 const options = useMfmRenderOptions()
 const advancedMfm = computed(() => options.value.advancedMfm)
@@ -29,5 +29,3 @@ provide(
   computed(() => scale.value * 3)
 )
 </script>
-
-<style></style>

@@ -1,29 +1,26 @@
 <template>
-  <!-- Misskey と同じく、数値でない・指定がないときは 90 度とみなす -->
-  <MfmComponent
-    :className="`rotate ${className ?? ''}`"
-    :tokens="children"
-    :style="[
-      {
-        transform: `rotate(${validNumber(token?.args.deg) ?? 90}deg)`,
-        transformOrigin: 'center center'
-      },
-      style
-    ]"
-  />
+  <span :class="className" :style="[wrapperStyle, style]">
+    <MfmComponent :tokens="children" />
+  </span>
 </template>
 
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
+import { computed } from 'vue'
 import type { MfmFn, MfmInline } from 'mfm-js'
-import { validNumber } from '@/utils/mfmUtil'
+import { validNumber } from '../../../utils/mfmUtil'
 
-defineProps<{
+const props = defineProps<{
   token?: MfmFn['props']
   children?: MfmInline[]
   style?: CSSProperties
   className?: string
 }>()
-</script>
 
-<style></style>
+// Misskey と同じく、数値でない・指定がないときは 90 度とみなす
+const wrapperStyle = computed<CSSProperties>(() => ({
+  display: 'inline-block',
+  transform: `rotate(${validNumber(props.token?.args.deg) ?? 90}deg)`,
+  transformOrigin: 'center center'
+}))
+</script>

@@ -34,9 +34,3 @@ const isSupported = computed(() => {
   return name !== '' && appComponents[name] != null
 })
 </script>
-
-<style>
-.Fn {
-  display: inline-block;
-}
-</style>
