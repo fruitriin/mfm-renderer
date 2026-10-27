@@ -27,7 +27,68 @@ createApp(App).use(Mfm).mount('#app')
 
 `vue` は peerDependencies なので、利用側で入れておく。
 
-`.use(Mfm)` でグローバル登録されるのは、`MfmRenderer`・`MfmComponent` と、構文ごとのコンポーネント（`MfmBold`・`MfmFg` など、`Mfm` 接頭辞付き）である。v0.2.x までは `Bold`・`Link` のように接頭辞なしで登録していた。
+## 版ごとの使い方
+
+`.use(Mfm)` でグローバル登録されるコンポーネントの名前が、v0.3.0 で変わった。`MfmRenderer` だけを使うなら、どちらの版でも書き方は同じである。
+
+| | v0.3.0 以降 | v0.2.x |
+|---|---|---|
+| 文字列の MFM を描画する | `MfmRenderer` | `MfmRenderer` |
+| 解析済みの AST を描画する | `MfmComponent` | `MfmComponent` |
+| 構文ごとのコンポーネント | `MfmBold`・`MfmLink`・`MfmFg` など（`Mfm` 接頭辞付き） | `Bold`・`Link`・`Fg` など（接頭辞なし） |
+
+### v0.3.0 以降
+
+```
+npm install github:fruitriin/mfm-renderer#v0.3.0
+```
+
+```vue
+<script setup lang="ts">
+import { parse } from 'mfm-js'
+
+const tokens = parse('**太字** と $[x2 大きい文字]')
+</script>
+
+<template>
+  <!-- ふつうはこれだけでよい -->
+  <MfmRenderer text="Hello **mfm**" />
+
+  <!-- 解析済みの AST を描画する -->
+  <MfmComponent :tokens="tokens" />
+
+  <!-- 構文ごとのコンポーネントを直接使う。名前には Mfm 接頭辞が付く -->
+  <MfmBold :children="tokens[0].children" />
+</template>
+```
+
+構文ごとのコンポーネントに接頭辞が付いたので、利用側の `Link` や `Search` などのコンポーネントと名前が衝突しない。
+
+### v0.2.x
+
+```
+npm install github:fruitriin/mfm-renderer#v0.2.1
+```
+
+```vue
+<template>
+  <MfmRenderer text="Hello **mfm**" />
+  <MfmComponent :tokens="tokens" />
+
+  <!-- 構文ごとのコンポーネントは接頭辞なし -->
+  <Bold :children="tokens[0].children" />
+</template>
+```
+
+v0.2.x では構文ごとのコンポーネントを `Bold`・`Link`・`Search` などの名前でグローバル登録する。利用側が同じ名前のコンポーネントを登録すると、登録した順番によってどちらかが上書きされる。
+
+後述の `MfmRenderer` の props のうち `text` 以外（`nyaize`・`advancedMfm` など）は、v0.2.1 で追加した。v0.2.0 では使えない。
+
+### v0.2.x から v0.3.0 に上げるとき
+
+- `MfmRenderer` と `MfmComponent` だけを使っているなら、書き換えは要らない
+- 構文ごとのコンポーネントを名前で使っているなら、名前の頭に `Mfm` を付ける（`<Bold>` → `<MfmBold>`、`<X2>` → `<MfmX2>`）
+- 名前の衝突を避けるために、利用側のコンポーネントの名前を変えていた場合は、元に戻してよい
 
 ## 使い方
 
