@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>MFM Renderer</h1>
+    <h1>MFM Renderer（Vue 版）</h1>
     <div style="position: fixed; right: 0; top: 0; background: wheat">
       モード
       <div>
@@ -72,6 +72,7 @@ import MfmRenderer from './components/MfmRenderer.vue'
 import { samples } from './testCode'
 import { computed, onMounted, provide, reactive, ref } from 'vue'
 import MfmAst from './components/MfmAst.vue'
+import { loadEmojis } from './demo/emojis.ts'
 
 const ast = ref(false)
 const debugMode = ref(false)
@@ -108,27 +109,7 @@ const handler = (event: Event) => {
 }
 
 const getEmojis = async () => {
-  const emojisData = localStorage.getItem('emojis')
-  if (emojisData) {
-    const json = JSON.parse(emojisData) as {
-      emojis: any[]
-    }
-
-    for (const emoji of json.emojis) {
-      emojis[emoji.name] = emoji
-    }
-  } else {
-    const res = await fetch(`https://${domain.value}/api/emojis`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8'
-      },
-      body: JSON.stringify({})
-    })
-    localStorage.setItem('emojis', JSON.stringify(await res.json()))
-
-    await getEmojis()
-  }
+  Object.assign(emojis, await loadEmojis(domain.value))
 }
 
 onMounted(() => {

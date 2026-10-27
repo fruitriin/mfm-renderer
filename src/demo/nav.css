@@ -1,0 +1,14 @@
+/* プレビューのページを切り替えるリンク */
+.demo-nav {
+  display: flex;
+  gap: 1em;
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+  font-family: sans-serif;
+}
+
+.demo-nav a[aria-current='page'] {
+  font-weight: bold;
+  color: inherit;
+  text-decoration: none;
+}
