@@ -40,6 +40,7 @@ import Ruby from './components/MfmComponents/Fn/Ruby.vue'
 import Border from './components/MfmComponents/Fn/Border.vue'
 import Rotate from './components/MfmComponents/Fn/Rotate.vue'
 import Clickable from './components/MfmComponents/Fn/Clickable.vue'
+import Unixtime from './components/MfmComponents/Fn/Unixtime.vue'
 import { App, ObjectPlugin } from 'vue'
 import MfmRenderer from './components/MfmRenderer.vue'
 
@@ -88,6 +89,7 @@ const components = {
   Border,
   Rotate,
   Clickable,
+  Unixtime,
 } as const
 
 export default {
