@@ -114,7 +114,7 @@ const getEmojis = async () => {
       emojis: any[]
     }
 
-    for (let emoji of json.emojis) {
+    for (const emoji of json.emojis) {
       emojis[emoji.name] = emoji
     }
   } else {

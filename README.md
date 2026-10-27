@@ -6,7 +6,7 @@ MFMをレンダリングするコンポーネント
 
 ## Installation
 
-npm から入れるか、GitHub のタグを指定して入れる。GitHub から入れたときは、インストール時に `prepare` でビルドされる。
+npm から入れるか、GitHub のタグを指定して入れる。GitHub から入れたときは、インストール時に `prepare` でビルドされる。v0.3.0 より後の版を GitHub から入れるには、ビルドに使う Vite 8 のために Node.js 20.19 以降が要る。
 
 ```
 npm install mfm-renderer

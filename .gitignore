@@ -24,3 +24,6 @@ dist-ssr
 
 # ビルド出力（インストール時に prepare でビルドする）
 dist
+
+# GitHub Pages のビルド出力（npm run pages）
+docs
