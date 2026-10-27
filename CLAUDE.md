@@ -82,7 +82,7 @@ mfm-renderer/
 │   │   └── MfmRenderer.vue       # レンダラーコンポーネント
 │   ├── utils/
 │   │   └── mfmUtil.ts            # ユーティリティ関数
-│   ├── mfm.css                   # アニメーションの keyframes など（Misskey から写した。ライブラリの style.css に含める）
+│   ├── mfm.css                   # アニメーションの keyframes など（Misskey の見た目に合わせて書き起こした。ライブラリの style.css に含める）
 │   ├── library.ts                # ライブラリエントリーポイント
 │   └── main.ts                   # 開発用エントリーポイント
 ├── dist/                         # ビルド出力
