@@ -46,8 +46,6 @@ import Unixtime from './components/MfmComponents/Fn/Unixtime.vue'
 import { App, ObjectPlugin } from 'vue'
 import MfmRenderer from './components/MfmRenderer.vue'
 import { mfmComponentPrefix } from './utils/mfmUtil.ts'
-// アニメーションの keyframes など、MFM の表示に使う CSS。ライブラリの style.css に含める
-import './mfm.css'
 
 // 構文ごとのコンポーネント。Mfm 接頭辞を付けて登録する（Bold → MfmBold）
 const syntaxComponents = {

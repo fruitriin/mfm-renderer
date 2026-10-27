@@ -1,6 +1,5 @@
 import { createApp } from 'vue'
 import './style.css'
-import './mfm.css'
 import App from './App.vue'
 import Mfm from './components/Mfm.vue'
 import { mfmComponentPrefix } from './utils/mfmUtil.ts'
