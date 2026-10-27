@@ -145,10 +145,14 @@ npm run format       # Prettier で整形
 ### 新しい MFM 構文コンポーネントを追加する場合
 
 1. **コンポーネント作成**: `src/components/MfmComponents/` に新しい `.vue` ファイルを作成
-2. **Props 定義**: 必要な Props (特に `token` や `mfmOptions`) を定義
+2. **Props 定義**: 必要な Props (`token`・`children`・`style`・`className`) を定義する。`className` を受け取らないと要素の className に入り、class が消える
 3. **レンダリングロジック**: Misskey の元実装を参照しつつ、Vue SFC として再実装
-4. **MfmAst.vue への登録**: `MfmAst.vue` の switch 文に新しい case を追加
+4. **library.ts への登録**: `syntaxComponents` に追加する。登録名には `Mfm` 接頭辞が付く（`Bold` → `MfmBold`）。開発サーバー（`main.ts`）では `MfmComponents/` 以下が自動で登録される
 5. **スタイリング**: 必要に応じて scoped style を追加
+
+#### コンポーネントの解決
+
+`Mfm.vue` と `Fn.vue` は、AST のノード種別や関数名から `getComponent`（`mfmUtil.ts`）で登録名を作り、`<component :is>` で描画する。例えば `bold` は `MfmBold`、`$[x2 ...]` は `MfmX2` になる。ファイル名は接頭辞なし（`Bold.vue`）のままにする。
 
 ### 既存コンポーネントを修正する場合
 
@@ -160,7 +164,7 @@ npm run format       # Prettier で整形
 
 - `Fn.vue` が親コンポーネント
 - 各関数 (`fg`, `bg`, `spin` など) は `Fn/` ディレクトリ内に独立したコンポーネントとして実装
-- 新しい関数を追加する場合は、`Fn.vue` の switch 文に case を追加
+- 新しい関数を追加する場合は、`Fn/` に関数名のファイル（`$[foo ...]` なら `Foo.vue`）を作り、`library.ts` に登録する。登録されていない関数は、Misskey と同じく `$[foo ...]` のまま表示される
 
 ## 未実装機能と改善が必要な箇所
 

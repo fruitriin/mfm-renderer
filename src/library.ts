@@ -43,11 +43,10 @@ import Clickable from './components/MfmComponents/Fn/Clickable.vue'
 import Unixtime from './components/MfmComponents/Fn/Unixtime.vue'
 import { App, ObjectPlugin } from 'vue'
 import MfmRenderer from './components/MfmRenderer.vue'
+import { mfmComponentPrefix } from './utils/mfmUtil.ts'
 
-// コンポーネントマップを定義
-const components = {
-  MfmRenderer,
-  MfmComponent: Mfm,
+// 構文ごとのコンポーネント。Mfm 接頭辞を付けて登録する（Bold → MfmBold）
+const syntaxComponents = {
   Bold,
   Italic,
   Quote,
@@ -94,9 +93,10 @@ const components = {
 
 export default {
   install: (app: App) => {
-    // Object.entries を使用して登録
-    Object.entries(components).forEach(([name, component]) => {
-      app.component(name, component)
+    app.component('MfmRenderer', MfmRenderer)
+    app.component('MfmComponent', Mfm)
+    Object.entries(syntaxComponents).forEach(([name, component]) => {
+      app.component(mfmComponentPrefix + name, component)
     })
     return app
   },

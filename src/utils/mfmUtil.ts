@@ -69,12 +69,20 @@ export function mfm(text: string, plain: boolean): MfmNode[] {
 }
 
 /**
+ * 構文ごとのコンポーネントをグローバル登録するときの接頭辞。
+ * 利用側のコンポーネント（Link・Search など）と名前が衝突しないように付ける
+ */
+export const mfmComponentPrefix = 'Mfm'
+
+/**
  * MfmVueがAST Nodeからコンポーネントを決定するためのもの
  * <component :is=getComponent(token.type)>
+ * 例: bold → MfmBold、x2 → MfmX2。空文字なら空文字を返す
  * @param string
  */
 export function getComponent(string: string) {
-  return string.replace(/(^.)(.*)/, (_$1, $2, $3) => `${$2.toUpperCase() + $3}`)
+  if (string === '') return ''
+  return mfmComponentPrefix + string.replace(/(^.)(.*)/, (_$1, $2, $3) => `${$2.toUpperCase() + $3}`)
 }
 
 /**
