@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { getComponent, mfm, validBorderStyle, validColor, validNumber, validTime } from '../src/utils/mfmUtil.ts'
+import { getComponent, mfm, twemojiFileName, validBorderStyle, validColor, validNumber, validTime } from '../src/utils/mfmUtil.ts'
 
 describe('validTime', () => {
   it('秒の指定だけを受け付ける', () => {
@@ -81,5 +81,17 @@ describe('mfm', () => {
   it('plain のときはテキスト・絵文字・プレーンだけを解析する', () => {
     expect(mfm('**太字**', true).map((node) => node.type)).toEqual(['text'])
     expect(mfm('**太字**', false).map((node) => node.type)).toEqual(['bold'])
+  })
+})
+
+describe('twemojiFileName', () => {
+  it('Misskey の char2twemojiFilePath と同じ規則でファイル名を作る', () => {
+    expect(twemojiFileName('😀')).toBe('1f600')
+    // ZWJ を含まないときは FE0F（異体字セレクタ）を除く
+    expect(twemojiFileName('⚔️')).toBe('2694')
+    expect(twemojiFileName('🛡️')).toBe('1f6e1')
+    // ZWJ を含むときは FE0F を残す
+    expect(twemojiFileName('🏳️‍🌈')).toBe('1f3f3-fe0f-200d-1f308')
+    expect(twemojiFileName('👨‍💻')).toBe('1f468-200d-1f4bb')
   })
 })

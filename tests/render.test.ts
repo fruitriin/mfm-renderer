@@ -101,6 +101,15 @@ describe('MfmRenderer の props', () => {
 })
 
 describe('利用側から渡すもの', () => {
+  it('emojiStyle が twemoji なら Unicode の絵文字を Twemoji の画像で表示する', () => {
+    const native = render({ text: '😀' })
+    expect(native.find('img.twemoji').exists()).toBe(false)
+    expect(native.text()).toContain('😀')
+    const twemoji = render({ text: '😀', emojiStyle: 'twemoji', twemojiBase: 'https://example.com/svg/' })
+    expect(twemoji.find('img.twemoji').attributes('src')).toBe('https://example.com/svg/1f600.svg')
+    expect(twemoji.find('img.twemoji').attributes('alt')).toBe('😀')
+  })
+
   it('provide した emojis にある絵文字は画像で表示する', () => {
     const wrapper = render({ text: ':pudding:' }, { emojis: { pudding: { url: 'https://example.com/pudding.png' } } })
     expect(wrapper.find('img.emoji').attributes('src')).toBe('https://example.com/pudding.png')
