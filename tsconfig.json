@@ -4,11 +4,12 @@
     "useDefineForClassFields": true,
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "types": ["node", "vite/client"],
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "outDir": "dist",
-    "declaration": true,
+    // 型チェックだけを行う。型定義の出力は tsconfig.build.json で行う
+    "noEmit": true,
 
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -16,9 +17,8 @@
     "isolatedModules": true,
 
     /* Path aliases */
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     },
 
     /* Linting */
@@ -27,5 +27,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "vite.config.ts", "vite.config.docs.ts", "vitest.config.ts"]
 }

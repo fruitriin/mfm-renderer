@@ -26,10 +26,11 @@
 
 - **フレームワーク**: Vue 3 (Composition API)
 - **言語**: TypeScript
-- **ビルドツール**: Vite
+- **ビルドツール**: Vite 8。ビルドだけなら Node.js 20.19 以降で動く（GitHub から入れた利用側の `prepare` もこの条件）。テスト（Vitest 5・jsdom 30）には Node.js 22 以降が要る
 - **パーサー**: mfm-js (v0.28.0)
 - **スタイリング**: CSS (scoped styles in Vue components)
-- **コード品質**: ESLint, Prettier
+- **コード品質**: ESLint（flat config の `eslint.config.js`）, Prettier
+- **テスト**: Vitest + @vue/test-utils（jsdom）。テストは `tests/` に置く
 
 ## プロジェクト構造
 
@@ -110,6 +111,16 @@ npm run build        # ライブラリとして UMD + ES Module 形式でビル�
 npm run pages        # GitHub Pages 用にビルド
 ```
 
+### テスト・型チェック
+
+```bash
+npm test             # Vitest でテストを実行する
+npm run typecheck    # vue-tsc で型チェックする（tests/ と設定ファイルも含む）
+```
+
+- `tests/fixtures.ts` の入力を描画し、出力の HTML をスナップショット（`tests/__snapshots__/`）と比べる。HTML は `tests/normalizeHtml.ts` でコメントと `data-v-*` 属性を除いてから比べる
+- 描画が変わる修正をしたら `npx vitest run -u` でスナップショットを更新し、差分が意図どおりか確かめる
+
 ### コード整形
 
 ```bash
@@ -179,8 +190,9 @@ npm run format       # Prettier で整形
 ## 変更を加える際のチェックリスト
 
 - [ ] 元の Misskey 実装と動作が一致しているか
-- [ ] TypeScript の型エラーがないか (`npm run build` で確認)
+- [ ] TypeScript の型エラーがないか (`npm run build` と `npm run typecheck` で確認)
 - [ ] ESLint のエラーがないか (`npm run lint`)
+- [ ] テストが通るか (`npm test`)。スナップショットが変わったときは、差分が意図どおりか
 - [ ] Vue の警告が出ていないか
 - [ ] 既存のコンポーネントとの一貫性が保たれているか
 - [ ] スコープ付きスタイルを使用しているか

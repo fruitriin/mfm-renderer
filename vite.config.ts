@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => {
 
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "./src"),
+        "@": path.resolve(import.meta.dirname, "./src"),
       },
     },
 
@@ -27,6 +27,8 @@ export default defineConfig(({ mode }) => {
         entry: "src/library.ts",
         name: "MMFMRenderer",
         fileName: "MMFMRenderer",
+        // Vite 7 以降は CSS の名前が lib.name になるので、exports の ./style.css に合わせる
+        cssFileName: "style",
         formats: isUmd ? ["umd"] : ["es"],
       },
       rollupOptions: {
@@ -39,7 +41,6 @@ export default defineConfig(({ mode }) => {
           globals: {
             vue: "Vue",
           },
-          ...(isUmd ? { inlineDynamicImports: true } : {}),
         },
       },
     },

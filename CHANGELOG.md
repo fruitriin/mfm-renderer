@@ -4,8 +4,17 @@
 
 ## [Unreleased]
 
+### 変更
+
+- 開発用のツールを新しくした。Vite 5 → 8、vue-tsc 1 → 3、TypeScript 5.3 → 6.0、ESLint 8 → 10（flat config の `eslint.config.js` に移した）、Vitest 1 → 5
+  - GitHub から入れると `prepare` で Vite 8 を使ってビルドするので、Node.js 20.19 以降が要る（これまでは Node.js 18 でもビルドできた）
+  - ビルドの出力（`dist/MMFMRenderer.js`・`dist/MMFMRenderer.umd.cjs`・`dist/style.css`）のファイル名と、同梱しない依存は変わらない。CSS は圧縮の仕方が変わったが、効き方は同じである
+  - 型定義（`dist/types`）は vue-tsc 3 の形式で出力される
+
 ### 追加
 
+- テストを追加した（`npm test`）。検証関数（`validTime` など）の単体テスト、構文と関数ごとの出力のスナップショット、`MfmRenderer` の props・イベントのテストを含む
+- 型チェックだけを行う `npm run typecheck` を追加した。CI でもテストと型チェックを実行する
 - `MfmRenderer` に `emojiStyle` と `twemojiBase` を追加した。`emojiStyle: 'twemoji'` にすると、Unicode の絵文字を Twemoji の画像（高さ 1.25em）で描き、Misskey の既定の見た目になる。既定は今までどおり `'native'`（OS の絵文字）。画像を読めなかったときは OS の絵文字で表示する
 
 ## [0.3.0] - 2026-10-27
