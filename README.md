@@ -27,6 +27,8 @@ createApp(App).use(Mfm).mount('#app')
 
 `vue` は peerDependencies なので、利用側で入れておく。
 
+`.use(Mfm)` でグローバル登録されるのは、`MfmRenderer`・`MfmComponent` と、構文ごとのコンポーネント（`MfmBold`・`MfmFg` など、`Mfm` 接頭辞付き）である。v0.2.0 までは `Bold`・`Link` のように接頭辞なしで登録していた。
+
 ## 使い方
 
 コンポーネントの中で MfmRenderer コンポーネントを使う
