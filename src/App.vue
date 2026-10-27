@@ -13,7 +13,7 @@
         <input v-model.lazy="domain" />
       </div>
       <div>
-        <label><input type="checkbox" v-model="isCat" /> 猫ユーザー（にゃー化）</label>
+        <label><input type="checkbox" v-model="isCat" /> にゃあああああああ！（nyaize）</label>
       </div>
       <div>
         <label><input type="checkbox" v-model="advancedMfm" /> 高度な MFM</label>
