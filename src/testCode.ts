@@ -93,6 +93,7 @@ $[font.fantasy MisskeyでFediverseの世界が広がります]
     title: '`反転',
     body: `
 $[flip MisskeyでFediverseの世界が広がります]
+$[flip.h MisskeyでFediverseの世界が広がります]
 $[flip.v MisskeyでFediverseの世界が広がります]
 $[flip.h,v MisskeyでFediverseの世界が広がります]`
   },

@@ -164,15 +164,9 @@ npm run format       # Prettier で整形
 
 ## 未実装機能と改善が必要な箇所
 
-### スタイルが不足しているコンポーネント
-
-- `BlockCode.vue`: コードブロックのスタイルが未実装
-- `InlineCode.vue`: インラインコードのスタイルが未実装
-
 ### アニメーション関連
 
-- 全てのアニメーションが実装済み（`delay`パラメータを含む）
-- `spin`コンポーネントの`axis`と`direction`パラメータは未対応
+- 全てのアニメーションが実装済み（`delay`パラメータ、`spin`の`x`/`y`・`left`/`alternate`を含む）
 
 ### Unicode Emoji
 
