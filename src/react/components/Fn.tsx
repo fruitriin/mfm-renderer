@@ -1,6 +1,6 @@
 import type { MfmFn } from 'mfm-js'
 import { toComponentName } from '../../core/index.ts'
-import { cx, useMfmEnvironment } from '../context.ts'
+import { cx, findComponentMap, useMfmEnvironment } from '../context.ts'
 import type { MfmSyntaxProps } from '../context.ts'
 import { MfmComponent } from '../Mfm.tsx'
 import { defaultComponents } from './index.ts'
@@ -9,7 +9,7 @@ import { defaultComponents } from './index.ts'
 export function Fn({ token, children, className, style }: MfmSyntaxProps<MfmFn['props']>) {
   const { components } = useMfmEnvironment()
   const name = toComponentName(token?.name ?? '')
-  const Component = name === '' ? undefined : (components[name] ?? defaultComponents[name])
+  const Component = findComponentMap(name, components, defaultComponents)?.[name]
   // 未対応の関数は Misskey と同じく $[name ...] の形のまま表示する
   if (Component == null) return <FnRaw token={token} children={children} className={cx('Fn', className)} style={style} />
   return <Component token={token} children={children} className={cx('Fn', token?.name, className)} style={style} />

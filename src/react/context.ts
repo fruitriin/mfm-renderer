@@ -20,6 +20,15 @@ export type MfmSyntaxProps<Token = any> = {
 /** 構文ごとのコンポーネントの一覧。キーは接頭辞なしの名前（Bold・Link・X2 など） */
 export type MfmComponentMap = Record<string, ComponentType<MfmSyntaxProps>>
 
+/**
+ * 名前の構文のコンポーネントを持っている一覧を返す。利用側が渡した components を優先し、なければ組み込みのものを使う。
+ * 名前は投稿の本文（$[__proto__ ...] など）から作るので、Object.prototype から継承したものは持っているとみなさない
+ */
+export function findComponentMap(name: string, ...maps: Partial<MfmComponentMap>[]): Partial<MfmComponentMap> | undefined {
+  if (name === '') return undefined
+  return maps.find((map) => Object.prototype.hasOwnProperty.call(map, name) && map[name] != null)
+}
+
 /** カスタム絵文字の一覧。名前から画像の URL を引く */
 export type MfmEmojis = Record<string, { url: string }>
 

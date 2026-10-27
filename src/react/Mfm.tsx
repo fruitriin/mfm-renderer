@@ -1,6 +1,6 @@
 import type { MfmNode } from 'mfm-js'
 import { toComponentName } from '../core/index.ts'
-import { useMfmEnvironment } from './context.ts'
+import { findComponentMap, useMfmEnvironment } from './context.ts'
 import { defaultComponents } from './components/index.ts'
 
 type Props = {
@@ -17,13 +17,13 @@ export function MfmComponent({ tokens }: Props) {
     <>
       {(tokens ?? []).map((token, index) => {
         const name = toComponentName(token.type)
-        const Component = components[name] ?? defaultComponents[name]
+        const Component = findComponentMap(name, components, defaultComponents)?.[name]
         if (Component == null) {
           console.error('unrecognized ast type:', token.type)
           return null
         }
-        // AST のノードには安定した ID がないので、位置を key にする。text が変わると同じ位置のコンポーネントの state は引き継がれるため、
-        // state を持つコンポーネント（Mention など）は、入力から作った key で前の入力の state を捨てる
+        // AST のノードには安定した ID がないので、位置を key にする（Vue 版と同じ）。text が変わると、同じ位置のコンポーネントの state は引き継がれる。
+        // Mention は入力から作った key で前のユーザーのアバターを捨てる。BlockCode は Vue 版と同じく、新しいハイライトができるまで前のものを表示する
         return <Component key={index} token={token.props} children={'children' in token ? token.children : undefined} />
       })}
     </>

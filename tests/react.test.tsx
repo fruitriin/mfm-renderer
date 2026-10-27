@@ -206,6 +206,13 @@ describe('React 版だけの使い方', () => {
     expect(container.querySelector('img.avatar')?.getAttribute('src')).toBe('https://a.example/bob.png')
   })
 
+  it('Object.prototype にある名前の関数も、未対応の関数として $[...] のまま表示する', async () => {
+    const text = '$[__proto__ a] $[__defineGetter__ b] $[constructor c] $[hasOwnProperty d]'
+    const container = await renderReact(<MfmRenderer text={text} components={{ Shout: () => null }} />)
+    expect(container.textContent).toBe('$[__proto__ a] $[__defineGetter__ b] $[constructor c] $[hasOwnProperty d]')
+    expect(normalizeHtml(container.innerHTML)).toBe(await renderVue({ text }))
+  })
+
   it('components で構文ごとのコンポーネントを差し替えられる', async () => {
     const MyLink = ({ token }: { token?: { url: string } }) => <span className="my-link">{token?.url}</span>
     const container = await renderReact(<MfmRenderer text="[リンク](https://example.com) $[x2 大]" components={{ Link: MyLink }} />)
