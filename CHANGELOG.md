@@ -2,6 +2,31 @@
 
 このプロジェクトの主な変更を記録する。
 
+## [0.2.1] - 2026-10-27
+
+互換性を壊す変更は含まない。`^0.2.0` で入れている場合も、そのまま更新される。ただし、次の点は利用側が何もしなくても変わる。
+
+- `misskey-js` が依存に加わる（にゃー化に使う。ライブラリには同梱せず、必要になったときだけ読み込む）
+- ハッシュタグに色が付く（`--MI_THEME-hashtag`、なければ `--hashtag`）
+- `$[fg]`・`$[bg]` に不正な色を指定すると、Misskey と同じく赤（`#f00`）になる
+
+### 追加
+
+- `$[unixtime 1700000000]` に対応した（`Fn/Unixtime.vue`）。Misskey と同じく「絶対時刻 (相対時間)」で表示する（#36）
+- `MfmRenderer` に、Misskey の MFM コンポーネントと同じ props を追加した（#69）。既定値は今までの表示と同じになる
+  - `nyaize`・`author`: `nyaize` が `'respect'` で `author.isCat` が true のとき、テキストとルビをにゃー化する。引用とリンクの中はにゃー化しない
+  - `advancedMfm`・`animatedMfm`: アニメーションを止めると、rainbow は静的な虹色、sparkle は中身だけで表示する。高度な MFM を止めると、x2〜x4・position・scale も効かせない
+  - `plain`・`nowrap`・`rootScale`: 改行を空白にした表示、1 行に収めて省略する表示、文字の倍率の初期値
+- テーマの色に、Misskey 2024.10 以降の CSS 変数（`--MI_THEME-fg`・`--MI_THEME-accent`・`--MI_THEME-divider`・`--MI_THEME-mention`・`--MI_THEME-hashtag`）を使うようにした。定義されていなければ、以前の名前（`--fg` など）を使う（#65）
+
+### 修正
+
+- コードブロックが、言語の指定がないときなどに黒地に黒文字で読めなかったのを直した。入力が変わったときにハイライトし直すようにし、前後の余分な空白も取り除いた（#62）
+- `$[flip.h ...]` が反転せず、`$[flip.v ...]`・`$[flip.h,v ...]` の反転方向も違っていたのを直した（#63）
+- `$[position.x=1 ...]` のように片方だけ指定すると表示が崩れていたのを直した。`$[rotate]`・`$[fg]`・`$[bg]` も、不正な引数を Misskey と同じく扱う（#64）
+- `$[sparkle.speed=... ]`・`delay` が効いていなかったのを直した（#71）
+- Bold・Italic・Small・Strike・Url・Search・UnicodeEmoji・Hashtag・Quote で、`class="bold"` などの class が消えていたのを直した（#65、#71）
+
 ## [0.2.0] - 2026-10-26
 
 ### 追加
