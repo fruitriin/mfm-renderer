@@ -48,7 +48,7 @@ createApp(App).use(Mfm).mount('#app')
 | Blockcode.vue    | 複数行のコード | ✅ Shiki でハイライト            |
 | Bold.vue         | 太字      | ✅ 完成                     |
 | EmojiCode.vue    | カスタム絵文字 | ✅ 完成                     |
-| InlineCode.vue   | 一行のコード  | ⚠️ スタイルがない               |
+| InlineCode.vue   | 一行のコード  | ✅ 完成                     |
 | Mention.vue      | メンション   | 🟡 動作OK（最適化の余地あり）        |
 | Search.vue       | 検索      | ✅ 完成                     |
 | Text.vue         | テキスト    | ✅ 完成                     |
@@ -75,8 +75,8 @@ createApp(App).use(Mfm).mount('#app')
 |---------|-------------|------------------------------|
 | fg      | 文字色         | ✅ 完成                         |
 | bg      | 背景色         | ✅ 完成                         |
-| blur    | ぼかし         | ❌ バグあり（不要なfontFamilyプロパティ） |
-| font    | フォント        | ❌ 致命的なバグ（Object.keys()の誤用）  |
+| blur    | ぼかし         | ✅ 完成                         |
+| font    | フォント        | ✅ 完成                         |
 | border  | ボーダー        | ✅ 完成                         |
 
 #### 変形
@@ -84,9 +84,9 @@ createApp(App).use(Mfm).mount('#app')
 | コンポーネント | せつめい | 進み具合                              |
 |---------|------|-----------------------------------|
 | rotate  | 回転   | ✅ 完成                              |
-| scale   | 拡大縮小 | ❌ バグあり（classNameミス、最大値制限なし）     |
+| scale   | 拡大縮小 | ✅ 完成                              |
 | position | 位置調整 | ✅ 完成                              |
-| flip    | 反転   | ❌ ロジックバグ（反転方向が逆）                 |
+| flip    | 反転   | ✅ 完成                              |
 | x2      | 2倍   | ✅ 完成                              |
 | x3      | 3倍   | ✅ 完成                              |
 | x4      | 4倍   | ✅ 完成                              |
@@ -95,7 +95,7 @@ createApp(App).use(Mfm).mount('#app')
 
 | コンポーネント | せつめい   | 進み具合                                   |
 |---------|--------|----------------------------------------|
-| spin    | 回転     | ⚠️ speed, delayのみ対応（axis、direction未対応） |
+| spin    | 回転     | ✅ speed, delay, x/y, left/alternate対応済み |
 | jump    | ジャンプ   | ✅ speed, delay対応済み                     |
 | bounce  | バウンス   | ✅ speed, delay対応済み                     |
 | shake   | シェイク   | ✅ speed, delay対応済み                     |
@@ -113,27 +113,9 @@ createApp(App).use(Mfm).mount('#app')
 | unixtime | 日時と相対時間 | ✅ 完成 |
 | clickable | クリックイベント | ✅ 完成（`clickEv` イベント） |
 
-### 優先度別の改善提案
+### 今後の改善候補
 
-#### 🔴 最優先（致命的なバグ）
-
-1. Font.vueのバグ修正 - `Object.keys()`を適切なフォント選択に修正
-2. ~~Rotate.vueのパラメータ参照修正 - `token.deg` → `token.args.deg`~~（対応済み）
-3. Blur.vueの不要なfontFamily削除
-4. Flip.vueのロジック修正 - 反転の動作を正しく
-5. Scale.vueのclassName修正と最大値制限追加
-
-#### 🟠 高優先度（重要な機能の欠如）
-
-6. ~~Clickable機能の実装~~（対応済み）
-7. Unixtime機能の実装
-8. Spin.vueのaxis/direction対応
-
-#### 🟡 中優先度（改善）
-
-11. コードスタイルの改善（InlineCode.vue、BlockCode.vue）
-12. シンタックスハイライトの実装（BlockCode.vue）
-13. Mention.vueの最適化（デバウンス/キャッシュ）
-14. Unicode絵文字の置き換え（Twemoji等）
-15. Link.vueのsilentオプション実装 
+- Mention.vue の最適化（デバウンス/キャッシュ）
+- Unicode 絵文字の置き換え（Twemoji 等）
+- Link.vue の silent オプション実装
 

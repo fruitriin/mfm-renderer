@@ -4,7 +4,8 @@
     :tokens="children"
     :style="[
       {
-        transform: `scale(${token?.args.h ? 1 : -1}, ${token?.args.v ? -1 : 1})`
+        // Misskey と同じく、引数なしと h は左右、v は上下、h,v は上下左右に反転する
+        transform: `scale(${token?.args.h || !token?.args.v ? -1 : 1}, ${token?.args.v ? -1 : 1})`
       },
       style
     ]"
