@@ -4,7 +4,8 @@
     "noEmit": false,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "declarationDir": "dist/types"
+    "declarationDir": "dist/types",
+    "rootDir": "src"
   },
   "include": ["src/library.ts", "src/vite-env.d.ts", "src/**/*.vue"],
   "exclude": ["src/App.vue", "src/main.ts", "src/testCode.ts"]
